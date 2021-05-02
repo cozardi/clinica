@@ -1,6 +1,6 @@
 package Usuarios;
 
-public class Medico extends Usuarios implements IMedico{
+public class Medico extends Paciente implements IMedico{
     private double Honorario;
 
     public Medico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,int honorarioBasico) {
