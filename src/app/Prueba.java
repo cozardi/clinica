@@ -1,8 +1,8 @@
-package App;
+package app;
 
-import Exceptions.NoExisteException;
-import Usuarios.IMedico;
-import Usuarios.MedicoFactory;
+import exceptions.NoExisteException;
+import usuarios.IMedico;
+import usuarios.MedicoFactory;
 
 public class Prueba {
 

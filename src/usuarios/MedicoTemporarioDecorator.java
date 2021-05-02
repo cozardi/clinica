@@ -1,5 +1,8 @@
-package Usuarios;
+package usuarios;
 
+/**
+ * Crea un medico con contratacion Temporal
+ */
 public class MedicoTemporarioDecorator extends MedicoDecorator{
 
 

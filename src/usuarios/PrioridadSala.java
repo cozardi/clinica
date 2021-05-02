@@ -1,4 +1,4 @@
-package Usuarios;
+package usuarios;
 
 /**
  * Interfaz que establece el juego de prioridades de asignación de la sala privada. <br>

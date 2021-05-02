@@ -1,5 +1,8 @@
-package Usuarios;
+package usuarios;
 
+/**
+ * Crea un medico con Magister
+ */
 public class MagisterMedicoDecorator extends MedicoDecorator{
 
 

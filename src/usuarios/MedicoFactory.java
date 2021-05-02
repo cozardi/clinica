@@ -1,9 +1,23 @@
-package Usuarios;
+package usuarios;
 
-import Exceptions.NoExisteException;
+import exceptions.NoExisteException;
 
 public abstract class MedicoFactory {
 
+    /**
+     * Crea el medico segun su especialidad, tipo de Contratacion y posgrado (en caso de tenerlo).
+     * @param dni
+     * @param domicilio
+     * @param ciudad
+     * @param telefono
+     * @param nombre
+     * @param numero
+     * @param honorarioBasico
+     * @param especialidad
+     * @param tipoContratacion
+     * @return
+     * @throws NoExisteException
+     */
     public static IMedico getMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,int honorarioBasico,String especialidad,String tipoContratacion) throws NoExisteException {
         IMedico medico = new Medico(dni,domicilio,ciudad,telefono,nombre,numero,honorarioBasico);
         IMedico respuesta;

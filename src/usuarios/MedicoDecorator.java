@@ -1,4 +1,4 @@
-package Usuarios;
+package usuarios;
 
 public abstract class MedicoDecorator implements IMedico{
     protected IMedico medico;
