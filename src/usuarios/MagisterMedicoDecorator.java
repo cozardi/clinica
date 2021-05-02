@@ -1,8 +1,9 @@
-package Usuarios;
+package usuarios;
 
-public class MedicoClinicoDecorator extends MedicoDecorator{
+public class MagisterMedicoDecorator extends MedicoDecorator{
 
-    public MedicoClinicoDecorator(IMedico medico) {
+
+    public MagisterMedicoDecorator(IMedico medico) {
         super(medico);
     }
 
@@ -13,5 +14,4 @@ public class MedicoClinicoDecorator extends MedicoDecorator{
         return honorario*1.05;
 
     }
-
 }

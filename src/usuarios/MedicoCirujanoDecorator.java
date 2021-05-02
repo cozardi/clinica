@@ -1,9 +1,8 @@
-package Usuarios;
+package usuarios;
 
-public class MedicoPermanenteDecorator extends MedicoDecorator{
+public class MedicoCirujanoDecorator extends MedicoDecorator{
 
-
-    public MedicoPermanenteDecorator(IMedico medico) {
+    public MedicoCirujanoDecorator(IMedico medico) {
         super(medico);
     }
 

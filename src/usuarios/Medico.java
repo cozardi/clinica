@@ -1,4 +1,4 @@
-package Usuarios;
+package usuarios;
 
 public class Medico extends Usuarios implements IMedico{
     private double Honorario;
@@ -13,4 +13,10 @@ public class Medico extends Usuarios implements IMedico{
         return Honorario;
     }
 
+
+    @Override
+    public int compareTo(Object o) {
+        Medico m = (Medico) o;
+        return this.numero - m.numero;
+    }
 }
