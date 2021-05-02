@@ -1,5 +1,8 @@
 package usuarios;
 
+/**
+ * Crea un medico Cirujano
+ */
 public class MedicoCirujanoDecorator extends MedicoDecorator{
 
     public MedicoCirujanoDecorator(IMedico medico) {

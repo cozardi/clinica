@@ -1,5 +1,8 @@
 package usuarios;
 
+/**
+ * Es el medico base sin ningun decorator aplicado (esta clase no deberia instanciarse en ninguna situacion).
+ */
 public class Medico extends Usuarios implements IMedico{
     private double Honorario;
 
