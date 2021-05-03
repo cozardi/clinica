@@ -1,5 +1,6 @@
 package usuarios;
 
+
 /**
  * Es el medico base sin ningun decorator aplicado (esta clase no deberia instanciarse en ninguna situacion).
  */
