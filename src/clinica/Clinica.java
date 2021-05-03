@@ -4,11 +4,9 @@ import exceptions.NoExisteException;
 import usuarios.IMedico;
 import usuarios.MedicoFactory;
 import usuarios.Paciente;
-
-
-import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.TreeSet;
 
 
 /**
@@ -32,8 +30,8 @@ public class Clinica
 		this.telefono = telefono;
 		this.ciudad = ciudad;
 		listaEspera = new PriorityQueue();
-		medicos = new HashSet<>();
-		pacientes = new HashSet<>();
+		medicos = new TreeSet<>();
+		pacientes = new TreeSet<>();
 	}
 
 	private Clinica() {
@@ -77,6 +75,14 @@ public class Clinica
 		} catch (NoExisteException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public void ingresaPaciente(Paciente paciente){
+
+		pacientes.add(paciente);
+		listaEspera.add(paciente);
+
+
 	}
 
 
