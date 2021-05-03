@@ -1,6 +1,6 @@
 package usuarios;
 
-public class Joven extends Paciente implements PrioridadSala{
+public class Joven extends Paciente{
 
 
     public Joven(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica, String edad) {

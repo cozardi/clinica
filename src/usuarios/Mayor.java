@@ -1,6 +1,6 @@
 package usuarios;
 
-public class Mayor extends Paciente implements PrioridadSala{
+public class Mayor extends Paciente{
 
     public Mayor(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica, String rangoEtario) {
         super(dni, domicilio, ciudad, telefono, nombre, numHistClinica,rangoEtario);

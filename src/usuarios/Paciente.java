@@ -1,6 +1,6 @@
 package usuarios;
 
-public abstract class Paciente  extends Usuarios{
+public abstract class Paciente  extends Usuarios implements PrioridadSala{
     protected String RangoEtario;
 
 
@@ -8,6 +8,7 @@ public abstract class Paciente  extends Usuarios{
         super(dni, domicilio, ciudad, telefono, nombre, numHistClinica);
         this.RangoEtario = RangoEtario;
     }
+
 
 
 }
