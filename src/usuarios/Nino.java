@@ -3,7 +3,7 @@ package usuarios;
 public class Nino extends Paciente implements PrioridadSala{
 
 
-    public Nino(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica, int edad) {
+    public Nino(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica, String edad) {
         super(dni, domicilio, ciudad, telefono, nombre, numHistClinica, edad);
     }
 

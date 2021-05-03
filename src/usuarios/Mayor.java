@@ -2,8 +2,8 @@ package usuarios;
 
 public class Mayor extends Paciente implements PrioridadSala{
 
-    public Mayor(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica) {
-        super(dni, domicilio, ciudad, telefono, nombre, numHistClinica);
+    public Mayor(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica, String rangoEtario) {
+        super(dni, domicilio, ciudad, telefono, nombre, numHistClinica,rangoEtario);
     }
 
     @Override
