@@ -23,7 +23,7 @@ public class PacienteFactory{
      * @throws NoExisteException Si el rango etareo es erroneo lanza la excepcion y no crea el objeto <br>
      */
 
-    public static Paciente PacienteFactory(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica,String rangoEtario) throws NoExisteException {
+    public static Paciente getPaciente(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica, String rangoEtario) throws NoExisteException {
         Paciente paciente=null;
         if (rangoEtario.equalsIgnoreCase("Nino"))
             paciente=new Nino(dni,domicilio,ciudad,telefono,nombre,numHistClinica,rangoEtario);

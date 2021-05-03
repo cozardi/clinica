@@ -3,10 +3,9 @@ package lugares;
 import usuarios.Paciente;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Patio{
-    ArrayList<Paciente> pacientes;
+    ArrayList<Paciente> pacientes = new ArrayList<>();
 
     public void ingresaPaciente(Paciente paciente){
         pacientes.add(paciente);

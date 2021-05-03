@@ -9,7 +9,7 @@ public class SalaEsperaPrivada{
 
     public void ingresaPaciente(Paciente ingresante) throws NoIngresaSalaPrivadaException
     {
-        if (pacienteActual != null)
+        if (!this.vacia())
             if (pacienteActual.prioriza(ingresante))  //Si el paciente actual tiene prioridad sobre el ingresante
                 throw new NoIngresaSalaPrivadaException();
             else
