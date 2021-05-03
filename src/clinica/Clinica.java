@@ -4,6 +4,8 @@ import exceptions.NoExisteException;
 import usuarios.IMedico;
 import usuarios.MedicoFactory;
 import usuarios.Paciente;
+import usuarios.PacienteFactory;
+
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeSet;
@@ -77,12 +79,14 @@ public class Clinica
 		}
 	}
 
-	public void ingresaPaciente(Paciente paciente){
-
-		pacientes.add(paciente);
-		listaEspera.add(paciente);
-
-
+	public void ingresaPaciente(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica,String rangoEtario){
+		try {
+			Paciente paciente = PacienteFactory.PacienteFactory(dni,domicilio,ciudad,telefono,nombre,numHistClinica,rangoEtario);
+			pacientes.add(paciente);    //si el paciente ya se encuentra no se agrega a la estructura (Por implementar la interfaz Set)
+			listaEspera.add(paciente);
+		} catch (NoExisteException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 
