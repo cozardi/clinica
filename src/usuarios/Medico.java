@@ -18,9 +18,4 @@ public class Medico extends Usuarios implements IMedico{
     }
 
 
-    @Override
-    public int compareTo(Object o) {
-        Medico m = (Medico) o;
-        return this.numero - m.numero;
-    }
 }

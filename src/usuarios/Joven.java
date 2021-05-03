@@ -1,9 +1,10 @@
 package usuarios;
 
-public class Joven extends Usuarios implements PrioridadSala{
+public class Joven extends Paciente implements PrioridadSala{
 
-    public Joven(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero) {
-        super(dni, domicilio, ciudad, telefono, nombre, numero);
+
+    public Joven(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica, int edad) {
+        super(dni, domicilio, ciudad, telefono, nombre, numHistClinica, edad);
     }
 
     @Override
@@ -27,9 +28,5 @@ public class Joven extends Usuarios implements PrioridadSala{
     }
 
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
 
 }

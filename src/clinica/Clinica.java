@@ -1,7 +1,9 @@
 package clinica;
 
+import exceptions.NoExisteException;
 import usuarios.IMedico;
-import usuarios.Medico;
+import usuarios.MedicoFactory;
+import usuarios.Paciente;
 
 
 import java.util.HashSet;
@@ -19,8 +21,9 @@ public class Clinica
 	//DATOS DE LA CLINICA
 	private String nombre,direccion,telefono,ciudad;
 
-	private Set<Medico> medicos;
-	private PriorityQueue listaEspera;
+	private Set<IMedico> medicos;
+	private Set<Paciente> pacientes;
+	private PriorityQueue<Paciente> listaEspera;
 
 
 	private Clinica(String nombre, String direccion, String telefono, String ciudad) {
@@ -30,6 +33,7 @@ public class Clinica
 		this.ciudad = ciudad;
 		listaEspera = new PriorityQueue();
 		medicos = new HashSet<>();
+		pacientes = new HashSet<>();
 	}
 
 	private Clinica() {
@@ -58,8 +62,21 @@ public class Clinica
 	}
 
 
-	public void addMedico(Medico medico){
-		medicos.add(medico);
+	public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,int honorarioBasico,String especialidad,String tipoContratacion){
+		try{
+			IMedico medico = MedicoFactory.getMedico(dni,domicilio,ciudad,telefono,nombre,numero,honorarioBasico,especialidad,tipoContratacion);
+		} catch (NoExisteException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,int honorarioBasico,String especialidad,String tipoContratacion,String posgrado){
+		try{
+			IMedico medico = MedicoFactory.getMedico(dni,domicilio,ciudad,telefono,nombre,numero,honorarioBasico,especialidad,tipoContratacion,posgrado);
+			medicos.add(medico);
+		} catch (NoExisteException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 

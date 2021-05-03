@@ -16,6 +16,12 @@ public abstract class Usuarios implements Comparable{
     }
 
     @Override
+    public int compareTo(Object o) {
+        Usuarios u = (Usuarios) o;
+        return this.numero - u.numero;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
