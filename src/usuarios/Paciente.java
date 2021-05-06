@@ -1,5 +1,6 @@
 package usuarios;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import exceptions.DiasInvalidosException;
@@ -9,6 +10,7 @@ import lugares.*;
 public abstract class Paciente  extends Usuarios implements PrioridadSala{
     protected String RangoEtario;
     protected Hashtable<Habitacion, Integer> internaciones;
+    protected ArrayList<Medico> consultas;
 
 
     public Paciente(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica, String RangoEtario) 
@@ -48,6 +50,28 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
     	}
     	else
     		throw new DiasInvalidosException("Cantidad de dias de internacion invalida: ", dias);
+    }
+    
+    
+    /**
+     * 
+     * @param med: El medico que hizo la consulta
+     * 
+     * <b>pre:</b> El medico no es nulo
+     * <b>post:</b> La consulta queda registrada
+     * 
+     * @throws Exception si el medico no es valido
+     */
+    public void AgregaConsulta(Medico med) throws Exception
+    {
+    	if (med != null)
+    	{
+    		consultas.add(med);
+    	}
+    	else
+    	{
+    		throw new Exception("Error. Medico no válido");
+    	}
     }
 
 
