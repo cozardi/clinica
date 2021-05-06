@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import exceptions.DiasInvalidosException;
+import exceptions.MedicoInvalidoException;
 import exceptions.NoExisteException;
 import lugares.*;
 
 public abstract class Paciente  extends Usuarios implements PrioridadSala{
     protected String RangoEtario;
-    protected Hashtable<Habitacion, Integer> internaciones;
-    protected ArrayList<Medico> consultas;
+    protected Hashtable<Habitacion, Integer> internaciones = new Hashtable<Habitacion, Integer>();
+    protected Hashtable<Medico, Integer> consultas = new Hashtable<Medico, Integer>();
+
 
 
     public Paciente(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica, String RangoEtario) 
@@ -45,8 +47,8 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
                 	internaciones.put(hab, dias);
             	}
     		}
-    		else
-    			throw new Exception("Error en los parametros del constructor Paciente. Falta Alguno");
+    		else //TODO excepcion de habitacion nula
+    			throw new Exception("Error. Habitacion nula");
     	}
     	else
     		throw new DiasInvalidosException("Cantidad de dias de internacion invalida: ", dias);
@@ -54,26 +56,47 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
     
     
     /**
+     * Agrega una consulta medica a la estadía actual del paciente
      * 
      * @param med: El medico que hizo la consulta
      * 
      * <b>pre:</b> El medico no es nulo
      * <b>post:</b> La consulta queda registrada
      * 
-     * @throws Exception si el medico no es valido
+     * @throws MedicoInvalidoException si el medico no es valido
      */
-    public void AgregaConsulta(Medico med) throws Exception
+    public void AgregaConsulta(Medico med) throws MedicoInvalidoException
     {
     	if (med != null)
     	{
-    		consultas.add(med);
+    		if (consultas.contains(med)) 
+    		{
+    			consultas.put(med, consultas.get(med) + 1);
+    		}
+    		else
+    		{
+    			consultas.put(med, 1);
+    		}
     	}
+    	
     	else
     	{
-    		throw new Exception("Error. Medico no válido");
+    		throw new MedicoInvalidoException("Error. Medico nulo");
     	}
     }
 
+    /**
+     * Borra las internaciones y consultas actuales del paciente
+     * 
+     * <b>pre:</b> Ninguna
+     * <b>post:</b> Las internaciones y consultas son reseteadas
+     * 
+     */
+    public void ReseteaPrestaciones()
+    {
+    	internaciones.clear();
+    	consultas.clear();
+    }
 
 
 }

@@ -1,8 +1,11 @@
 package clinica;
 
 import exceptions.NoExisteException;
+import exceptions.PacienteInvalidoException;
+import lugares.Habitacion;
 import lugares.SalaDeEspera;
 import usuarios.IMedico;
+import usuarios.Medico;
 import usuarios.MedicoFactory;
 import usuarios.Paciente;
 import usuarios.PacienteFactory;
@@ -131,5 +134,71 @@ public class Clinica {
 		SalaDeEspera.getinstance().retiraPaciente(paciente);
 		pacientesEnAtencion.add(paciente);
 	}
+	
+	/**
+	 * Busca el paciente con cierto numero de paciente
+	 * 
+	 * @param numeroPaciente: El numero de historia clinica del paciente a buscar
+	 * @return Retorna el paciente con ese numero o null si no existe
+	 */
+	private Paciente buscaPaciente(int numeroPaciente)
+	{
+		for (Paciente paciente : pacientesEnAtencion)
+		{
+			if (paciente.getNumero() == numeroPaciente)
+			{
+				return paciente;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Agrega una consulta médica al paciente
+	 * 
+	 * <b>pre:</b> El paciente y medico dados no son nulos
+     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del médico
+     * 
+	 * @param paciente: Paciente que recibio la consulta
+	 * @param medico: Medico que hizo la consulta
+	 * @throws Exception si el medico o paciente son nulos
+	 */
+	public void agregaConsultaAPaciente(Paciente paciente, Medico medico) throws Exception
+	{
+		//TODO: integrar con módulo de Reporte de Actividad Medica
+		if (paciente != null)
+		{
+			paciente.AgregaConsulta(medico);
+		}
+		else
+		{
+			throw new PacienteInvalidoException("Error. Paciente es nulo");
+		}
+	}
+	
+	
+	/**
+	 * Agrega una estadía en una habitacion al paciente
+	 * 
+	 * <b>pre:</b> El paciente y medico dados no son nulos
+     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del médico
+     * 
+	 * @param paciente: Paciente internado
+	 * @param habitacion: Habitacion en la que estuvo el paciente
+	 * @param dias: dias de estadia en la habitacion
+	 * @throws Exception si el medico o paciente son nulos
+	 */
+	public void agregaInternacionAPaciente(Paciente paciente, Habitacion hab, int dias) throws Exception
+	{
 
+		if (paciente != null)
+		{
+			paciente.AgregaInternacion(hab, 0);
+		}
+		else
+		{
+			throw new PacienteInvalidoException("Error. Paciente es nulo");
+		}
+	}
 }
