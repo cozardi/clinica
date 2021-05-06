@@ -13,7 +13,11 @@ public interface PrioridadSala {
      * @return El valor de la invocacion al respectivo metodo que determina si
      * el objeto p tiene prioridad sobre el objeto actual en la Sala de Espera. <br>
      */
+
     boolean prioriza(PrioridadSala p);
+
+
+
     boolean beatsJoven();
     boolean beatsMayor();
     boolean beatsNino();
