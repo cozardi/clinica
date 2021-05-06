@@ -34,10 +34,6 @@ public abstract class Usuarios implements Comparable{
         return Objects.hash(numero);
     }
 
-	public String getDni() {
-		return dni;
-	}
-
 	public int getNumero() {
 		return numero;
 	}
