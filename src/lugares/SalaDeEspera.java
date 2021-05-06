@@ -31,9 +31,9 @@ public class SalaDeEspera {
 
     public void retiraPaciente(Paciente paciente){
         if (salaprivada.getPacienteActual().equals(paciente))
-            salaprivada.retira();
+            this.salaprivada.retira();
         else
-            patio.retira(paciente);
+            this.patio.retira(paciente);
     }
 
 
@@ -45,10 +45,17 @@ public class SalaDeEspera {
      */
     public void ingresaSala(Paciente paciente){
         try{
-            salaprivada.ingresaPaciente(paciente);
+            this.salaprivada.ingresaPaciente(paciente);
         } catch (NoIngresaSalaPrivadaException e) {
-            patio.ingresaPaciente(paciente);
+            this.patio.ingresaPaciente(paciente);
         }
     }
 
+    public Patio getPatio() {
+        return patio;
+    }
+
+    public SalaEsperaPrivada getSalaprivada() {
+        return salaprivada;
+    }
 }
