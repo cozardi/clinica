@@ -3,7 +3,7 @@ package lugares;
 import exceptions.DiasInvalidosException;
 
 public class HabCompartida extends Habitacion {
-    private final double costoAsignacion = 500;// Preguntar el costo este tmb
+    private static double costoAsignacion = 500;// Preguntar el costo este tmb
 
     public HabCompartida() {
         super();
