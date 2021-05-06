@@ -3,7 +3,7 @@ package lugares;
 import exceptions.DiasInvalidosException;
 
 public class HabTerapiaIntensiva extends Habitacion {
-    private final double costoAsignacion = 1000;
+    private static double costoAsignacion = 1000;
 
     @Override
     public double calculaArancel(int cantDias) throws DiasInvalidosException {

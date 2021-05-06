@@ -3,7 +3,7 @@ package lugares;
 import exceptions.DiasInvalidosException;
 
 public abstract class Habitacion {
-    protected final double costoInicial = 1000;// preguntar que valor darle
+    protected static double costoInicial = 1000;// preguntar que valor darle
 
     public Habitacion() {
     }
