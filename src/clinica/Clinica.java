@@ -31,7 +31,13 @@ public class Clinica
 	private PriorityQueue<Paciente> listaEspera;
 	private ArrayList<Paciente> pacientesEnAtencion;
 
-
+	/**
+	 * Constructor privado, es invocado por el metodo <i>getInstance</i>
+	 * @param nombre Representa el nombre de la clinica
+	 * @param direccion Contiene la direccion de la clinica
+	 * @param telefono Contiene el telefono de la clinica
+	 * @param ciudad Contiene la ciudad donde se encuentra la clinica
+	 */
 	private Clinica(String nombre, String direccion, String telefono, String ciudad) {
 		this.nombre = nombre;
 		this.direccion = direccion;
@@ -48,10 +54,10 @@ public class Clinica
 
 	/**
 	 * Crea la instancia de la clinica en caso de que esta no exista, sino devuelve la existente
-	 * @param nombre
-	 * @param direccion
-	 * @param telefono
-	 * @param ciudad
+	 * @param nombre Representa el nombre de la clinica
+	 * @param direccion Contiene la direccion de la clinica
+	 * @param telefono Contiene el telefono de la clinica
+	 * @param ciudad Contiene la ciudad donde se encuentra la clinica
 	 * @return Una instancia de la clinica
 	 */
 	public static Clinica getInstance(String nombre, String direccion, String telefono, String ciudad){
@@ -61,7 +67,7 @@ public class Clinica
 	}
 
 	/**
-	 *
+	 * <b>Pre: </b> Deberia invocarse anteriormente al otro constructor para generar la primer instancia de la clinica, luego usar constructor sin parametros.
 	 * @return La instancia previamente creada (<i>null</i> en caso de no existir).
 	 */
 	public static Clinica getInstance(){
@@ -71,15 +77,15 @@ public class Clinica
 
 	/**
 	 * Agrega un medico a la lista de medicos de la Clinica, en caso de ingresar un dato erroneo informa con un mensaje y no crea el objeto
-	 * @param dni
-	 * @param domicilio
-	 * @param ciudad
-	 * @param telefono
-	 * @param nombre
-	 * @param numero
-	 * @param honorarioBasico
-	 * @param especialidad
-	 * @param tipoContratacion
+	 * @param dni Contiene el DNI del medico
+	 * @param domicilio contiene el domicilio del medico
+	 * @param ciudad representa la ciudad de origen
+	 * @param telefono contiene el telefono del medico
+	 * @param nombre Nombre y apellido del medico
+	 * @param numero representa el numero de licencia medico (unico por medico)
+	 * @param honorarioBasico Honorario basico del medico
+	 * @param especialidad especialidad del medico (clinico, cirujano, pediatra)
+	 * @param tipoContratacion tipo de contratacion (permanente, temporario)
 	 */
 	public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,int honorarioBasico,String especialidad,String tipoContratacion){
 		try{
@@ -89,6 +95,19 @@ public class Clinica
 		}
 	}
 
+	/**
+	 * Agrega un medico a la lista de medicos de la Clinica, en caso de ingresar un dato erroneo informa con un mensaje y no crea el objeto
+	 * @param dni Contiene el DNI del medico
+	 * @param domicilio contiene el domicilio del medico
+	 * @param ciudad representa la ciudad de origen
+	 * @param telefono contiene el telefono del medico
+	 * @param nombre Nombre y apellido del medico
+	 * @param numero representa el numero de licencia medico (unico por medico)
+	 * @param honorarioBasico Honorario basico del medico
+	 * @param especialidad especialidad del medico (clinico, cirujano, pediatra)
+	 * @param tipoContratacion tipo de contratacion (permanente, temporario)
+	 * @param posgrado posgrado del medico en caso de tenerlo (magister, doctorado)
+	 */
 	public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,int honorarioBasico,String especialidad,String tipoContratacion,String posgrado){
 		try{
 			IMedico medico = MedicoFactory.getMedico(dni,domicilio,ciudad,telefono,nombre,numero,honorarioBasico,especialidad,tipoContratacion,posgrado);
@@ -101,13 +120,13 @@ public class Clinica
 
 	/**
 	 * Ingresa el paciente a la clinica y lo deriva a la sala de espera. En caso de no poder crearlo informa el error con un mensaje.
-	 * @param dni
-	 * @param domicilio
-	 * @param ciudad
-	 * @param telefono
-	 * @param nombre
-	 * @param numHistClinica
-	 * @param rangoEtario
+	 * @param dni String, contiene el DNI del paciente. <br>
+	 * @param domicilio String, contiene el Domicilio en nombre y nÃºmero. <br>
+	 * @param ciudad String, representa la ciudad de nacimiento. <br>
+	 * @param telefono String, contiene el numero de telefono del paciente. <br>
+	 * @param nombre Nombre y Apellido del paciente. <br>
+	 * @param numHistClinica valor autoincremental asignado por la clinica, representa su numero de Historia Clinica. <br>
+	 * @param rangoEtario Rango etario del paciente (nino, joven o mayor) <br>
 	 */
 
 	public void ingresaPaciente(String dni, String domicilio, String ciudad, String telefono, String nombre, int numHistClinica,String rangoEtario){
@@ -121,10 +140,16 @@ public class Clinica
 		}
 	}
 
+	/**
+	 * Mueve el paciente de la lista de espera, lo retira de la sala de espera correspondiente y lo ingresa en la lista de pacientes en atencion.<br>
+	 * En caso de no haber pacientes en la lista de espera, no realiza ningun movimiento.
+	 */
 	public void atiendePaciente(){
 		Paciente paciente = listaEspera.poll();
-		SalaDeEspera.getinstance().retiraPaciente(paciente);
-		pacientesEnAtencion.add(paciente);
+		if (paciente != null) {
+			SalaDeEspera.getinstance().retiraPaciente(paciente);
+			pacientesEnAtencion.add(paciente);
+		}
 	}
 	
 	/**
@@ -142,23 +167,22 @@ public class Clinica
 				return paciente;
 			}
 		}
-		
 		return null;
 	}
 	
 	/**
-	 * Agrega una consulta médica al paciente
+	 * Agrega una consulta mï¿½dica al paciente
 	 * 
 	 * <b>pre:</b> El paciente y medico dados no son nulos
-     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del médico
+     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del mï¿½dico
      * 
 	 * @param paciente: Paciente que recibio la consulta
 	 * @param medico: Medico que hizo la consulta
-	 * @throws Exception si el medico o paciente son nulos
+	 * @throws PacienteInvalidoException si el medico o paciente son nulos
 	 */
 	public void agregaConsultaAPaciente(Paciente paciente, Medico medico) throws Exception
 	{
-		//TODO: integrar con módulo de Reporte de Actividad Medica
+		//TODO: integrar con mï¿½dulo de Reporte de Actividad Medica
 		if (paciente != null)
 		{
 			paciente.AgregaConsulta(medico);
@@ -171,15 +195,15 @@ public class Clinica
 	
 	
 	/**
-	 * Agrega una estadía en una habitacion al paciente
+	 * Agrega una estadï¿½a en una habitacion al paciente<br>
 	 * 
-	 * <b>pre:</b> El paciente y medico dados no son nulos
-     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del médico
+	 * <b>pre:</b> El paciente y medico dados no son nulos<br>
+     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del mï¿½dico<br>
      * 
 	 * @param paciente: Paciente internado
 	 * @param habitacion: Habitacion en la que estuvo el paciente
 	 * @param dias: dias de estadia en la habitacion
-	 * @throws Exception si el medico o paciente son nulos
+	 * @throws PacienteInvalidoException si el medico o paciente son nulos
 	 */
 	public void agregaInternacionAPaciente(Paciente paciente, Habitacion hab, int dias) throws Exception
 	{

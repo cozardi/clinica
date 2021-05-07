@@ -8,6 +8,9 @@ import exceptions.MedicoInvalidoException;
 import exceptions.NoExisteException;
 import lugares.*;
 
+/**
+ * Establece los atributos de un paciente y almacena sus consultas
+ */
 public abstract class Paciente  extends Usuarios implements PrioridadSala{
     protected String RangoEtario;
     protected Hashtable<Habitacion, Integer> internaciones;
@@ -23,22 +26,21 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
 	 * @param ciudad String, representa la ciudad de nacimiento. <br>
 	 * @param telefono String, contiene el numero de telefono del paciente. <br>
 	 * @param nombre Nombre y Apellido del paciente. <br>
-	 * @return Crea un objeto de tipo paciente <br>
-	 * @throws NoExisteException Si el rango etareo es erroneo lanza la excepcion y no crea el objeto <br>
+	 * @param rangoEtario Rango Etario del paciente, que es Nino, Joven o Mayor.<br>
 	 */
 
 
-	public Paciente(String dni, String domicilio, String ciudad, String telefono, String nombre, String RangoEtario)
+	public Paciente(String dni, String domicilio, String ciudad, String telefono, String nombre, String rangoEtario)
     {
         super(dni, domicilio, ciudad, telefono, nombre,++numHistoriaClinica);
-        this.RangoEtario = RangoEtario;
+        this.RangoEtario = rangoEtario;
     }
     
     /**
-     * Registra una internaciï¿½n en la estadï¿½a del hospital actual del paciente. Si vuelve a una habitaciï¿½n en la que ya estuvo, simplemente le suma dï¿½as.
+     * Registra una internaciï¿½n en la estadï¿½a del hospital actual del paciente. Si vuelve a una habitaciï¿½n en la que ya estuvo, simplemente le suma dï¿½as.<br>
      * 
-     * <b>pre:</b> La habitaciï¿½n no es nula, dias > 0
-     * <b>post:</b> La estadia queda registrada
+     * <b>pre:</b> La habitaciï¿½n no es nula, dias > 0 <br>
+     * <b>post:</b> La estadia queda registrada <br>
      * 
      * @param hab: La habitaciï¿½n en la que se internï¿½ el paciente
      * @param dias: Los dï¿½as que fue internado en dicha habitaciï¿½n
@@ -69,12 +71,12 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
     
     
     /**
-     * Agrega una consulta medica a la estadía actual del paciente
+     * Agrega una consulta medica a la estadï¿½a actual del paciente <br>
      * 
-     * @param med: El medico que hizo la consulta
+     * @param med: El medico que hizo la consulta<br>
      * 
-     * <b>pre:</b> El medico no es nulo
-     * <b>post:</b> La consulta queda registrada
+     * <b>pre:</b> El medico no es nulo<br>
+     * <b>post:</b> La consulta queda registrada<br>
      * 
      * @throws MedicoInvalidoException si el medico no es valido
      */
@@ -101,8 +103,8 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
     /**
      * Borra las internaciones y consultas actuales del paciente
      * 
-     * <b>pre:</b> Ninguna
-     * <b>post:</b> Las internaciones y consultas son reseteadas
+     * <b>pre:</b> Ninguna<br>
+     * <b>post:</b> Las internaciones y consultas son reseteadas<br>
      * 
      */
     public void ReseteaPrestaciones()

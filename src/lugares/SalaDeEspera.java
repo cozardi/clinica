@@ -41,7 +41,7 @@ public class SalaDeEspera {
      * Metodo que se encarga de ingresar al paciente. Primero intenta ingresarlo en la sala privada, si no es posible lo mueve al patio.<br>
      * <b>Pre:  </b> El paciente debe existir. <br>
      * <b>Post: </b> El paciente es acomodado a la sala correspondiente. <br>
-     * @param paciente
+     * @param paciente Paciente a ingresar a alguna sala de espera
      */
     public void ingresaSala(Paciente paciente){
         try{

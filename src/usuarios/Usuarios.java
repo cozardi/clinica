@@ -2,7 +2,10 @@ package usuarios;
 
 import java.util.Objects;
 
-public abstract class Usuarios implements Comparable{
+/**
+ * Define tipo de Usuario que pasa por la clinica (Medico y Paciente)
+ */
+public abstract class Usuarios implements Comparable<Usuarios>{
     protected String dni,domicilio,ciudad,telefono,nombre;
     protected int numero;
 
@@ -16,9 +19,8 @@ public abstract class Usuarios implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-        Usuarios u = (Usuarios) o;
-        return this.numero - u.numero;
+    public int compareTo(Usuarios o) {
+        return this.numero - o.numero;
     }
 
     @Override
