@@ -31,6 +31,8 @@ public class Clinica
 	private PriorityQueue<Paciente> listaEspera;
 	private ArrayList<Paciente> pacientesEnAtencion;
 
+	
+
 	/**
 	 * Constructor privado, es invocado por el metodo <i>getInstance</i>
 	 * @param nombre Representa el nombre de la clinica
@@ -171,10 +173,10 @@ public class Clinica
 	}
 	
 	/**
-	 * Agrega una consulta m�dica al paciente
+	 * Agrega una consulta medica al paciente
 	 * 
 	 * <b>pre:</b> El paciente y medico dados no son nulos
-     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del m�dico
+     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del medico
      * 
 	 * @param paciente: Paciente que recibio la consulta
 	 * @param medico: Medico que hizo la consulta
@@ -182,7 +184,7 @@ public class Clinica
 	 */
 	public void agregaConsultaAPaciente(Paciente paciente, Medico medico) throws Exception
 	{
-		//TODO: integrar con m�dulo de Reporte de Actividad Medica
+		//TODO: integrar con modulo de Reporte de Actividad Medica
 		if (paciente != null)
 		{
 			paciente.AgregaConsulta(medico);
@@ -198,7 +200,7 @@ public class Clinica
 	 * Agrega una estad�a en una habitacion al paciente<br>
 	 * 
 	 * <b>pre:</b> El paciente y medico dados no son nulos<br>
-     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del m�dico<br>
+     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del medico<br>
      * 
 	 * @param paciente: Paciente internado
 	 * @param habitacion: Habitacion en la que estuvo el paciente
@@ -216,5 +218,17 @@ public class Clinica
 		{
 			throw new PacienteInvalidoException("Error. Paciente es nulo");
 		}
+	}
+	
+	public void imprimeFacturaDePaciente(Paciente paciente) throws PacienteInvalidoException
+	{
+		String salida = new String();
+		
+		paciente.getConsultas().forEach((medico, consultas) ->
+		{
+			salida
+		})
+		
+		return salida;
 	}
 }
