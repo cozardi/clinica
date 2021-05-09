@@ -1,9 +1,7 @@
 package app;
 
 import clinica.Clinica;
-import exceptions.NoExisteException;
-import usuarios.IMedico;
-import usuarios.MedicoFactory;
+
 
 public class Prueba {
 
@@ -22,8 +20,7 @@ public class Prueba {
         // Creamos un par de pacientes
         clinica.ingresaPaciente("65761321", "Moreno 1239", "Mar del plata", "2234564687", "Verconica Galindo", "Nino");
         clinica.ingresaPaciente("7561238", "Colon 1239", "Mar del plata", "6873213", "Elmer Melada", "joven");
-        clinica.ingresaPaciente("1354314", "Buenos Aires 1239", "Mar del plata", "2234564687",
-                "Elmer Idiano de Greenwich", "Nino");
+        clinica.ingresaPaciente("1354314", "Buenos Aires 1239", "Mar del plata", "2234564687", "Elmer Idiano de Greenwich", "Nino");
         // Ingreso del paciente a la clínica
 
     }

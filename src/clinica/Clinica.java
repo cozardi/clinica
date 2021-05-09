@@ -45,8 +45,6 @@ public class Clinica {
 		this.telefono = telefono;
 		this.ciudad = ciudad;
 		listaEspera = new PriorityQueue();
-		medicos = new TreeSet<>();
-		pacientes = new TreeSet<>();
 		pacientesEnAtencion = new ArrayList<>();
 	}
 

@@ -19,11 +19,6 @@ public abstract class Usuarios implements Comparable<Usuarios>{
     }
 
     @Override
-    public int compareTo(Usuarios o) {
-        return this.numero - o.numero;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -39,7 +34,9 @@ public abstract class Usuarios implements Comparable<Usuarios>{
 	public int getNumero() {
 		return numero;
 	}
- 
-	
-	
+
+    @Override
+    public int compareTo(Usuarios o) {
+        return this.numero - o.numero;
+    }
 }

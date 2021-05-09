@@ -33,7 +33,7 @@ public abstract class MedicoFactory {
 
         if(tipoContratacion.equalsIgnoreCase("PERMANENTE"))
             respuesta = new MedicoPermanenteDecorator(respuesta);
-        else if(tipoContratacion.equalsIgnoreCase("TEMPORAL"))
+        else if(tipoContratacion.equalsIgnoreCase("TEMPORARIO"))
             respuesta = new MedicoPermanenteDecorator(respuesta);
         else
             throw new NoExisteException("El tipo de contratacion ingresado no existe");

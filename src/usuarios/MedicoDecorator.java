@@ -12,5 +12,4 @@ public abstract class MedicoDecorator implements IMedico{
         return medico.getHonorario();
     }
 
-
 }
