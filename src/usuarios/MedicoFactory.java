@@ -18,23 +18,23 @@ public abstract class MedicoFactory {
      * @return Un medico especifico
      * @throws NoExisteException Una advertencia sobre algun parametro mal ingresado
      */
-    public static IMedico getMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,int honorarioBasico,String especialidad,String tipoContratacion) throws NoExisteException {
-        IMedico medico = new Medico(dni,domicilio,ciudad,telefono,nombre,numero,honorarioBasico);
+    public static IMedico getMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,double honorarioBasico,String especialidad,String tipoContratacion) throws NoExisteException {
+        MedicoBase medicoBase;
         IMedico respuesta;
 
         if (especialidad.equalsIgnoreCase("CLINICO"))
-            respuesta = new MedicoClinicoDecorator(medico);
+            medicoBase = new MedicoClinico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico);
         else if (especialidad.equalsIgnoreCase("CIRUJANO"))
-            respuesta = new MedicoCirujanoDecorator(medico);
+            medicoBase = new MedicoCirujano(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico);
         else if (especialidad.equalsIgnoreCase("PEDIATRA"))
-            respuesta = new MedicoPediatraDecorator(medico);
+            medicoBase = new MedicoPediatra(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico);
         else
             throw new NoExisteException("La especialidad ingresada no existe");
 
         if(tipoContratacion.equalsIgnoreCase("PERMANENTE"))
-            respuesta = new MedicoPermanenteDecorator(respuesta);
+            respuesta = new MedicoPermanenteDecorator(medicoBase);
         else if(tipoContratacion.equalsIgnoreCase("TEMPORARIO"))
-            respuesta = new MedicoPermanenteDecorator(respuesta);
+            respuesta = new MedicoTemporarioDecorator(medicoBase);
         else
             throw new NoExisteException("El tipo de contratacion ingresado no existe");
 

@@ -7,13 +7,14 @@ public class DoctoradoMedicoDecorator  extends MedicoDecorator{
 
     public DoctoradoMedicoDecorator(IMedico medico) {
         super(medico);
+        setHonorario();
     }
 
     @Override
-    public double getHonorario() {
+    public void setHonorario() {
         double honorario = medico.getHonorario();
 
-        return honorario * 1.1;
+        this.Honorario = honorario * 1.1;
 
     }
 }

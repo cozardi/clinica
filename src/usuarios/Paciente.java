@@ -1,11 +1,9 @@
 package usuarios;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 import exceptions.DiasInvalidosException;
 import exceptions.MedicoInvalidoException;
-import exceptions.NoExisteException;
 import lugares.*;
 
 /**
@@ -14,7 +12,7 @@ import lugares.*;
 public abstract class Paciente  extends Usuarios implements PrioridadSala{
     protected String RangoEtario;
     protected Hashtable<Habitacion, Integer> internaciones;
-    protected Hashtable<Medico, Integer> consultas = new Hashtable<Medico, Integer>();
+    protected Hashtable<MedicoBase, Integer> consultas = new Hashtable<MedicoBase, Integer>();
     private static int numHistoriaClinica=0;
 
 
@@ -80,7 +78,7 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
      * 
      * @throws MedicoInvalidoException si el medico no es valido
      */
-    public void AgregaConsulta(Medico med) throws MedicoInvalidoException
+    public void AgregaConsulta(MedicoBase med) throws MedicoInvalidoException
     {
     	if (med != null)
     	{

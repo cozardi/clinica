@@ -5,16 +5,12 @@ import exceptions.PacienteInvalidoException;
 import lugares.Habitacion;
 import lugares.SalaDeEspera;
 import usuarios.IMedico;
-import usuarios.Medico;
+import usuarios.MedicoBase;
 import usuarios.MedicoFactory;
 import usuarios.Paciente;
 import usuarios.PacienteFactory;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Esta clase contiene la informacion de los medicos, los pacientes y donde se
@@ -26,10 +22,19 @@ public class Clinica {
 	// DATOS DE LA CLINICA
 	private String nombre, direccion, telefono, ciudad;
 
-	private Set<IMedico> medicos = new HashSet<IMedico>();
-	private Set<Paciente> pacientes = new HashSet<Paciente>();
+	private Set<IMedico> medicos = new TreeSet<>();
+	private Set<Paciente> pacientes = new TreeSet<>();
 	private PriorityQueue<Paciente> listaEspera;
 	private ArrayList<Paciente> pacientesEnAtencion;
+
+	public Set<IMedico> getMedicos() {
+		return medicos;
+	}
+
+	public Set<Paciente> getPacientes() {
+		return pacientes;
+	}
+
 
 	/**
 	 * Constructor privado, es invocado por el metodo <i>getInstance</i>
@@ -195,13 +200,13 @@ public class Clinica {
 	 * queda registrada en el paciente y el reporte del m�dico
 	 * 
 	 * @param paciente: Paciente que recibio la consulta
-	 * @param medico:   Medico que hizo la consulta
+	 * @param medicoBase:   Medico que hizo la consulta
 	 * @throws PacienteInvalidoException si el medico o paciente son nulos
 	 */
-	public void agregaConsultaAPaciente(Paciente paciente, Medico medico) throws Exception {
+	public void agregaConsultaAPaciente(Paciente paciente, MedicoBase medicoBase) throws Exception {
 		// TODO: integrar con m�dulo de Reporte de Actividad Medica
 		if (paciente != null) {
-			paciente.AgregaConsulta(medico);
+			paciente.AgregaConsulta(medicoBase);
 		} else {
 			throw new PacienteInvalidoException("Error. Paciente es nulo");
 		}
