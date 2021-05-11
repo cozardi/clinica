@@ -4,7 +4,7 @@ import exceptions.DiasInvalidosException;
 
 public abstract class Habitacion {
     protected static double costoInicial = 1000;// preguntar que valor darle
-
+    
     public Habitacion() {
     }
 
@@ -17,5 +17,10 @@ public abstract class Habitacion {
      * @throws DiasInvalidosException si los dias <=0
      */
     public abstract double calculaArancel(int cantDias) throws DiasInvalidosException;
+    
+    public String IDTipoHabitacion()
+    {
+    	return "Habitacion";
+    }
 
 }

@@ -18,4 +18,12 @@ public class HabPrivada extends Habitacion {
             throw new DiasInvalidosException("Dias menores a 0", cantDias);
     }
 
+	@Override
+	public String IDTipoHabitacion() {
+		// TODO Auto-generated method stub
+		return "Habitacion Privada";
+	}
+    
+    
+
 }

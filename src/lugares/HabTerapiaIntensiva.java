@@ -12,4 +12,12 @@ public class HabTerapiaIntensiva extends Habitacion {
         } else
             throw new DiasInvalidosException("Dias no mayores a 0", cantDias);
     }
+
+	@Override
+	public String IDTipoHabitacion() {
+		// TODO Auto-generated method stub
+		return "Terapia Intensiva";
+	}
+    
+    
 }

@@ -17,4 +17,17 @@ public class HabCompartida extends Habitacion {
             throw new DiasInvalidosException("Dias menores que cero", cantDias);
     }
 
+	@Override
+	public String IDTipoHabitacion() {
+		// TODO Auto-generated method stub
+		return "Habitacion Compartida";
+	}
+
+	public static double getCostoAsignacion() {
+		return costoAsignacion;
+	}
+    
+	
+    
+
 }
