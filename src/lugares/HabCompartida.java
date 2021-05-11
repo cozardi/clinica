@@ -22,7 +22,7 @@ public class HabCompartida extends Habitacion {
 		return "Habitacion Compartida";
 	}
 
-	public static double getCostoAsignacion() {
+	public double getCostoAsignacion() {
 		return costoAsignacion;
 	}
     

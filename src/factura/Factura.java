@@ -1,6 +1,12 @@
 package factura;
 
+import java.util.Enumeration;
+
 import dnl.utils.text.table.TextTable;
+import exceptions.DiasInvalidosException;
+import exceptions.PacienteInvalidoException;
+import lugares.Habitacion;
+import usuarios.IMedico;
 import usuarios.Paciente;
 
 public class Factura 
@@ -13,11 +19,14 @@ public class Factura
 	
 	private int contadorFilaFactura;
 	
-	public Factura(Paciente paciente)
+	public Factura(Paciente paciente) throws PacienteInvalidoException
 	{
 		numFacturaMax++;
 		numFactura = numFacturaMax;
-		this.paciente = paciente;
+		if (paciente != null)
+			this.paciente = paciente;
+		else
+			throw new PacienteInvalidoException("Se trato de crear una factura con un paciente null");
 	}
 
 	@Override
@@ -41,17 +50,36 @@ public class Factura
 		Object[][] datos = new Object[consultas.size() + internaciones.size()][nombresColumnas.length];
 		
 		
-		
-		consultas.forEach((medico, cant) -> 
+		Enumeration<IMedico> enumMedicos = consultas.keys();
+		while (enumMedicos.hasMoreElements())
 		{
-			datos[contadorDatos][0] = medico.getNombre();
-			datos[contadorDatos][1] = medico.getHonorario() * valorAgregadoConsulta;
-			datos[contadorDatos][2] = cant;
-			datos[contadorDatos][3] = medico.getHonorario() * valorAgregadoConsulta * cant;
+			IMedico medActual = enumMedicos.nextElement();
+			datos[contadorDatos][0] = medActual.getNombre();
+			datos[contadorDatos][1] = medActual.getHonorario() * valorAgregadoConsulta;
+			datos[contadorDatos][2] = consultas.get(medActual);
+			datos[contadorDatos][3] = medActual.getHonorario() * valorAgregadoConsulta * consultas.get(medActual);
+			costoTotal += medActual.getHonorario() * valorAgregadoConsulta * consultas.get(medActual);
 			
-			contadorDatos = contadorDatos + 1;
-		});
+			contadorDatos++;
+		}
 		
+		
+		Enumeration<Habitacion> enumHabitaciones = internaciones.keys();
+		while(enumHabitaciones.hasMoreElements())
+		{
+			Habitacion habActual = enumHabitaciones.nextElement();
+			datos[contadorDatos][0] = habActual.IDTipoHabitacion();
+			datos[contadorDatos][1] = habActual.getCostoAsignacion();
+			datos[contadorDatos][2] = internaciones.get(habActual);
+			try {
+				datos[contadorDatos][3] = habActual.calculaArancel(internaciones.get(habActual));
+				costoTotal += habActual.calculaArancel(internaciones.get(habActual));
+			} catch (DiasInvalidosException e) {
+				e.fillInStackTrace();
+			}
+			
+			contadorDatos++;
+		}
 		
 		TextTable tablaDatos = new TextTable(nombresColumnas, datos);
 		

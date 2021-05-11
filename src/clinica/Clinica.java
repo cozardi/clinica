@@ -2,6 +2,7 @@ package clinica;
 
 import exceptions.NoExisteException;
 import exceptions.PacienteInvalidoException;
+import factura.Factura;
 import lugares.Habitacion;
 import lugares.SalaDeEspera;
 import usuarios.IMedico;
@@ -184,7 +185,7 @@ public class Clinica {
 	 * @param numeroPaciente: El numero de historia clinica del paciente a buscar
 	 * @return Retorna el paciente con ese numero o null si no existe
 	 */
-	private Paciente buscaPaciente(int numeroPaciente) {
+	public Paciente buscaPaciente(int numeroPaciente) {
 		for (Paciente paciente : pacientesEnAtencion) {
 			if (paciente.getNumero() == numeroPaciente) {
 				return paciente;
@@ -203,7 +204,7 @@ public class Clinica {
 	 * @param medicoBase:   Medico que hizo la consulta
 	 * @throws PacienteInvalidoException si el medico o paciente son nulos
 	 */
-	public void agregaConsultaAPaciente(Paciente paciente, Medico medico) throws Exception
+	public void agregaConsultaAPaciente(Paciente paciente, IMedico medico) throws Exception
 	{
 		//TODO: integrar con modulo de Reporte de Actividad Medica
 		if (paciente != null)
@@ -240,11 +241,9 @@ public class Clinica {
 	{
 		String salida = new String();
 		
-		paciente.getConsultas().forEach((medico, consultas) ->
-		{
-			salida
-		})
+		Factura facturaNueva = new Factura(paciente);
+		paciente.ReseteaPrestaciones();
 		
-		return salida;
+		System.out.print(facturaNueva.toString());
 	}
 }
