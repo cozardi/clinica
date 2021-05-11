@@ -3,10 +3,9 @@ package lugares;
 import exceptions.DiasInvalidosException;
 
 public class HabCompartida extends Habitacion {
-    private static double costoAsignacion = 500;// Preguntar el costo este tmb
 
     public HabCompartida() {
-        super();
+        super(500);
     }
 
     @Override
