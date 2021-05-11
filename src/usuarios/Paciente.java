@@ -88,7 +88,7 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
      * 
      * @throws MedicoInvalidoException si el medico no es valido
      */
-    public void AgregaConsulta(Medico med) throws MedicoInvalidoException
+    public void AgregaConsulta(MedicoBase med) throws MedicoInvalidoException
     {
     	if (med != null)
     	{

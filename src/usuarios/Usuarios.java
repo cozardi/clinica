@@ -18,9 +18,24 @@ public abstract class Usuarios implements Comparable<Usuarios>{
         this.numero = numero;
     }
 
-    @Override
-    public int compareTo(Usuarios o) {
-        return this.numero - o.numero;
+    public String getDni() {
+        return dni;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     @Override
@@ -39,7 +54,9 @@ public abstract class Usuarios implements Comparable<Usuarios>{
 	public int getNumero() {
 		return numero;
 	}
- 
-	
-	
+
+    @Override
+    public int compareTo(Usuarios o) {
+        return this.numero - o.numero;
+    }
 }
