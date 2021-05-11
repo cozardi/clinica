@@ -14,7 +14,7 @@ import lugares.*;
 public abstract class Paciente  extends Usuarios implements PrioridadSala{
     protected String RangoEtario;
     protected Hashtable<Habitacion, Integer> internaciones;
-    protected Hashtable<Medico, Integer> consultas = new Hashtable<Medico, Integer>();
+    protected Hashtable<IMedico, Integer> consultas = new Hashtable<IMedico, Integer>();
     private static int numHistoriaClinica=0;
 
 
@@ -37,15 +37,15 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
     }
     
     /**
-     * Registra una internaci�n en la estad�a del hospital actual del paciente. Si vuelve a una habitaci�n en la que ya estuvo, simplemente le suma d�as.<br>
+     * Registra una internacion en la estadia del hospital actual del paciente. Si vuelve a una habitacion en la que ya estuvo, simplemente le suma dias.<br>
      * 
-     * <b>pre:</b> La habitaci�n no es nula, dias > 0 <br>
+     * <b>pre:</b> La habitacion no es nula, dias > 0 <br>
      * <b>post:</b> La estadia queda registrada <br>
      * 
-     * @param hab: La habitaci�n en la que se intern� el paciente
-     * @param dias: Los d�as que fue internado en dicha habitaci�n
+     * @param hab: La habitacion en la que se interno el paciente
+     * @param dias: Los dias que fue internado en dicha habitacion
      * 
-     * @throws Exception si la habitaci�n es nula o los d�as no son v�lidos
+     * @throws Exception si la habitacion es nula o los dias no son validos
      */
     public void AgregaInternacion(Habitacion hab, int dias) throws Exception
     {
@@ -70,7 +70,15 @@ public abstract class Paciente  extends Usuarios implements PrioridadSala{
     }
     
     
-    /**
+    public Hashtable<Habitacion, Integer> getInternaciones() {
+		return internaciones;
+	}
+
+	public Hashtable<IMedico, Integer> getConsultas() {
+		return consultas;
+	}
+
+	/**
      * Agrega una consulta medica a la estad�a actual del paciente <br>
      * 
      * @param med: El medico que hizo la consulta<br>
