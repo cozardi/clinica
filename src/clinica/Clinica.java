@@ -142,15 +142,12 @@ public class Clinica {
 	 * Ingresa el paciente a la clinica y lo deriva a la sala de espera. En caso de
 	 * no poder crearlo informa el error con un mensaje.
 	 * 
-	 * @param dni            String, contiene el DNI del paciente. <br>
-	 * @param domicilio      String, contiene el Domicilio en nombre y número. <br>
-	 * @param ciudad         String, representa la ciudad de nacimiento. <br>
-	 * @param telefono       String, contiene el numero de telefono del paciente.
-	 *                       <br>
-	 * @param nombre         Nombre y Apellido del paciente. <br>
-	 * @param numHistClinica valor autoincremental asignado por la clinica,
-	 *                       representa su numero de Historia Clinica. <br>
-	 * @param rangoEtario    Rango etario del paciente (nino, joven o mayor) <br>
+	 * @param dni         String, contiene el DNI del paciente. <br>
+	 * @param domicilio   String, contiene el Domicilio en nombre y número. <br>
+	 * @param ciudad      String, representa la ciudad de nacimiento. <br>
+	 * @param telefono    String, contiene el numero de telefono del paciente. <br>
+	 * @param nombre      Nombre y Apellido del paciente. <br>
+	 * @param rangoEtario Rango etario del paciente (nino, joven o mayor) <br>
 	 */
 
 	public void ingresaPaciente(String dni, String domicilio, String ciudad, String telefono, String nombre,
@@ -248,9 +245,9 @@ public class Clinica {
 	 * <b>post:</b> La consulta queda registrada en el paciente y el reporte del
 	 * medico<br>
 	 * 
-	 * @param paciente:   Paciente internado
-	 * @param habitacion: Habitacion en la que estuvo el paciente
-	 * @param dias:       dias de estadia en la habitacion
+	 * @param paciente: Paciente internado
+	 * @param hab:      Habitacion en la que estuvo el paciente
+	 * @param dias:     dias de estadia en la habitacion
 	 * @throws Exception si el medico o paciente son nulos
 	 */
 	public void agregaInternacionAPaciente(Paciente paciente, Habitacion hab, int dias) throws Exception {

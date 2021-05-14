@@ -16,10 +16,8 @@ public interface PrioridadSala {
 
     boolean prioriza(PrioridadSala p);
 
-
-
-    boolean beatsJoven();
-    boolean beatsMayor();
-    boolean beatsNino();
+    boolean ganaJoven();
+    boolean ganaMayor();
+    boolean ganaNino();
 
 }

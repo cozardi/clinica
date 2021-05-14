@@ -9,6 +9,7 @@ import exceptions.FechaInvalidaException;
 import exceptions.PacienteInvalidoException;
 import lugares.HabPrivada;
 import lugares.Habitacion;
+import lugares.SalaDeEspera;
 import usuarios.IMedico;
 import usuarios.Paciente;
 
