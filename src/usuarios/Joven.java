@@ -10,7 +10,7 @@ public class Joven extends Paciente{
      * @param ciudad String, representa la ciudad de nacimiento. <br>
      * @param telefono String, contiene el numero de telefono del paciente. <br>
      * @param nombre Nombre y Apellido del paciente. <br>
-     * @return Crea un objeto de tipo Joven <br>
+     * <b>Post: </b> Crea un objeto de tipo Joven <br>
      */
 
 
@@ -20,22 +20,22 @@ public class Joven extends Paciente{
 
     @Override
     public boolean prioriza(PrioridadSala p) {
-        return p.beatsJoven();
+        return p.ganaJoven();
     }
 
     @Override
-    public boolean beatsJoven() {
+    public boolean ganaJoven() {
         return false;
     }
 
     @Override
-    public boolean beatsMayor() {
+    public boolean ganaMayor() {
+        return false;
+    }
+
+    @Override
+    public boolean ganaNino() {
         return true;
-    }
-
-    @Override
-    public boolean beatsNino() {
-        return false;
     }
 
 

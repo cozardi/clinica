@@ -7,6 +7,7 @@ import clinica.Clinica;
 import exceptions.PacienteInvalidoException;
 import lugares.HabPrivada;
 import lugares.Habitacion;
+import lugares.SalaDeEspera;
 import usuarios.IMedico;
 import usuarios.Paciente;
 
@@ -29,9 +30,10 @@ public class Prueba {
         clinica.addMedico("867321", "Colon 1235", "Mar del Plata", "57658432", "Marianito", 1410, 7000, "Clinico",
                 "Temporario","Magister");
         // Creamos un par de pacientes
+        clinica.ingresaPaciente("7561238", "Colon 1239", "Mar del plata", "6873213", "Elmer Melada", "Mayor");
+        clinica.ingresaPaciente("1354314", "Buenos Aires 1239", "Mar del plata", "2234564687", "Elmer Idiano de Greenwich", "Joven");
         clinica.ingresaPaciente("65761321", "Moreno 1239", "Mar del plata", "2234564687", "Verconica Galindo", "Nino");
-        clinica.ingresaPaciente("7561238", "Colon 1239", "Mar del plata", "6873213", "Elmer Melada", "joven");
-        clinica.ingresaPaciente("1354314", "Buenos Aires 1239", "Mar del plata", "2234564687", "Elmer Idiano de Greenwich", "Nino");
+
         // Ingreso del paciente a la clínica
 
 

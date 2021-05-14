@@ -1,7 +1,5 @@
 package usuarios;
 
-import exceptions.NoExisteException;
-
 public class Nino extends Paciente implements PrioridadSala{
 
 
@@ -13,7 +11,7 @@ public class Nino extends Paciente implements PrioridadSala{
      * @param ciudad String, representa la ciudad de nacimiento. <br>
      * @param telefono String, contiene el numero de telefono del paciente. <br>
      * @param nombre Nombre y Apellido del paciente. <br>
-     * @return Crea un objeto de tipo Nino <br>
+     * <b>Post: </b>@return Crea un objeto de tipo Nino <br>
      */
 
     public Nino(String dni, String domicilio, String ciudad, String telefono, String nombre, String edad) {
@@ -22,21 +20,21 @@ public class Nino extends Paciente implements PrioridadSala{
 
     @Override
     public boolean prioriza(PrioridadSala p) {
-        return p.beatsNino();
+        return p.ganaNino();
     }
 
     @Override
-    public boolean beatsJoven() {
-        return true;
-    }
-
-    @Override
-    public boolean beatsMayor() {
+    public boolean ganaJoven() {
         return false;
     }
 
     @Override
-    public boolean beatsNino() {
+    public boolean ganaMayor() {
+        return false;
+    }
+
+    @Override
+    public boolean ganaNino() {
         return false;
     }
 

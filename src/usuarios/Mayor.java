@@ -10,7 +10,7 @@ public class Mayor extends Paciente{
      * @param ciudad String, representa la ciudad de nacimiento. <br>
      * @param telefono String, contiene el numero de telefono del paciente. <br>
      * @param nombre Nombre y Apellido del paciente. <br>
-     * @return Crea un objeto de tipo Mayor <br>
+     * <b>Post: </b> Crea un objeto de tipo Mayor <br>
      */
 
 
@@ -20,22 +20,22 @@ public class Mayor extends Paciente{
 
     @Override
     public boolean prioriza(PrioridadSala p) {
-        return p.beatsMayor();
+        return p.ganaMayor();
     }
 
     @Override
-    public boolean beatsJoven() {
-        return false;
-    }
-
-    @Override
-    public boolean beatsMayor() {
-        return false;
-    }
-
-    @Override
-    public boolean beatsNino() {
+    public boolean ganaJoven() {
         return true;
+    }
+
+    @Override
+    public boolean ganaMayor() {
+        return false;
+    }
+
+    @Override
+    public boolean ganaNino() {
+        return false;
     }
 
 

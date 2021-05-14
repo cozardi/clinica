@@ -148,8 +148,6 @@ public class Clinica {
 	 * @param telefono       String, contiene el numero de telefono del paciente.
 	 *                       <br>
 	 * @param nombre         Nombre y Apellido del paciente. <br>
-	 * @param numHistClinica valor autoincremental asignado por la clinica,
-	 *                       representa su numero de Historia Clinica. <br>
 	 * @param rangoEtario    Rango etario del paciente (nino, joven o mayor) <br>
 	 */
 
@@ -239,7 +237,7 @@ public class Clinica {
      * <b>post:</b> La consulta queda registrada en el paciente y el reporte del medico<br>
      * 
 	 * @param paciente: Paciente internado
-	 * @param habitacion: Habitacion en la que estuvo el paciente
+	 * @param hab: Habitacion en la que estuvo el paciente
 	 * @param dias:       dias de estadia en la habitacion
 	 * @throws Exception si el medico o paciente son nulos
 	 */

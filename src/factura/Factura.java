@@ -83,16 +83,15 @@ public class Factura
 		}
 		
 		TextTable tablaDatos = new TextTable(nombresColumnas, datos);
-		
-		
+
+
 		tablaDatos.printTable();
 		
 		
 		System.out.print("\n" + "Total: " + costoTotal);
-		
 	}
-	
-	
-	
-	
+
+
+
+
 }
