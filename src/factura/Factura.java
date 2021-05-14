@@ -29,9 +29,10 @@ public class Factura
 			throw new PacienteInvalidoException("Se trato de crear una factura con un paciente null");
 	}
 
-	@Override
-	public String toString() 
+	public void ImprimeFactura() 
 	{
+		System.out.print("Factura numero: " + numFactura + "\n");
+		
 		String[] nombresColumnas = {
 				"Prestacion",
 				"Valor",
@@ -55,9 +56,9 @@ public class Factura
 		{
 			IMedico medActual = enumMedicos.nextElement();
 			datos[contadorDatos][0] = medActual.getNombre();
-			datos[contadorDatos][1] = medActual.getHonorario() * valorAgregadoConsulta;
+			datos[contadorDatos][1] = (int) (medActual.getHonorario() * valorAgregadoConsulta);
 			datos[contadorDatos][2] = consultas.get(medActual);
-			datos[contadorDatos][3] = medActual.getHonorario() * valorAgregadoConsulta * consultas.get(medActual);
+			datos[contadorDatos][3] = (int) (medActual.getHonorario() * valorAgregadoConsulta * consultas.get(medActual));
 			costoTotal += medActual.getHonorario() * valorAgregadoConsulta * consultas.get(medActual);
 			
 			contadorDatos++;
@@ -69,10 +70,10 @@ public class Factura
 		{
 			Habitacion habActual = enumHabitaciones.nextElement();
 			datos[contadorDatos][0] = habActual.IDTipoHabitacion();
-			datos[contadorDatos][1] = habActual.getCostoAsignacion();
+			datos[contadorDatos][1] = (int) habActual.getCostoAsignacion();
 			datos[contadorDatos][2] = internaciones.get(habActual);
 			try {
-				datos[contadorDatos][3] = habActual.calculaArancel(internaciones.get(habActual));
+				datos[contadorDatos][3] = (int) habActual.calculaArancel(internaciones.get(habActual));
 				costoTotal += habActual.calculaArancel(internaciones.get(habActual));
 			} catch (DiasInvalidosException e) {
 				e.fillInStackTrace();
@@ -83,12 +84,12 @@ public class Factura
 		
 		TextTable tablaDatos = new TextTable(nombresColumnas, datos);
 		
-		String salida = tablaDatos.toString();
+		
+		tablaDatos.printTable();
 		
 		
-		salida.concat("\n" + "Total: " + costoTotal);
+		System.out.print("\n" + "Total: " + costoTotal);
 		
-		return salida;
 	}
 	
 	

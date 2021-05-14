@@ -1,6 +1,12 @@
 package app;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import clinica.Clinica;
+import exceptions.PacienteInvalidoException;
+import lugares.HabPrivada;
+import lugares.Habitacion;
 import usuarios.IMedico;
 import usuarios.Paciente;
 
@@ -38,7 +44,39 @@ public class Prueba {
             System.out.println(medico.getNombre() + ' ' +  medico.getHonorario());
         }
 
-
+        Set<Paciente> pacientes = clinica.getPacientes();
+        Iterator<Paciente> pacientesIterator = pacientes.iterator();
+        Paciente pacientePrueba = pacientesIterator.next();
+        
+        Set<IMedico> medicos = clinica.getMedicos();
+        Iterator<IMedico> medicosIterator = medicos.iterator();
+        IMedico medicoPrueba1 = medicosIterator.next();
+        IMedico medicoPrueba2 = medicosIterator.next();
+        
+        Habitacion habPrueba = new HabPrivada();
+        
+        
+        try {
+			clinica.agregaConsultaAPaciente(pacientePrueba, medicoPrueba1);
+	        clinica.agregaConsultaAPaciente(pacientePrueba, medicoPrueba2);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
+        try {
+			clinica.agregaInternacionAPaciente(pacientePrueba, habPrueba, 5);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
+        try {
+			clinica.imprimeFacturaDePaciente(pacientePrueba);
+		} catch (PacienteInvalidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
     }
 }

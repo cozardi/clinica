@@ -13,7 +13,7 @@ import lugares.*;
  */
 public abstract class Paciente  extends Usuarios implements PrioridadSala{
     protected String RangoEtario;
-    protected Hashtable<Habitacion, Integer> internaciones;
+    protected Hashtable<Habitacion, Integer> internaciones = new Hashtable<Habitacion, Integer>();
     protected Hashtable<IMedico, Integer> consultas = new Hashtable<IMedico, Integer>();
     private static int numHistoriaClinica=0;
 

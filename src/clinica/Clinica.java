@@ -1,5 +1,6 @@
 package clinica;
 
+import exceptions.DiasInvalidosException;
 import exceptions.NoExisteException;
 import exceptions.PacienteInvalidoException;
 import factura.Factura;
@@ -195,14 +196,14 @@ public class Clinica {
 	}
 
 	/**
-	 * Agrega una consulta medica al paciente
+	 * Agrega una consulta medica al paciente <br>
 	 * 
-	 * <b>pre:</b> El paciente y medico dados no son nulos
-     * <b>post:</b> La consulta queda registrada en el paciente y el reporte del medico
+	 * <b>pre</b> El paciente y medico dados no son nulos <br>
+     * <b>post</b> La consulta queda registrada en el paciente y el reporte del medico <br>
      * 
-	 * @param paciente: Paciente que recibio la consulta
-	 * @param medicoBase:   Medico que hizo la consulta
-	 * @throws PacienteInvalidoException si el medico o paciente son nulos
+	 * @param paciente 		Paciente que recibio la consulta <br>
+	 * @param medico   		Medico que hizo la consulta <br>
+	 * @throws PacienteInvalidoException si el medico o paciente son nulos <br>
 	 */
 	public void agregaConsultaAPaciente(Paciente paciente, IMedico medico) throws Exception
 	{
@@ -216,25 +217,62 @@ public class Clinica {
 			throw new PacienteInvalidoException("Error. Paciente es nulo");
 		}
 	}
+	
+	
+	public boolean agregaConsultaAPaciente(int numero, IMedico medico) throws Exception
+	{
+		Paciente paciente = buscaPaciente(numero);
+		if (paciente != null) //lo encontro
+		{
+			agregaConsultaAPaciente(paciente, medico);
+			
+			return true;
+		}
+		else
+			return false;
+	}
 
 	/**
-	 * Agrega una estad�a en una habitacion al paciente<br>
+	 * Agrega una estadia en una habitacion al paciente<br>
 	 * 
-	 * <b>pre:</b> El paciente y medico dados no son nulos<br>
+	 * <b>pre:</b> El paciente y hab dados no son nulos<br>
      * <b>post:</b> La consulta queda registrada en el paciente y el reporte del medico<br>
      * 
 	 * @param paciente: Paciente internado
 	 * @param habitacion: Habitacion en la que estuvo el paciente
 	 * @param dias:       dias de estadia en la habitacion
-	 * @throws PacienteInvalidoException si el medico o paciente son nulos
+	 * @throws Exception si el medico o paciente son nulos
 	 */
-	public void agregaInternacionAPaciente(Paciente paciente, Habitacion hab, int dias) throws Exception {
-
+	public void agregaInternacionAPaciente(Paciente paciente, Habitacion hab, int dias) throws Exception 
+	{
 		if (paciente != null) {
-			paciente.AgregaInternacion(hab, 0);
+			paciente.AgregaInternacion(hab, dias);
 		} else {
 			throw new PacienteInvalidoException("Error. Paciente es nulo");
 		}
+	}
+	
+	/**
+	 * Agrega una estadia en una habitacion al paciente<br>
+	 * 
+	 * 
+	 * @param numero el numero de paciente al que se le quiere agregar la internacion
+	 * @param hab la habitacion que se le agregara 
+	 * @param dias los dias que estuvo en dicha habitacion
+	 * @return verdadero si se encontro el paciente con el numero, falso si no
+	 * @throws Exception si la habitacion o los dias no son validos
+	 */
+	public boolean agregaInternacionAPaciente(int numero, Habitacion hab, int dias) throws Exception
+	{
+		Paciente paciente = buscaPaciente(numero);
+		if (paciente != null) //lo encontro
+		{
+			agregaInternacionAPaciente(paciente, hab, dias);
+			
+			return true;
+		}
+		else
+			return false;
 	}
 	
 	public void imprimeFacturaDePaciente(Paciente paciente) throws PacienteInvalidoException
@@ -242,8 +280,9 @@ public class Clinica {
 		String salida = new String();
 		
 		Factura facturaNueva = new Factura(paciente);
-		paciente.ReseteaPrestaciones();
 		
-		System.out.print(facturaNueva.toString());
+		facturaNueva.ImprimeFactura();
+		
+		paciente.ReseteaPrestaciones();
 	}
 }
