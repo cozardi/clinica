@@ -1,5 +1,9 @@
 package exceptions;
 
+/*
+ Esta clase es una excepcion que es utilizada cuando se ingresan dias 
+ negativos o cero
+*/
 public class DiasInvalidosException extends Exception {
     private int dias;
 

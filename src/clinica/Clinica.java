@@ -193,10 +193,10 @@ public class Clinica {
 	}
 
 	/**
-	 * Busca el paciente con cierto numero de paciente
+	 * Busca el medico con cierto numero de medico
 	 * 
-	 * @param numeroMedico: El numero de interno del medico a buscar
-	 * @return Retorna el paciente con ese numero o null si no existe
+	 * @param numeroMedico: El numero del medico
+	 * @return Retorna el Medico con ese numero o null si no existe
 	 */
 	public IMedico buscaMedico(int numeroMedico) {
 		for (IMedico medico : medicos) {
@@ -227,6 +227,17 @@ public class Clinica {
 		}
 	}
 
+	/**
+	 * Agregamos una consulta al historial de consultas del paciente Pre: El numero
+	 * de paciente debe ser un valor existente<br>
+	 * El Imedico no debe ser null <br>
+	 * Post: retorna true si se pudo agregar con exito y false en caso contrario
+	 * 
+	 * @param numero
+	 * @param medico
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean agregaConsultaAPaciente(int numero, IMedico medico) throws Exception {
 		Paciente paciente = buscaPaciente(numero);
 		if (paciente != null) // lo encontro
@@ -280,6 +291,15 @@ public class Clinica {
 			return false;
 	}
 
+	/**
+	 * Pre:El paciente y la fecha no deben ser null<br>
+	 * Post:Muestra la tabla de la facura y tambien agrega la informacion necesaria
+	 * a los reportes de los medicos
+	 * 
+	 * @param paciente
+	 * @param fecha
+	 * @throws PacienteInvalidoException
+	 */
 	public void imprimeFacturaDePaciente(Paciente paciente, GregorianCalendar fecha) throws PacienteInvalidoException {
 		String salida = new String();
 

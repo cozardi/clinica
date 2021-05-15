@@ -2,7 +2,6 @@ package usuarios;
 
 public class MedicoClinico extends MedicoBase {
 
-
     /**
      * Constructor de Medico base
      *
@@ -11,17 +10,19 @@ public class MedicoClinico extends MedicoBase {
      * @param ciudad          representa la ciudad de origen
      * @param telefono        contiene el telefono del medico
      * @param nombre          Nombre y apellido del medico
-     * @param numero          representa el numero de licencia medico (unico por medico)
+     * @param numero          representa el numero de licencia medico (unico por
+     *                        medico)
      * @param honorarioBasico Honorario basico del medico
      */
-    public MedicoClinico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero, double honorarioBasico) {
+    public MedicoClinico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
+            double honorarioBasico) {
         super(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico);
         setHonorario();
     }
 
     @Override
     public void setHonorario() {
-       this.Honorario*=1.05;
+        this.Honorario *= 1.05;
     }
 
 }

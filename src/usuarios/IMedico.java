@@ -30,14 +30,35 @@ public abstract class IMedico extends Usuarios {
     */
    public abstract void setHonorario();
 
+   /**
+    * Retorna el honorario del medico
+    * 
+    * @return double
+    */
    public double getHonorario() {
       return Honorario;
    }
 
+   /**
+    * Retorna el treeset de reportes
+    * 
+    * @return TreeSet<Reporte>
+    */
    public TreeSet<Reporte> getReporte() {
       return reporte;
    }
 
+   /**
+    * PRE: Se espera que f1 sea una fecha en la que mas adelante se encuentre algun
+    * reporte<br>
+    * POST: Muestra por cada reporte los datos: Nombre del paciente, fecha de
+    * facturacion, cantidad de consultas realizadas por el paciente, y el subtotal
+    * que cobra el medico
+    * 
+    * @param f1
+    * @param f2
+    * @throws FechaInvalidaException
+    */
    public void muestraReporte(GregorianCalendar f1, GregorianCalendar f2) throws FechaInvalidaException {
       double total = 0;
       Iterator<Reporte> it = reporte.iterator();

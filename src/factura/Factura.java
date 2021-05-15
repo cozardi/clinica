@@ -31,6 +31,11 @@ public class Factura {
 			throw new PacienteInvalidoException("Se trato de crear una factura con un paciente null");
 	}
 
+	/*
+	 * Imprime la factura con los datos de Prestacion, Valor, Cantidad, Subtotal
+	 * Post: Imprime en formato de tabla la informacion
+	 */
+
 	public void ImprimeFactura() {
 		System.out.print("Factura numero: " + numFactura + "\n");
 
@@ -82,6 +87,11 @@ public class Factura {
 
 	}
 
+	/**
+	 * Post: Retorna la fecha de facturacion
+	 * 
+	 * @return GregorianCalendar
+	 */
 	public GregorianCalendar getFecha() {
 		return fecha;
 	}

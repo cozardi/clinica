@@ -9,16 +9,22 @@ public class MedicoPediatra extends MedicoBase {
      * @param ciudad          representa la ciudad de origen
      * @param telefono        contiene el telefono del medico
      * @param nombre          Nombre y apellido del medico
-     * @param numero          representa el numero de licencia medico (unico por medico)
+     * @param numero          representa el numero de licencia medico (unico por
+     *                        medico)
      * @param honorarioBasico Honorario basico del medico
      */
-    public MedicoPediatra(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero, double honorarioBasico) {
+    public MedicoPediatra(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
+            double honorarioBasico) {
         super(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico);
         setHonorario();
     }
 
+    /**
+     * Delega el seteo del honorario al medico que tiene como atributo, es decir
+     * llama al setHonorario del medico que es quien calcula el honorario
+     */
     @Override
     public void setHonorario() {
-        this.Honorario*=1.07;
+        this.Honorario *= 1.07;
     }
 }

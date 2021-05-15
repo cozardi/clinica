@@ -24,8 +24,7 @@ public abstract class Habitacion {
         return costoAsignacion;
     }
 
-    public String IDTipoHabitacion()
-    {
-    	return "Habitacion";
+    public String IDTipoHabitacion() {
+        return "Habitacion";
     }
 }
