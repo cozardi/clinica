@@ -3,14 +3,17 @@ package usuarios;
 /**
  * Crea un medico con contratacion Temporal
  */
-public class MedicoTemporarioDecorator extends MedicoDecorator{
-
+public class MedicoTemporarioDecorator extends MedicoDecorator {
 
     public MedicoTemporarioDecorator(IMedico medico) {
         super(medico);
         setHonorario();
     }
 
+    /**
+     * Delega el seteo del honorario al medico que tiene como atributo, es decir
+     * llama al setHonorario del medico que es quien calcula el honorario
+     */
     @Override
     public void setHonorario() {
         double honorario = medico.getHonorario();

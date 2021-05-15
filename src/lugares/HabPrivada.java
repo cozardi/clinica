@@ -8,6 +8,15 @@ public class HabPrivada extends Habitacion {
         super(600);
     }
 
+    /**
+     * Pre: La cantidad de dias debe ser mayor a cero <br>
+     * Post: Retorna el arancel que se le debe cobrar POR la habitacion
+     * especifica<br>
+     * 
+     * @param cantDias
+     * @return double
+     * @throws DiasInvalidosException
+     */
     @Override
     public double calculaArancel(int cantDias) throws DiasInvalidosException {
         if (cantDias > 0) {
@@ -21,12 +30,15 @@ public class HabPrivada extends Habitacion {
             throw new DiasInvalidosException("Dias menores a 0", cantDias);
     }
 
-	@Override
-	public String IDTipoHabitacion() {
-		// TODO Auto-generated method stub
-		return "Habitacion Privada";
-	}
-    
-    
+    /**
+     * Retorna el costo asignacion especifico de esta habitacion
+     * 
+     * @return double
+     */
+    @Override
+    public String IDTipoHabitacion() {
+        // TODO Auto-generated method stub
+        return "Habitacion Privada";
+    }
 
 }
