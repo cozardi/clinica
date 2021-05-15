@@ -17,8 +17,6 @@ public class Factura {
 
 	private final float valorAgregadoConsulta = 0.2f;
 
-	private int contadorFilaFactura;
-
 	public Factura(Paciente paciente, GregorianCalendar fecha) throws PacienteInvalidoException {
 		numFacturaMax++;
 		numFactura = numFacturaMax;
@@ -86,8 +84,8 @@ public class Factura {
 		System.out.format("\nTotal: $%8.2f" , costoTotal);
 		
 	}
-	
-	
-	
-	
+
+	public GregorianCalendar getFecha() {
+		return fecha;
+	}
 }
