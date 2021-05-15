@@ -10,12 +10,21 @@ import usuarios.Paciente;
 
 public class SalaDeEspera {
     private static SalaDeEspera _instance=null;
-    private Patio patio=new Patio();
-    private SalaEsperaPrivada salaprivada=new SalaEsperaPrivada();
+    private Patio patio;
+    private SalaEsperaPrivada salaprivada;
 
+    /**
+     * Genera las instancias del patio y de la sala privada.<br>
+     */
     private SalaDeEspera(){
+        this.patio=new Patio();
+        this.salaprivada=new SalaEsperaPrivada();
     }
 
+    /**
+     * Patron singleton que genera una instancia de la Sala de Espera en caso de que no haya sido creada, o retorna la ya creada. <br>
+     * @return
+     */
     public static SalaDeEspera getinstance(){
         if (_instance==null)
             _instance=new SalaDeEspera();
@@ -51,10 +60,19 @@ public class SalaDeEspera {
         }
     }
 
+
+    /**
+     * Metodo que retorna la instancia de patio creada anteriormente.<br>
+     * @return instancia de patio
+     */
     public Patio getPatio() {
         return patio;
     }
 
+    /**
+     * Metodo que retorna la instancia de la Sala Privada de la clinica.<br>
+     * @return instancia de salaprivada.
+     */
     public SalaEsperaPrivada getSalaprivada() {
         return salaprivada;
     }

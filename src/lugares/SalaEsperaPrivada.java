@@ -3,14 +3,18 @@ package lugares;
 import exceptions.NoIngresaSalaPrivadaException;
 import usuarios.Paciente;
 
+/**
+ *
+ */
 
 public class SalaEsperaPrivada{
     private Paciente pacienteActual;
 
+
     public void ingresaPaciente(Paciente ingresante) throws NoIngresaSalaPrivadaException
     {
         if (!this.vacia())
-            if (pacienteActual.prioriza(ingresante))  //Si el paciente actual tiene prioridad sobre el ingresante
+            if (pacienteActual.prioriza(ingresante))  //Si el paciente actual tiene prioridad por sobre el ingresante
                 throw new NoIngresaSalaPrivadaException();
             else {
                 SalaDeEspera.getinstance().getPatio().ingresaPaciente(pacienteActual);

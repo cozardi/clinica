@@ -31,10 +31,10 @@ public class Prueba {
                                 "Clinico", "Temporario", "Magister");
                 // Creamos un par de pacientes
                 clinica.ingresaPaciente("65761321", "Moreno 1239", "Mar del plata", "2234564687", "Veronica Galindo",
-                                "Nino");
-                clinica.ingresaPaciente("7561238", "Colon 1239", "Mar del plata", "6873213", "Elmer Melada", "joven");
+                                "Mayor");
+                clinica.ingresaPaciente("7561238", "Colon 1239", "Mar del plata", "6873213", "Elmer Melada", "Nino");
                 clinica.ingresaPaciente("1354314", "Buenos Aires 1239", "Mar del plata", "2234564687",
-                                "Elmer Idiano de Greenwich", "Nino");
+                                "Elmer Idiano de Greenwich", "Joven");
                 // Ingreso del paciente a la clínica
 
                 System.out.println("PACIENTES");

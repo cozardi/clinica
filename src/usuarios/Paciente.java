@@ -11,7 +11,7 @@ import lugares.*;
 /**
  * Establece los atributos de un paciente y almacena sus consultas
  */
-public abstract class Paciente extends Usuarios implements PrioridadSala {
+public abstract class Paciente extends Usuarios implements Priorizable {
 	protected String RangoEtario;
 	protected Hashtable<Habitacion, Integer> internaciones = new Hashtable<Habitacion, Integer>();
 	protected Hashtable<IMedico, Integer> consultas = new Hashtable<IMedico, Integer>();

@@ -195,7 +195,7 @@ public class Clinica {
 	/**
 	 * Busca el paciente con cierto numero de paciente
 	 * 
-	 * @param numeroPaciente: El numero de historia clinica del paciente a buscar
+	 * @param numeroMedico: El numero de interno del medico a buscar
 	 * @return Retorna el paciente con ese numero o null si no existe
 	 */
 	public IMedico buscaMedico(int numeroMedico) {
