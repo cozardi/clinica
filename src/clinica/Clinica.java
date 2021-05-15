@@ -23,7 +23,6 @@ import java.util.*;
 public class Clinica {
 	private static Clinica instance = null;
 	// DATOS DE LA CLINICA
-	private String nombre, direccion, telefono, ciudad;
 
 	private Set<IMedico> medicos = new TreeSet<>();
 	private Set<Paciente> pacientes = new TreeSet<>();
