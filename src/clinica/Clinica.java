@@ -277,8 +277,6 @@ public class Clinica {
 	
 	public void imprimeFacturaDePaciente(Paciente paciente) throws PacienteInvalidoException
 	{
-		String salida = new String();
-		
 		Factura facturaNueva = new Factura(paciente);
 		
 		facturaNueva.ImprimeFactura();
