@@ -7,7 +7,6 @@ import exceptions.DiasInvalidosException;
  * como el costo inicial, comun a todas, y el costo asignacion que depende de la
  * habitacion concreta
  */
-
 public abstract class Habitacion {
     protected static double costoInicial = 1000;// preguntar que valor darle
     protected double costoAsignacion;

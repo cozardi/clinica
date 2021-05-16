@@ -33,11 +33,10 @@ public class Factura {
 			throw new PacienteInvalidoException("Se trato de crear una factura con un paciente null");
 	}
 
-	/*
+	/**
 	 * Imprime la factura con los datos de Prestacion, Valor, Cantidad, Subtotal
 	 * Post: Imprime en formato de tabla la informacion
 	 */
-
 	public void ImprimeFactura() {
 		System.out.print("\nFactura numero: " + numFactura + "\n");
 

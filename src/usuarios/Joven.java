@@ -1,5 +1,8 @@
 package usuarios;
 
+/**
+ * Paciente concrecto de tipo joven
+ */
 public class Joven extends Paciente {
 
     /**
