@@ -1,7 +1,7 @@
 package usuarios;
 
 /**
- * Es el medico base sin ningun decorator aplicado.
+ * Medico con informacion base
  */
 public abstract class MedicoBase extends IMedico {
 

@@ -1,5 +1,8 @@
 package usuarios;
 
+/**
+ * Medico con especialidad de tipo: Pediatria
+ */
 public class MedicoPediatra extends MedicoBase {
     /**
      * Constructor de Medico base

@@ -2,6 +2,9 @@ package lugares;
 
 import exceptions.DiasInvalidosException;
 
+/**
+ * Esta clase es usada para calcular parte del arancel que debe pagar el cliente
+ */
 public class HabPrivada extends Habitacion {
 
     public HabPrivada() {

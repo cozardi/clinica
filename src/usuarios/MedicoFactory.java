@@ -2,6 +2,9 @@ package usuarios;
 
 import exceptions.NoExisteException;
 
+/**
+ * Clase utilizada para la creacion de los medicos
+ */
 public abstract class MedicoFactory {
 
     /**

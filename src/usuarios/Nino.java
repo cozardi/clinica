@@ -1,5 +1,8 @@
 package usuarios;
 
+/**
+ * Paciente concrecto de tipo Nino
+ */
 public class Nino extends Paciente implements Priorizable {
 
     /**
