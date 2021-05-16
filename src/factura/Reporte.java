@@ -78,8 +78,8 @@ public class Reporte implements Comparable {
      */
     @Override
     public String toString() {
-        return "nombrePaciente=" + nombrePaciente + " " + " cantConsultas= " + cantConsultas + " fecha="
-                + fecha.getTime() + " subtotal= " + subtotal + "]";
+        return "\nnombrePaciente=" + nombrePaciente + "" + "\ncantConsultas= " + cantConsultas + "\nfecha="
+                + fecha.getTime() + "\nsubtotal= " + subtotal;
     }
 
 }

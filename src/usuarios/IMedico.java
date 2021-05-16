@@ -65,7 +65,9 @@ public abstract class IMedico extends Usuarios {
       Reporte[] aux = reporte.toArray(new Reporte[reporte.size()]);
 
       // it.next().getFecha().compareTo(f1) < 0
-      System.out.println(this.nombre);
+      System.out.println("Reporte medico: " + this.nombre);
+      System.out.format("Fecha: %tF - %tF%n", f1, f2);
+
       // While que busca f1 en adelante
       int i = 0;
       while (i < aux.length && aux[i].getFecha().compareTo(f1) < 0) {
@@ -77,7 +79,7 @@ public abstract class IMedico extends Usuarios {
             total += aux[i].getSubtotal();
             i++;
          }
-         System.out.println("El total generado por este medico es: " + total);
+         System.out.format("El total generado por este medico es: %8.2f", total);
       } else {
          throw new FechaInvalidaException("No se ha encontrado reportes a partir de la fecha ingresada\n");
       }

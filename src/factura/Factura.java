@@ -34,7 +34,7 @@ public class Factura {
 	 */
 
 	public void ImprimeFactura() {
-		System.out.print("Factura numero: " + numFactura + "\n");
+		System.out.print("\nFactura numero: " + numFactura + "\n");
 
 		int contadorDatos = 0;
 		
@@ -81,7 +81,7 @@ public class Factura {
 		    System.out.format("%25s | $%10.2f | %8d | $%7.2f%n", entrada);
 		}
 		
-		System.out.format("\nTotal: $%8.2f" , costoTotal);
+		System.out.format("\nTotal: $%8.2f%n" , costoTotal);
 		
 	}
 
