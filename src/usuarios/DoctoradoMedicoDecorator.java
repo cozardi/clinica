@@ -5,7 +5,7 @@ package usuarios;
  */
 public class DoctoradoMedicoDecorator extends MedicoDecorator {
 
-    public DoctoradoMedicoDecorator(IMedico medico) {
+    public DoctoradoMedicoDecorator(Medico medico) {
         super(medico);
         setHonorario();
     }

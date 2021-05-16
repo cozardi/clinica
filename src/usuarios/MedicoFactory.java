@@ -24,10 +24,10 @@ public abstract class MedicoFactory {
      * @return Un medico especifico
      * @throws NoExisteException Una advertencia sobre algun parametro mal ingresado
      */
-    public static IMedico getMedico(String dni, String domicilio, String ciudad, String telefono, String nombre,
-            int numero, double honorarioBasico, String especialidad, String tipoContratacion) throws NoExisteException {
+    public static Medico getMedico(String dni, String domicilio, String ciudad, String telefono, String nombre,
+                                   int numero, double honorarioBasico, String especialidad, String tipoContratacion) throws NoExisteException {
         MedicoBase medicoBase;
-        IMedico respuesta;
+        Medico respuesta;
 
         if (especialidad.equalsIgnoreCase("CLINICO"))
             medicoBase = new MedicoClinico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico);
@@ -68,10 +68,10 @@ public abstract class MedicoFactory {
      * @throws NoExisteException Una advertencia sobre algun parametro mal ingresado
      */
 
-    public static IMedico getMedico(String dni, String domicilio, String ciudad, String telefono, String nombre,
-            int numero, int honorarioBasico, String especialidad, String tipoContratacion, String posgrado)
+    public static Medico getMedico(String dni, String domicilio, String ciudad, String telefono, String nombre,
+                                   int numero, int honorarioBasico, String especialidad, String tipoContratacion, String posgrado)
             throws NoExisteException {
-        IMedico respuesta;
+        Medico respuesta;
 
         respuesta = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
                 especialidad, tipoContratacion);

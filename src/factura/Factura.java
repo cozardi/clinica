@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 import exceptions.DiasInvalidosException;
 import exceptions.PacienteInvalidoException;
 import lugares.Habitacion;
-import usuarios.IMedico;
+import usuarios.Medico;
 import usuarios.Paciente;
 
 /**
@@ -49,9 +49,9 @@ public class Factura {
 
 		Object[][] datos = new Object[consultas.size() + internaciones.size()][4];
 
-		Enumeration<IMedico> enumMedicos = consultas.keys();
+		Enumeration<Medico> enumMedicos = consultas.keys();
 		while (enumMedicos.hasMoreElements()) {
-			IMedico medActual = enumMedicos.nextElement();
+			Medico medActual = enumMedicos.nextElement();
 			datos[contadorDatos][0] = medActual.getNombre();
 			datos[contadorDatos][1] = medActual.getHonorario() * valorAgregadoConsulta;
 			datos[contadorDatos][2] = consultas.get(medActual);

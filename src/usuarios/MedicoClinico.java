@@ -1,5 +1,8 @@
 package usuarios;
 
+/**
+ * Medico con especialidad de tipo: clinico
+ */
 public class MedicoClinico extends MedicoBase {
 
     /**

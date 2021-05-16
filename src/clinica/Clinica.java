@@ -7,8 +7,7 @@ import factura.Factura;
 import factura.Reporte;
 import lugares.Habitacion;
 import lugares.SalaDeEspera;
-import usuarios.IMedico;
-import usuarios.MedicoBase;
+import usuarios.Medico;
 import usuarios.MedicoFactory;
 import usuarios.Paciente;
 import usuarios.PacienteFactory;
@@ -25,12 +24,12 @@ public class Clinica {
 	// DATOS DE LA CLINICA
 	private String nombre, direccion, telefono, ciudad;
 
-	private Set<IMedico> medicos = new TreeSet<>();
+	private Set<Medico> medicos = new TreeSet<>();
 	private Set<Paciente> pacientes = new TreeSet<>();
 	private PriorityQueue<Paciente> listaEspera;
 	private ArrayList<Paciente> pacientesEnAtencion;
 
-	public Set<IMedico> getMedicos() {
+	public Set<Medico> getMedicos() {
 		return medicos;
 	}
 
@@ -102,7 +101,7 @@ public class Clinica {
 	public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
 			int honorarioBasico, String especialidad, String tipoContratacion) {
 		try {
-			IMedico medico = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
+			Medico medico = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
 					especialidad, tipoContratacion);
 			medicos.add(medico);// tira error aca?-->si
 		} catch (NoExisteException e) {
@@ -130,7 +129,7 @@ public class Clinica {
 	public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
 			int honorarioBasico, String especialidad, String tipoContratacion, String posgrado) {
 		try {
-			IMedico medico = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
+			Medico medico = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
 					especialidad, tipoContratacion, posgrado);
 			medicos.add(medico);
 		} catch (NoExisteException e) {
@@ -198,8 +197,8 @@ public class Clinica {
 	 * @param numeroMedico: El numero del medico
 	 * @return Retorna el Medico con ese numero o null si no existe
 	 */
-	public IMedico buscaMedico(int numeroMedico) {
-		for (IMedico medico : medicos) {
+	public Medico buscaMedico(int numeroMedico) {
+		for (Medico medico : medicos) {
 			if (medico.getNumero() == numeroMedico) {
 				return medico;
 			}
@@ -218,7 +217,7 @@ public class Clinica {
 	 * @param medico   Medico que hizo la consulta <br>
 	 * @throws PacienteInvalidoException si el medico o paciente son nulos <br>
 	 */
-	public void agregaConsultaAPaciente(Paciente paciente, IMedico medico)  {
+	public void agregaConsultaAPaciente(Paciente paciente, Medico medico)  {
 		if (paciente != null) {
 			paciente.AgregaConsulta(medico);
 		} 
@@ -233,7 +232,7 @@ public class Clinica {
 	 * @param medico
 	 * @return boolean, <i>true</i> si encontro al paciente y <i>false</i> si no
 	 */
-	public boolean agregaConsultaAPaciente(int numero, IMedico medico) {
+	public boolean agregaConsultaAPaciente(int numero, Medico medico) {
 		Paciente paciente = buscaPaciente(numero);
 		if (paciente != null) // lo encontro
 		{
@@ -304,9 +303,9 @@ public class Clinica {
 
 		facturaNueva.ImprimeFactura();
 		// Por cada medico en el paciente
-		IMedico it2;
-		Set<IMedico> keys = paciente.getConsultas().keySet();
-		Iterator<IMedico> it = keys.iterator();
+		Medico it2;
+		Set<Medico> keys = paciente.getConsultas().keySet();
+		Iterator<Medico> it = keys.iterator();
 		while (it.hasNext()) {
 			it2 = it.next();
 			it2.getReporte().add(new Reporte(facturaNueva.getFecha(), paciente.getNombre(),

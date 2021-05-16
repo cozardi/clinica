@@ -3,7 +3,7 @@ package usuarios;
 /**
  * Medico con informacion base
  */
-public abstract class MedicoBase extends IMedico {
+public abstract class MedicoBase extends Medico {
 
     /**
      * Constructor de Medico base

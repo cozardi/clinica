@@ -9,8 +9,7 @@ import exceptions.FechaInvalidaException;
 import exceptions.PacienteInvalidoException;
 import lugares.HabPrivada;
 import lugares.Habitacion;
-import lugares.SalaDeEspera;
-import usuarios.IMedico;
+import usuarios.Medico;
 import usuarios.Paciente;
 
 public class Prueba {
@@ -19,7 +18,7 @@ public class Prueba {
                 // Creamos la Clinica
                 Clinica clinica = Clinica.getInstance("Hospital", "Avenida siempre viva", "123123", "Balcarce");
                 // Creacion de medicos
-                clinica.addMedico("234565", "Marconi 2345", "Mar del Plata", "223456732", "Susana Ibañez", 1502, 3000,
+                clinica.addMedico("234565", "Marconi 2345", "Mar del Plata", "223456732", "Susana Ibanez", 1502, 3000,
                                 "Clinico", "Permanente");
                 clinica.addMedico("82216", "Moreno 4562", "Mar del Plata", "6872312", "Davinia Pino", 1407, 5000,
                                 "Cirujano", "Temporario");
@@ -42,7 +41,7 @@ public class Prueba {
                         System.out.println(paciente.getNombre());
                 }
                 System.out.println("MEDICOS");
-                for (IMedico medico : clinica.getMedicos()) {
+                for (Medico medico : clinica.getMedicos()) {
                         System.out.format("%20s $%8.2f%n", medico.getNombre(), medico.getHonorario());
                 }
 
@@ -50,10 +49,10 @@ public class Prueba {
                 Iterator<Paciente> pacientesIterator = pacientes.iterator();
                 Paciente pacientePrueba = pacientesIterator.next();
 
-                Set<IMedico> medicos = clinica.getMedicos();
-                Iterator<IMedico> medicosIterator = medicos.iterator();
-                IMedico medicoPrueba1 = medicosIterator.next();
-                IMedico medicoPrueba2 = medicosIterator.next();
+                Set<Medico> medicos = clinica.getMedicos();
+                Iterator<Medico> medicosIterator = medicos.iterator();
+                Medico medicoPrueba1 = medicosIterator.next();
+                Medico medicoPrueba2 = medicosIterator.next();
 
                 Habitacion habPrueba = new HabPrivada();
 

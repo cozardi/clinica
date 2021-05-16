@@ -1,11 +1,7 @@
 package usuarios;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
-import exceptions.DiasInvalidosException;
-import exceptions.MedicoInvalidoException;
-import exceptions.NoExisteException;
 import lugares.*;
 
 /**
@@ -14,7 +10,7 @@ import lugares.*;
 public abstract class Paciente extends Usuarios implements Priorizable {
 	protected String RangoEtario;
 	protected Hashtable<Habitacion, Integer> internaciones = new Hashtable<Habitacion, Integer>();
-	protected Hashtable<IMedico, Integer> consultas = new Hashtable<IMedico, Integer>();
+	protected Hashtable<Medico, Integer> consultas = new Hashtable<Medico, Integer>();
 	private static int numHistoriaClinica = 0;
 
 	/**
@@ -62,7 +58,7 @@ public abstract class Paciente extends Usuarios implements Priorizable {
 		return internaciones;
 	}
 
-	public Hashtable<IMedico, Integer> getConsultas() {
+	public Hashtable<Medico, Integer> getConsultas() {
 		return consultas;
 	}
 
@@ -75,7 +71,7 @@ public abstract class Paciente extends Usuarios implements Priorizable {
 	 * @param med El medico que hizo la consulta<br>
 	 * 
 	 */
-	public void AgregaConsulta(IMedico med) {
+	public void AgregaConsulta(Medico med) {
 		if (med != null) {
 			if (consultas.contains(med)) {
 				consultas.put(med, consultas.get(med) + 1);

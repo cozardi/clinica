@@ -12,12 +12,12 @@ import factura.Reporte;
 /**
  * Interfaz de medico, define el calculo de Honorario de cada tipo de medico
  */
-public abstract class IMedico extends Usuarios {
+public abstract class Medico extends Usuarios {
    protected double Honorario;
    protected TreeSet<Reporte> reporte = new TreeSet<Reporte>();
 
-   public IMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
-         double honorarioBasico) {
+   public Medico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
+                 double honorarioBasico) {
       super(dni, domicilio, ciudad, telefono, nombre, numero);
       this.Honorario = honorarioBasico;
    }

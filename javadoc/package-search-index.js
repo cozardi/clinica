@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"clinica","l":"app"},{"m":"clinica","l":"clinica"},{"m":"clinica","l":"exceptions"},{"m":"clinica","l":"factura"},{"m":"clinica","l":"lugares"},{"m":"clinica","l":"usuarios"}];updateSearchResults();
