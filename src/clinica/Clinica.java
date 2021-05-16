@@ -180,7 +180,7 @@ public class Clinica {
 	/**
 	 * Busca el paciente con cierto numero de paciente
 	 * 
-	 * @param numeroPaciente: El numero de historia clinica del paciente a buscar
+	 * @param numeroPaciente El numero de historia clinica del paciente a buscar
 	 * @return Retorna el paciente con ese numero o null si no existe
 	 */
 	public Paciente buscaPaciente(int numeroPaciente) {
@@ -218,27 +218,22 @@ public class Clinica {
 	 * @param medico   Medico que hizo la consulta <br>
 	 * @throws PacienteInvalidoException si el medico o paciente son nulos <br>
 	 */
-	public void agregaConsultaAPaciente(Paciente paciente, IMedico medico) throws Exception {
-		// TODO: integrar con modulo de Reporte de Actividad Medica
+	public void agregaConsultaAPaciente(Paciente paciente, IMedico medico)  {
 		if (paciente != null) {
 			paciente.AgregaConsulta(medico);
-		} else {
-			throw new PacienteInvalidoException("Error. Paciente es nulo");
-		}
+		} 
 	}
 
 	/**
-	 * Agregamos una consulta al historial de consultas del paciente Pre: El numero
-	 * de paciente debe ser un valor existente<br>
-	 * El Imedico no debe ser null <br>
-	 * Post: retorna true si se pudo agregar con exito y false en caso contrario
+	 * Agregamos una consulta al historial de consultas del paciente <br>
+	 * Pre: El IMedico no debe ser null <br>
+	 * Post: si encontro al paciente y se agrego con exito returna <i>true</i>, en caso contrario <i>false</i>
 	 * 
-	 * @param numero
+	 * @param numero El numero de paciente del 
 	 * @param medico
-	 * @return
-	 * @throws Exception
+	 * @return boolean, <i>true</i> si encontro al paciente y <i>false</i> si no
 	 */
-	public boolean agregaConsultaAPaciente(int numero, IMedico medico) throws Exception {
+	public boolean agregaConsultaAPaciente(int numero, IMedico medico) {
 		Paciente paciente = buscaPaciente(numero);
 		if (paciente != null) // lo encontro
 		{
@@ -258,29 +253,31 @@ public class Clinica {
 	 * 
 	 * @param paciente: Paciente internado
 	 * @param hab:      Habitacion en la que estuvo el paciente
-	 * @param dias:     dias de estadia en la habitacion
-	 * @throws Exception si el medico o paciente son nulos
+	 * @param dias:     Dias de estadia en la habitacion
+	 * @throws DiasInvalidosException si la cantidad de dias es menor que 0
 	 */
-	public void agregaInternacionAPaciente(Paciente paciente, Habitacion hab, int dias) throws Exception {
-		if (paciente != null) {
+	public void agregaInternacionAPaciente(Paciente paciente, Habitacion hab, int dias) throws DiasInvalidosException {
+		if (dias > 0) {
 			paciente.AgregaInternacion(hab, dias);
 		} else {
-			throw new PacienteInvalidoException("Error. Paciente es nulo");
+			throw new DiasInvalidosException("Error. Cantidad de dias no valida,", dias);
 		}
 	}
 
 	/**
 	 * Agrega una estadia en una habitacion al paciente<br>
 	 * 
+	 * <b>pre:</b> El paciente y hab dados no son nulos<br>
+	 * <b>post:</b> La consulta queda registrada en el paciente y el reporte del
 	 * 
 	 * @param numero el numero de paciente al que se le quiere agregar la
 	 *               internacion
 	 * @param hab    la habitacion que se le agregara
 	 * @param dias   los dias que estuvo en dicha habitacion
 	 * @return verdadero si se encontro el paciente con el numero, falso si no
-	 * @throws Exception si la habitacion o los dias no son validos
+	 * @throws DiasInvalidosException si la cantidad de dias es menor que 0
 	 */
-	public boolean agregaInternacionAPaciente(int numero, Habitacion hab, int dias) throws Exception {
+	public boolean agregaInternacionAPaciente(int numero, Habitacion hab, int dias) throws DiasInvalidosException {
 		Paciente paciente = buscaPaciente(numero);
 		if (paciente != null) // lo encontro
 		{

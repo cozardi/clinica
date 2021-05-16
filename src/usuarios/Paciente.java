@@ -45,9 +45,8 @@ public abstract class Paciente extends Usuarios implements Priorizable {
 	 * @param hab:  La habitacion en la que se interno el paciente
 	 * @param dias: Los dias que fue internado en dicha habitacion
 	 * 
-	 * @throws Exception si la habitacion es nula o los dias no son validos
 	 */
-	public void AgregaInternacion(Habitacion hab, int dias) throws Exception {
+	public void AgregaInternacion(Habitacion hab, int dias) {
 		if (dias > 0) {
 			if (hab != null) {
 				if (internaciones.contains(hab)) {
@@ -55,10 +54,8 @@ public abstract class Paciente extends Usuarios implements Priorizable {
 				} else {
 					internaciones.put(hab, dias);
 				}
-			} else // TODO excepcion de habitacion nula
-				throw new Exception("Error. Habitacion nula");
-		} else
-			throw new DiasInvalidosException("Cantidad de dias de internacion invalida: ", dias);
+			}
+		}
 	}
 
 	public Hashtable<Habitacion, Integer> getInternaciones() {
@@ -70,16 +67,15 @@ public abstract class Paciente extends Usuarios implements Priorizable {
 	}
 
 	/**
-	 * Agrega una consulta medica a la estad�a actual del paciente <br>
+	 * Agrega una consulta medica a la estadia actual del paciente <br>
 	 * 
-	 * @param med: El medico que hizo la consulta<br>
+	 * <b>pre</b> El medico no es nulo<br>
+	 * <b>post</b> La consulta queda registrada<br>
 	 * 
-	 *             <b>pre:</b> El medico no es nulo<br>
-	 *             <b>post:</b> La consulta queda registrada<br>
+	 * @param med El medico que hizo la consulta<br>
 	 * 
-	 * @throws MedicoInvalidoException si el medico no es valido
 	 */
-	public void AgregaConsulta(IMedico med) throws MedicoInvalidoException {
+	public void AgregaConsulta(IMedico med) {
 		if (med != null) {
 			if (consultas.contains(med)) {
 				consultas.put(med, consultas.get(med) + 1);
@@ -87,16 +83,11 @@ public abstract class Paciente extends Usuarios implements Priorizable {
 				consultas.put(med, 1);
 			}
 		}
-
-		else {
-			throw new MedicoInvalidoException("Error. Medico nulo");
-		}
 	}
 
 	/**
 	 * Borra las internaciones y consultas actuales del paciente
 	 * 
-	 * <b>pre:</b> Ninguna<br>
 	 * <b>post:</b> Las internaciones y consultas son reseteadas<br>
 	 * 
 	 */

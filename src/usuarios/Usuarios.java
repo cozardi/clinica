@@ -103,8 +103,10 @@ public abstract class Usuarios implements Comparable<Usuarios> {
     }
 
     /**
-     * Pre: o no es null Post: retorna un valor positivo si this.numero es mayor que
+     * Pre: o no es null <br>
+     * Post: retorna un valor positivo si this.numero es mayor que
      * parametro.numero<br>
+     * <br>
      * Retorna cero si los numeros son iguales<br>
      * Retorna negativo si this.numero es menos que parametro.numero<br>
      * 
