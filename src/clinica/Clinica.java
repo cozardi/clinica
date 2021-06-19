@@ -1,5 +1,7 @@
 package clinica;
 
+import Exceptions.YaExisteAsociadoException;
+import ambulancia.Ambulancia;
 import exceptions.DiasInvalidosException;
 import exceptions.NoExisteException;
 import exceptions.PacienteInvalidoException;
@@ -7,10 +9,7 @@ import factura.Factura;
 import factura.Reporte;
 import lugares.Habitacion;
 import lugares.SalaDeEspera;
-import usuarios.Medico;
-import usuarios.MedicoFactory;
-import usuarios.Paciente;
-import usuarios.PacienteFactory;
+import usuarios.*;
 
 import java.util.*;
 
@@ -26,6 +25,7 @@ public class Clinica {
 
 	private Set<Medico> medicos = new TreeSet<>();
 	private Set<Paciente> pacientes = new TreeSet<>();
+	private Set<Asociado> asociados = new HashSet<>();
 	private PriorityQueue<Paciente> listaEspera;
 	private ArrayList<Paciente> pacientesEnAtencion;
 
@@ -135,6 +135,13 @@ public class Clinica {
 		} catch (NoExisteException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public void addAsociado(String dni, String nombre, String domicilio, String telefono, int cantSolicitudes, Ambulancia ambulancia) throws YaExisteAsociadoException{
+		Asociado asociado = new Asociado(dni,nombre,domicilio,telefono,cantSolicitudes,ambulancia);
+		if(!asociados.add(asociado));
+			throw new YaExisteAsociadoException();
+
 	}
 
 	/**
