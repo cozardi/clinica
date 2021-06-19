@@ -9,12 +9,12 @@ public class DisponibleState implements IState {
 
     @Override
     public void solicitaAtencionDomicilio() {
-
+        ambulancia.setEstado(new AtendiendoPacienteState(ambulancia));
     }
 
     @Override
     public void solicitaTraslado() {
-
+        ambulancia.setEstado(new RegresandoClinicaState(ambulancia));
     }
 
     @Override
@@ -24,6 +24,6 @@ public class DisponibleState implements IState {
 
     @Override
     public void repararAmbulancia() {
-
+        ambulancia.setEstado(new RegresandoTallerState(ambulancia));
     }
 }

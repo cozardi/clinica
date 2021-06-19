@@ -3,27 +3,31 @@ package ambulancia;
 public class AtendiendoPacienteState implements IState {
     private Ambulancia ambulancia;
 
+    public AtendiendoPacienteState(Ambulancia ambulancia) {
+        this.ambulancia = ambulancia;
+    }
+
     @Override
     public void solicitaAtencionDomicilio() {
-        // TODO Auto-generated method stub
+        System.out.println("No es posible");
 
     }
 
     @Override
     public void solicitaTraslado() {
-        // TODO Auto-generated method stub
+        System.out.println("No es posible");
 
     }
 
     @Override
     public void vuelveClinica() {
-        // TODO Auto-generated method stub
+        ambulancia.setEstado(new TrasladandoPacienteState(ambulancia));
 
     }
 
     @Override
     public void repararAmbulancia() {
-        // TODO Auto-generated method stub
+        System.out.println("No es posible");
 
     }
 

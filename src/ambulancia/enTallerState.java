@@ -3,27 +3,29 @@ package ambulancia;
 public class enTallerState implements IState {
     private Ambulancia ambulancia;
 
+    public enTallerState(Ambulancia ambulancia) {
+        this.ambulancia = ambulancia;
+    }
+
     @Override
     public void solicitaAtencionDomicilio() {
-        // TODO Auto-generated method stub
+        System.out.println("No es posible");
 
     }
 
     @Override
     public void solicitaTraslado() {
-        // TODO Auto-generated method stub
+        System.out.println("No es posible");
 
     }
 
     @Override
     public void vuelveClinica() {
-        // TODO Auto-generated method stub
-
+        ambulancia.setEstado(new RegresandoTallerState(ambulancia));
     }
 
     @Override
     public void repararAmbulancia() {
-        // TODO Auto-generated method stub
 
     }
 }
