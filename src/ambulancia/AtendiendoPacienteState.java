@@ -1,6 +1,6 @@
 package ambulancia;
 
-public class enTallerState implements IState {
+public class AtendiendoPacienteState implements IState {
     private Ambulancia ambulancia;
 
     @Override
@@ -26,4 +26,5 @@ public class enTallerState implements IState {
         // TODO Auto-generated method stub
 
     }
+
 }
