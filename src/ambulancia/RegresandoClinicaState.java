@@ -26,4 +26,9 @@ public class RegresandoClinicaState implements IState {
     public void repararAmbulancia() {
         System.out.println("No es posible");
     }
+
+    @Override
+    public String toString() {
+        return "regresando a la Clinica";
+    }
 }

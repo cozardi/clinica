@@ -11,15 +11,12 @@ public class Ambulancia extends Observable {
 
     private Ambulancia() {
         this.estado = new DisponibleState(this);
-        this.setChanged();
-        this.notifyObservers("Ambulancia Disponible");
     }
 
     public static Ambulancia get_instance() {
-        if (instance != null)
-            return instance;
-        else
-            return new Ambulancia();
+        if (instance == null)
+            instance = new Ambulancia();
+        return instance;
     }
 
     protected void setEstado(IState estado) {
@@ -29,7 +26,6 @@ public class Ambulancia extends Observable {
     public synchronized void solicitaAtencionDomicilio(Asociado asociado) {
         while (!(this.estado instanceof DisponibleState || estado instanceof RegresandoClinicaState)) {
             try {
-                System.out.println("El Asociado" + asociado.getNombre() + "solicito Atencion a domicilio pero la ambulancia esta ocupada");
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -40,21 +36,19 @@ public class Ambulancia extends Observable {
         this.setChanged();
         this.notifyObservers(this.estado.toString()); //se notifica que la ambulancia fue solicitada
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         this.estado.vuelveClinica();
-
         this.setChanged();
-        this.notifyObservers("Ambulancia Disponible"); //se notificia que la ambulancia esta disponible
+        this.notifyObservers(this.estado.toString()); //se notificia que la ambulancia esta disponible
         notifyAll();
     }
 
     public synchronized void solicitaTraslado(Asociado asociado) {
         while (!(this.estado instanceof DisponibleState)) {
             try {
-                System.out.println("La Ambulancia esta ocupada");
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -64,13 +58,13 @@ public class Ambulancia extends Observable {
         this.setChanged();
         this.notifyObservers(this.estado.toString());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         this.estado.vuelveClinica();
         this.setChanged();
-        this.notifyObservers("Ambulancia Disponible");
+        this.notifyObservers(this.estado.toString());
         notifyAll();
     }
 
@@ -86,14 +80,14 @@ public class Ambulancia extends Observable {
         this.setChanged();
         this.notifyObservers(this.estado.toString());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         this.estado.vuelveClinica();
 
         this.setChanged();
-        this.notifyObservers("Ambulancia Disponible");
+        this.notifyObservers(this.estado.toString());
         notifyAll();
     }
 }

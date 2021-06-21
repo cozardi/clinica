@@ -26,4 +26,9 @@ public class DisponibleState implements IState {
     public void repararAmbulancia() {
         ambulancia.setEstado(new RegresandoTallerState(ambulancia));
     }
+
+    @Override
+    public String toString() {
+        return "disponible";
+    }
 }

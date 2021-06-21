@@ -4,11 +4,13 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Set;
 
+import ambulancia.Ambulancia;
 import clinica.Clinica;
 import exceptions.FechaInvalidaException;
 import exceptions.PacienteInvalidoException;
 import lugares.HabPrivada;
 import lugares.Habitacion;
+import usuarios.Asociado;
 import usuarios.Medico;
 import usuarios.Paciente;
 
@@ -84,6 +86,25 @@ public class Prueba {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                 }
+
+                /* PRUEBA
+                ObserverAmbulanciaPrueba observerAmbulanciaPrueba = new ObserverAmbulanciaPrueba(Ambulancia.get_instance());
+
+                Asociado a1 = new Asociado("123456","Juan","Colon 2342","44356754",5,Ambulancia.get_instance());
+                Asociado a2 = new Asociado("123457","Alberto","Colon 2342","44356754",6,Ambulancia.get_instance());
+
+                Thread h1 = new Thread(a1);
+                Thread h2 = new Thread(a2);
+
+                h1.start();
+                h2.start();
+                 */
+
+
+
+
+
+
 
         }
 }

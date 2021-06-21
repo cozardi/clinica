@@ -1,6 +1,5 @@
 package clinica;
 
-import Exceptions.YaExisteAsociadoException;
 import ambulancia.Ambulancia;
 import exceptions.DiasInvalidosException;
 import exceptions.NoExisteException;
@@ -136,14 +135,14 @@ public class Clinica {
 			System.out.println(e.getMessage());
 		}
 	}
-
-	public void addAsociado(String dni, String nombre, String domicilio, String telefono, int cantSolicitudes, Ambulancia ambulancia) throws YaExisteAsociadoException{
+	/*
+	public void addAsociado(String dni, String nombre, String domicilio, String telefono, int cantSolicitudes, Ambulancia ambulancia) throws YaExisteAsociadoException {
 		Asociado asociado = new Asociado(dni,nombre,domicilio,telefono,cantSolicitudes,ambulancia);
 		if(!asociados.add(asociado));
-			throw new YaExisteAsociadoException();
+			throw new YaExisteAsociadoException("El Asociado ingresado ya existe");
 
 	}
-
+	*/
 	/**
 	 * Ingresa el paciente a la clinica y lo deriva a la sala de espera. En caso de
 	 * no poder crearlo informa el error con un mensaje.

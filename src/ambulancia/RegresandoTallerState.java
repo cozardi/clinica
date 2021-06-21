@@ -31,4 +31,9 @@ public class RegresandoTallerState implements IState {
 
     }
 
+    @Override
+    public String toString() {
+        return "regresando del Taller";
+    }
+
 }

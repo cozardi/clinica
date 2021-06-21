@@ -21,11 +21,16 @@ public class enTallerState implements IState {
 
     @Override
     public void vuelveClinica() {
-        ambulancia.setEstado(new RegresandoTallerState(ambulancia));
+        ambulancia.setEstado(new DisponibleState(ambulancia));
     }
 
     @Override
     public void repararAmbulancia() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "en el Taller";
     }
 }

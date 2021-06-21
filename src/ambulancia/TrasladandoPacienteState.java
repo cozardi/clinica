@@ -31,4 +31,9 @@ public class TrasladandoPacienteState implements IState {
 
     }
 
+    @Override
+    public String toString() {
+        return "trasladando Paciente";
+    }
+
 }

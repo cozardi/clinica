@@ -60,9 +60,10 @@ public class Asociado extends Observable implements Runnable {
 
     @Override
     public void run() {
-        if (this.cantSolicitudes!=0)
-            for (int i=1;i<=this.cantSolicitudes;i++)
+        if (this.cantSolicitudes != 0)
+            for (int i = 1; i <= this.cantSolicitudes; i++) {
                 this.solicitaAmbulancia();
+            }
     }
 
     @Override

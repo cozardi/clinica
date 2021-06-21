@@ -21,7 +21,7 @@ public class AtendiendoPacienteState implements IState {
 
     @Override
     public void vuelveClinica() {
-        ambulancia.setEstado(new TrasladandoPacienteState(ambulancia));
+        ambulancia.setEstado(new DisponibleState(ambulancia));
 
     }
 
@@ -31,4 +31,8 @@ public class AtendiendoPacienteState implements IState {
 
     }
 
+    @Override
+    public String toString() {
+        return "atendiendo Paciente";
+    }
 }
