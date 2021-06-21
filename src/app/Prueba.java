@@ -4,6 +4,7 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Set;
 
+import controlador.Controlador;
 import modelo.clinica.Clinica;
 import modelo.exceptions.FechaInvalidaException;
 import modelo.exceptions.PacienteInvalidoException;
@@ -15,6 +16,8 @@ import modelo.usuarios.Paciente;
 public class Prueba {
 
         public static void main(String[] args) {
+
+                Controlador controlador = new Controlador();
                 // Creamos la Clinica
                 Clinica clinica = Clinica.getInstance("Hospital", "Avenida siempre viva", "123123", "Balcarce");
                 // Creacion de medicos
@@ -84,6 +87,8 @@ public class Prueba {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                 }
+
+
 
                 /* PRUEBA
                 ObserverAmbulanciaPrueba observerAmbulanciaPrueba = new ObserverAmbulanciaPrueba(Ambulancia.get_instance());

@@ -64,25 +64,6 @@ public class VentanaInicio extends JFrame implements IVista {
 	private JList<Asociado> listAsociados;
 	private DefaultListModel<Asociado> modeloLista= new DefaultListModel<Asociado>();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaInicio frame = new VentanaInicio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public VentanaInicio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 533, 352);
@@ -221,6 +202,8 @@ public class VentanaInicio extends JFrame implements IVista {
 		textFieldLlamadas = new JTextField();
 		textFieldLlamadas.setColumns(10);
 		panelLlamados.add(textFieldLlamadas);
+
+		this.setVisible(true);
 	}
 
 	@Override
@@ -236,7 +219,6 @@ public class VentanaInicio extends JFrame implements IVista {
 	@Override
 	public void actualizaLista(Asociado asociado) {
 		this.modeloLista.addElement(asociado);
-		
 	}
 
 	@Override
@@ -246,7 +228,6 @@ public class VentanaInicio extends JFrame implements IVista {
 
 	@Override
 	public String getApellido() {
-
 		return this.textFieldApellido.getText();
 	}
 
