@@ -3,7 +3,7 @@ package modelo.usuarios;
 /**
  * Medico con especialidad de tipo: Pediatria
  */
-public class MedicoPediatra extends MedicoBase {
+public class MedicoPediatra extends Medico {
     /**
      * Constructor de Medico base
      *

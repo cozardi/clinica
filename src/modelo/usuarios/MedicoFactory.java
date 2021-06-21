@@ -10,7 +10,7 @@ public abstract class MedicoFactory {
     /**
      * Crea el medico segun su especialidad, tipo de Contratacion y posgrado (en
      * caso de tenerlo).
-     * 
+     *
      * @param dni              Contiene el DNI del medico
      * @param domicilio        contiene el domicilio del medico
      * @param ciudad           representa la ciudad de origen
@@ -26,7 +26,7 @@ public abstract class MedicoFactory {
      */
     public static Medico getMedico(String dni, String domicilio, String ciudad, String telefono, String nombre,
                                    int numero, double honorarioBasico, String especialidad, String tipoContratacion) throws NoExisteException {
-        MedicoBase medicoBase;
+        Medico medicoBase;
         Medico respuesta;
 
         if (especialidad.equalsIgnoreCase("CLINICO"))
@@ -51,7 +51,7 @@ public abstract class MedicoFactory {
     /**
      * Crea el medico segun su especialidad, tipo de Contratacion y posgrado (en
      * caso de tenerlo).
-     * 
+     *
      * @param dni              Contiene el DNI del medico
      * @param domicilio        contiene el domicilio del medico
      * @param ciudad           representa la ciudad de origen
