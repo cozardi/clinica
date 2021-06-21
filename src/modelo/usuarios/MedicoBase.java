@@ -7,7 +7,7 @@ public abstract class MedicoBase extends Medico {
 
     /**
      * Constructor de Medico base
-     * 
+     *
      * @param dni             Contiene el DNI del medico
      * @param domicilio       contiene el domicilio del medico
      * @param ciudad          representa la ciudad de origen
@@ -18,8 +18,10 @@ public abstract class MedicoBase extends Medico {
      * @param honorarioBasico Honorario basico del medico
      */
     public MedicoBase(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
-            double honorarioBasico) {
+                      double honorarioBasico) {
         super(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico);
+        
+
     }
 
 }

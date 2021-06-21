@@ -18,14 +18,18 @@ public class MedicoClinico extends MedicoBase {
      * @param honorarioBasico Honorario basico del medico
      */
     public MedicoClinico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
-            double honorarioBasico) {
+                         double honorarioBasico) {
         super(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico);
-        setHonorario();
+        //setHonorario();
     }
+
+//    @Override
+//    public void setHonorario() {
+//        this.honorario *= 1.05;
+//    }
 
     @Override
-    public void setHonorario() {
-        this.Honorario *= 1.05;
+    public double getHonorario() {
+        return super.getHonorario() * 1.05;
     }
-
 }

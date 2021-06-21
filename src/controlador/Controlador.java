@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.clinica.Clinica;
 import vista.IVista;
 import vista.VentanaInicio;
 import vista.VistaSimulacion;
@@ -11,13 +12,14 @@ public class Controlador implements ActionListener {
 	private IVista vista = null;
 
 	public Controlador() {
-		this.vista = new VistaSimulacion();
+		this.vista = new VentanaInicio();
 		this.vista.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		
+
+
 	}
 }

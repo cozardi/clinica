@@ -62,7 +62,6 @@ public class Prueba {
                 
                 clinica.agregaConsultaAPaciente(pacientePrueba, medicoPrueba1);
                 clinica.agregaConsultaAPaciente(pacientePrueba, medicoPrueba2);
-                
 
                 try {
                 clinica.agregaInternacionAPaciente(pacientePrueba, habPrueba, 5);

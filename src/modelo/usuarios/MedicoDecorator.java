@@ -1,11 +1,8 @@
 package modelo.usuarios;
 
 /**
- * 
  * Clase abstracta de los decoradores de medicos<br>
  * Contiene un atributo de tipo Imedico
- * 
- * 
  */
 
 public abstract class MedicoDecorator extends Medico {
@@ -13,7 +10,7 @@ public abstract class MedicoDecorator extends Medico {
 
     public MedicoDecorator(Medico medico) {
         super(medico.dni, medico.domicilio, medico.ciudad, medico.telefono, medico.nombre, medico.numero,
-                medico.Honorario);
+                medico.honorario);
         this.medico = medico;
     }
 
@@ -21,9 +18,10 @@ public abstract class MedicoDecorator extends Medico {
      * Delega el seteo del honorario al medico que tiene como atributo, es decir
      * llama al setHonorario del medico que es quien calcula el honorario
      */
-    @Override
-    public void setHonorario() {
-        medico.setHonorario();
-    }
+//    @Override
+//    public void setHonorario() {
+//        medico.setHonorario();
+//    }
+
 
 }
