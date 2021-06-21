@@ -3,12 +3,16 @@ package ambulancia;
 import clinica.Operario;
 import usuarios.Asociado;
 
-public class Ambulancia {
+import java.util.Observable;
+
+public class Ambulancia extends Observable {
     protected IState estado;
     private static Ambulancia instance = null;
 
     private Ambulancia() {
         this.estado = new DisponibleState(this);
+        this.setChanged();
+        this.notifyObservers("Ambulancia Disponible");
     }
 
     public static Ambulancia get_instance() {
@@ -25,17 +29,25 @@ public class Ambulancia {
     public synchronized void solicitaAtencionDomicilio(Asociado asociado) {
         while (!(this.estado instanceof DisponibleState || estado instanceof RegresandoClinicaState)) {
             try {
-                System.out.println("El Asociado" + asociado.getNombre()
-                        + "solicito Atencion a domicilio pero la ambulancia esta ocupada");
+                System.out.println("El Asociado" + asociado.getNombre() + "solicito Atencion a domicilio pero la ambulancia esta ocupada");
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         this.estado.solicitaAtencionDomicilio();
-        // tiempo de simulacion
+
+        this.setChanged();
+        this.notifyObservers(this.estado.toString()); //se notifica que la ambulancia fue solicitada
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.estado.vuelveClinica();
-        System.out.println("El Asociado" + asociado.getNombre() + "solicito Atencion a Domicilio correctamente");
+
+        this.setChanged();
+        this.notifyObservers("Ambulancia Disponible"); //se notificia que la ambulancia esta disponible
         notifyAll();
     }
 
@@ -49,9 +61,16 @@ public class Ambulancia {
             }
         }
         this.estado.solicitaTraslado();
-        // tiempo de simulacion
+        this.setChanged();
+        this.notifyObservers(this.estado.toString());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.estado.vuelveClinica();
-        System.out.println("El Asociado pidio la ambulancia");
+        this.setChanged();
+        this.notifyObservers("Ambulancia Disponible");
         notifyAll();
     }
 
@@ -64,9 +83,17 @@ public class Ambulancia {
             }
         }
         this.estado.repararAmbulancia(); // es la unica solicitud que puede realizar un operario
-        // tiempo de simulacion
+        this.setChanged();
+        this.notifyObservers(this.estado.toString());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.estado.vuelveClinica();
-        System.out.println("El operario pidio una ambulancia");
+
+        this.setChanged();
+        this.notifyObservers("Ambulancia Disponible");
         notifyAll();
     }
 }

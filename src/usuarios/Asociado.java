@@ -2,10 +2,13 @@ package usuarios;
 
 import ambulancia.Ambulancia;
 
+import java.io.ObjectStreamClass;
+import java.io.ObjectStreamException;
 import java.util.Objects;
+import java.util.Observable;
 import java.util.Random;
 
-public class Asociado extends Thread {
+public class Asociado extends Observable implements Runnable {
     private String dni,nombre,domicilio,telefono;
     private int cantSolicitudes;
     private Ambulancia ambulancia;
@@ -41,10 +44,18 @@ public class Asociado extends Thread {
 
     public void solicitaAmbulancia(){
         Random r = new Random();
-        if (r.nextBoolean())
+        this.setChanged();
+        if (r.nextBoolean()) {
+            this.notifyObservers("intenta solicitar atencion a Domicilio");
             this.ambulancia.solicitaAtencionDomicilio(this);
-        else
+
+        }
+        else {
+            this.notifyObservers("intenta solicitar traslado a clinica");
             this.ambulancia.solicitaTraslado(this);
+        }
+        this.setChanged();
+        this.notifyObservers("solicito correctamente");
     }
 
     @Override
