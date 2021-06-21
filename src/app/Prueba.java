@@ -4,15 +4,13 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Set;
 
-import ambulancia.Ambulancia;
-import clinica.Clinica;
-import exceptions.FechaInvalidaException;
-import exceptions.PacienteInvalidoException;
-import lugares.HabPrivada;
-import lugares.Habitacion;
-import usuarios.Asociado;
-import usuarios.Medico;
-import usuarios.Paciente;
+import modelo.clinica.Clinica;
+import modelo.exceptions.FechaInvalidaException;
+import modelo.exceptions.PacienteInvalidoException;
+import modelo.lugares.HabPrivada;
+import modelo.lugares.Habitacion;
+import modelo.usuarios.Medico;
+import modelo.usuarios.Paciente;
 
 public class Prueba {
 
@@ -36,7 +34,7 @@ public class Prueba {
                 clinica.ingresaPaciente("7561238", "Colon 1239", "Mar del plata", "6873213", "Agustin Adan", "Nino");
                 clinica.ingresaPaciente("1354314", "Buenos Aires 1239", "Mar del plata", "2234564687",
                                 "Richard Palomo", "Joven");
-                // Ingreso del paciente a la clinica
+                // Ingreso del paciente a la modelo.clinica
 
                 System.out.println("PACIENTES");
                 for (Paciente paciente : clinica.getPacientes()) {
