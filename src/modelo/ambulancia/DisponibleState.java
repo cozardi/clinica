@@ -5,6 +5,9 @@ public class DisponibleState implements IState {
 
     public DisponibleState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
+        this.ambulancia.setDisponibleAtencionDomicilio(true);
+        this.ambulancia.setDisponibleTraslado(true);
+        this.ambulancia.setDisponibleReparar(true);
     }
 
     @Override
@@ -15,6 +18,7 @@ public class DisponibleState implements IState {
     @Override
     public void solicitaTraslado() {
         ambulancia.setEstado(new RegresandoClinicaState(ambulancia));
+
     }
 
     @Override

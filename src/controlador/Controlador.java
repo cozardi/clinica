@@ -7,7 +7,6 @@ import modelo.exceptions.YaExisteAsociadoException;
 import modelo.usuarios.Asociado;
 import vista.IVista;
 import vista.VentanaInicio;
-import vista.VistaSimulacion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,10 +56,8 @@ public class Controlador implements ActionListener {
 			//CARGAR SERIAL
 		}
 		else if (accion.equalsIgnoreCase("COMENZAR")){
-			this.vista=new VistaSimulacion();
 			this.vista.addActionListener(this);
+			Clinica.getInstance().simulacion();
 		}
-
-
 	}
 }

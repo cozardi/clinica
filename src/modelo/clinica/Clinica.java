@@ -136,13 +136,8 @@ public class Clinica {
 		}
 	}
 	/**
-	 * Agrega un asociado al TreeSet de asociados. Si ya existe arroja excepcion.
-	 * @param dni
-	 * @param nombre
-	 * @param domicilio
-	 * @param telefono
-	 * @param cantSolicitudes
-	 * @param ambulancia
+	 * Agrega un asociado a la estructura de Asociados. Si ya existe arroja excepcion.
+	 * @param asociado
 	 * @throws YaExisteAsociadoException El controlador recibe esta excepción y delega a la vista la solución.
 	 */
 	public void addAsociado(Asociado asociado) throws YaExisteAsociadoException {
@@ -346,5 +341,12 @@ public class Clinica {
                     paciente.getConsultas().get(it2), it2.getHonorario() * paciente.getConsultas().get(it2)));
         }
         paciente.ReseteaPrestaciones();
+    }
+
+    public void simulacion (){
+        for (Asociado asociado : this.asociados) {
+            Thread h = new Thread(asociado);
+            h.start();
+        }
     }
 }

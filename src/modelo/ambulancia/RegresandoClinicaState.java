@@ -5,6 +5,9 @@ public class RegresandoClinicaState implements IState {
 
     public RegresandoClinicaState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
+        this.ambulancia.setDisponibleAtencionDomicilio(true);
+        this.ambulancia.setDisponibleReparar(false);
+        this.ambulancia.setDisponibleTraslado(false);
     }
 
     @Override

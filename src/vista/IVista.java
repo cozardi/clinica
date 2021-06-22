@@ -16,5 +16,4 @@ public interface IVista {
 	int getCantLlamadas();
 	Asociado getAsociadoSelected();
 
-
 	}

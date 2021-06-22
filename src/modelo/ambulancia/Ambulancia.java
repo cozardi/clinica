@@ -9,10 +9,14 @@ import java.util.Observable;
 public class Ambulancia extends Observable {
     protected IState estado;
     private static Ambulancia instance = null;
+    private boolean isDisponibleAtencionDomicilio;
+    private boolean isDisponibleTraslado;
+    private boolean isDisponibleReparar;
 
     private Ambulancia() {
         this.estado = new DisponibleState(this);
     }
+
 
     public static Ambulancia get_instance() {
         if (instance == null)
@@ -20,12 +24,24 @@ public class Ambulancia extends Observable {
         return instance;
     }
 
+    public void setDisponibleAtencionDomicilio(boolean disponibleAtencionDomicilio) {
+        isDisponibleAtencionDomicilio = disponibleAtencionDomicilio;
+    }
+
+    public void setDisponibleTraslado(boolean disponibleTraslado) {
+        isDisponibleTraslado = disponibleTraslado;
+    }
+
+    public void setDisponibleReparar(boolean disponibleReparar) {
+        isDisponibleReparar = disponibleReparar;
+    }
+
     protected void setEstado(IState estado) {
         this.estado = estado;
     }
 
     public synchronized void solicitaAtencionDomicilio(Asociado asociado) {
-        while (!(this.estado instanceof DisponibleState || estado instanceof RegresandoClinicaState)) {
+        while (!isDisponibleAtencionDomicilio) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -39,7 +55,7 @@ public class Ambulancia extends Observable {
     }
 
     public synchronized void solicitaTraslado(Asociado asociado) {
-        while (!(this.estado instanceof DisponibleState)) {
+        while (!isDisponibleTraslado) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -53,7 +69,7 @@ public class Ambulancia extends Observable {
     }
 
     public synchronized void repararAmbulancia(Operario operario) {
-        while (!(this.estado instanceof DisponibleState || this.estado instanceof enTallerState)) {
+        while (!isDisponibleReparar) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -78,9 +94,5 @@ public class Ambulancia extends Observable {
         this.setChanged();
         this.notifyObservers(this.estado.toString()); //se notificia que la modelo.ambulancia esta disponible
         notifyAll();
-    }
-
-    public IState getEstado() {
-        return estado;
     }
 }

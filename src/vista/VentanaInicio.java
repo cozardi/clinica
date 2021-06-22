@@ -299,5 +299,7 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		this.btnEliminar.setEnabled(!this.listAsociados.isSelectionEmpty());
+
+
 	}
 }
