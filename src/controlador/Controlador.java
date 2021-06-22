@@ -62,8 +62,8 @@ public class Controlador implements ActionListener {
 			//CARGAR SERIAL
 		}
 		else if (accion.equalsIgnoreCase("COMENZAR")){
-			this.vista.Visible(false);
-			this.vistaFactura.Visible(true);
+			Clinica.getInstance().simulacion();
+			this.vista.activaSimulacion();
 		}
 		else if (accion.equalsIgnoreCase("TERMINAR")){
 

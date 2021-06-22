@@ -8,6 +8,7 @@ import modelo.usuarios.Asociado;
 public interface IVista {
 	void addActionListener(ActionListener actionListener);
 	void actualizaLista(Asociado asociado);
+	void activaSimulacion();
 	String getNombre();
 	String getApellido();
 	String getDni();

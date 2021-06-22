@@ -25,8 +25,8 @@ public class Prueba {
 
 
         IVista ventanaInicio = new VentanaInicio();
-        //IVistaFactura ventanaFactura = new VentanaFactura();
-        Controlador controlador = new Controlador(ventanaInicio,(IVistaFactura)ventanaInicio);
+        IVistaFactura ventanaFactura = (IVistaFactura) ventanaInicio;
+        Controlador controlador = new Controlador(ventanaInicio, ventanaFactura);
 
         // Creamos la Clinica
         Clinica clinica = Clinica.getInstance();

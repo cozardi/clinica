@@ -15,7 +15,7 @@ import java.awt.event.*;
 import modelo.usuarios.Asociado;
 
 public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyListener, ListSelectionListener {
-
+	private static boolean tieneActionListener = false;
 	private JPanel contentPane;
 	private JPanel panelContenedorAsociados;
 	private JPanel panelCentral;
@@ -61,7 +61,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyL
 
 	public VentanaInicio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 533, 352);
+		setBounds(100, 100, 650, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -217,7 +217,8 @@ public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyL
 		tabbedPane.addTab("Asociados", null, panelContenedorAsociados, null);
 		
 		panelContenedorSimulacion = new JPanel();
-		tabbedPane.addTab("New tab", null, panelContenedorSimulacion, null);
+		tabbedPane.addTab("Simulacion", null, panelContenedorSimulacion, null);
+		tabbedPane.setEnabledAt(tabbedPane.indexOfTab("Simulacion"),false);
 
 
 		this.setVisible(true);
@@ -225,12 +226,15 @@ public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyL
 
 	@Override
 	public void addActionListener(ActionListener actionListener) {
-		this.btnAgregar.addActionListener(actionListener);
-		this.btnComenzar.addActionListener(actionListener);
-		this.btnCargar.addActionListener(actionListener);
-		this.btnEliminar.addActionListener(actionListener);
-		this.btnGuardarDatos.addActionListener(actionListener);
-		this.btnCargar.addActionListener(actionListener);
+		if (!tieneActionListener) {
+			this.btnAgregar.addActionListener(actionListener);
+			this.btnComenzar.addActionListener(actionListener);
+			this.btnCargar.addActionListener(actionListener);
+			this.btnEliminar.addActionListener(actionListener);
+			this.btnGuardarDatos.addActionListener(actionListener);
+			this.btnCargar.addActionListener(actionListener);
+			tieneActionListener = true;
+		}
 	}
 
 	@Override
@@ -279,6 +283,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyL
 				this.btnComenzar.setEnabled(false);
 		}
 		listAsociados.clearSelection();
+	}
+
+	@Override
+	public void activaSimulacion() {
+		this.tabbedPane.setEnabledAt(tabbedPane.indexOfTab("Simulacion"),true);
 	}
 
 	private void setTextField() {
