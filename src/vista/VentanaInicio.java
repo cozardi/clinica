@@ -1,29 +1,18 @@
 package vista;
 
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.FlowLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
+import java.awt.event.*;
 
 import modelo.usuarios.Asociado;
 
-public class VentanaInicio extends JFrame implements IVista, KeyListener {
+public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSelectionListener {
 
 	private JPanel contentPane;
 	private JPanel panelContenedor;
@@ -82,7 +71,8 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener {
 		panelContenedor.add(panelOeste);
 		panelOeste.setLayout(new BorderLayout(0, 0));
 		
-		lblListaAsociados = new JLabel("                  Lista de Asociados");
+		lblListaAsociados = new JLabel("Lista de Asociados");
+		lblListaAsociados.setHorizontalAlignment(SwingConstants.CENTER);
 		panelOeste.add(lblListaAsociados, BorderLayout.NORTH);
 		
 		scrollPane = new JScrollPane();
@@ -90,6 +80,7 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener {
 		
 		listAsociados = new JList<Asociado>();
 		listAsociados.setModel(modeloLista);
+		listAsociados.addListSelectionListener(this);
 		scrollPane.setViewportView(listAsociados);
 		
 		panelCentral = new JPanel();
@@ -240,11 +231,11 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener {
 	public void keyReleased(KeyEvent arg0)
 	{
 		int solicitudes = -1;
-		String nombre = null;
-		String apellido = null;
-		String domicilio = null;
-		String dni = null;
-		String telefono = null;
+		String nombre = "";
+		String apellido = "";
+		String domicilio = "";
+		String dni = "";
+		String telefono = "";
 		try{
 			solicitudes = Integer.parseInt(this.textFieldLlamadas.getText());
 			nombre = this.getNombre();
@@ -255,10 +246,8 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener {
 		}
 		catch (NumberFormatException e) {
 		}
-		System.out.println(nombre);
-		boolean condicion = (nombre!=null && apellido!=null && domicilio!=null
-							&& dni!=null && telefono!=null && solicitudes>=0);
-		System.out.println(condicion);
+		boolean condicion = (!nombre.isBlank() && !apellido.isBlank() && !domicilio.isBlank()
+							&& !dni.isBlank() && !telefono.isBlank() && solicitudes>=0);
 		this.btnAgregar.setEnabled(condicion);
 		if (solicitudes>=0)
 			this.btnOperario.setEnabled(true);
@@ -266,7 +255,10 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener {
 
 	@Override
 	public void actualizaLista(Asociado asociado) {
-		this.modeloLista.addElement(asociado);
+		if (!this.modeloLista.contains(asociado))
+			this.modeloLista.addElement(asociado);
+		else
+			this.modeloLista.remove(this.modeloLista.indexOf(asociado));
 	}
 
 	@Override
@@ -304,4 +296,8 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener {
 	}
 
 
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		this.btnEliminar.setEnabled(!this.listAsociados.isSelectionEmpty());
+	}
 }

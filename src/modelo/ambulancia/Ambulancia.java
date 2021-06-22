@@ -2,6 +2,7 @@ package modelo.ambulancia;
 
 import modelo.clinica.Operario;
 import modelo.usuarios.Asociado;
+import modelo.util.Util;
 
 import java.util.Observable;
 
@@ -32,15 +33,14 @@ public class Ambulancia extends Observable {
             }
         }
         this.estado.solicitaAtencionDomicilio();
-
         this.setChanged();
         this.notifyObservers(this.estado.toString()); //se notifica que la modelo.ambulancia fue solicitada
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Util.espera(1000);
         this.estado.vuelveClinica();
+        if (!(estado instanceof DisponibleState)){
+            Util.espera(1000);
+            this.estado.vuelveClinica();
+        }
         this.setChanged();
         this.notifyObservers(this.estado.toString()); //se notificia que la modelo.ambulancia esta disponible
         notifyAll();
@@ -57,11 +57,7 @@ public class Ambulancia extends Observable {
         this.estado.solicitaTraslado();
         this.setChanged();
         this.notifyObservers(this.estado.toString());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Util.espera(1000);
         this.estado.vuelveClinica();
         this.setChanged();
         this.notifyObservers(this.estado.toString());
@@ -79,13 +75,12 @@ public class Ambulancia extends Observable {
         this.estado.repararAmbulancia(); // es la unica solicitud que puede realizar un operario
         this.setChanged();
         this.notifyObservers(this.estado.toString());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Util.espera(1000);
         this.estado.vuelveClinica();
-
+        if (!(estado instanceof DisponibleState)){
+            Util.espera(1000);
+            this.estado.vuelveClinica();
+        }
         this.setChanged();
         this.notifyObservers(this.estado.toString());
         notifyAll();

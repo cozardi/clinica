@@ -1,10 +1,7 @@
 package modelo.clinica;
 
 import modelo.ambulancia.Ambulancia;
-import modelo.exceptions.DiasInvalidosException;
-import modelo.exceptions.NoExisteException;
-import modelo.exceptions.PacienteInvalidoException;
-import modelo.exceptions.YaExisteAsociadoException;
+import modelo.exceptions.*;
 import modelo.factura.Factura;
 import modelo.factura.Reporte;
 import modelo.lugares.Habitacion;
@@ -105,7 +102,7 @@ public class Clinica {
         try {
             Medico medico = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
                     especialidad, tipoContratacion);
-            medicos.add(medico);// tira error aca?-->si
+            medicos.add(medico);
         } catch (NoExisteException e) {
             System.out.println(e.getMessage());
         }
@@ -148,9 +145,8 @@ public class Clinica {
 	 * @param ambulancia
 	 * @throws YaExisteAsociadoException El controlador recibe esta excepción y delega a la vista la solución.
 	 */
-	public void addAsociado(String dni, String nombre, String domicilio, String telefono, int cantSolicitudes, Ambulancia ambulancia) throws YaExisteAsociadoException {
-		Asociado asociado = new Asociado(dni,nombre,domicilio,telefono,cantSolicitudes,ambulancia);
-		if(!asociados.add(asociado));
+	public void addAsociado(Asociado asociado) throws YaExisteAsociadoException {
+		if(!this.asociados.add(asociado))
 			throw new YaExisteAsociadoException("El Asociado ingresado ya existe");
 	}
 
@@ -158,8 +154,9 @@ public class Clinica {
 	 *
 	 * @param asociado
 	 */
-	public void eliminaAsociado(Asociado asociado){
-		this.asociados.remove(asociado);
+	public void eliminaAsociado(Asociado asociado) throws NoExisteAsociadoException {
+		if(!this.asociados.remove(asociado))
+		    throw new NoExisteAsociadoException("El asociado no existe");
 	}
 
 	/**

@@ -21,7 +21,7 @@ public class enTallerState implements IState {
 
     @Override
     public void vuelveClinica() {
-        ambulancia.setEstado(new DisponibleState(ambulancia));
+        ambulancia.setEstado(new RegresandoTallerState(ambulancia));
     }
 
     @Override

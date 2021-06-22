@@ -76,4 +76,9 @@ public class Asociado extends Observable implements Runnable {
     public int hashCode() {
         return Objects.hash(dni);
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
