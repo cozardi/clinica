@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import modelo.usuarios.Asociado;
 
+
 public interface IVista {
 	void addActionListener(ActionListener actionListener);
 	void actualizaLista(Asociado asociado);
@@ -13,4 +14,7 @@ public interface IVista {
 	String getDomicilio();
 	String getTelefono();
 	int getCantLlamadas();
-}
+	Asociado getAsociadoSelected();
+
+
+	}

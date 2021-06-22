@@ -49,7 +49,7 @@ public class Asociado extends Observable implements Runnable {
 
         }
         else {
-            this.notifyObservers("intenta solicitar traslado a modelo.clinica");
+            this.notifyObservers("intenta solicitar traslado a Clinica");
             this.ambulancia.solicitaTraslado(this);
         }
         this.setChanged();

@@ -10,7 +10,7 @@ import modelo.usuarios.Medico;
 import modelo.usuarios.Paciente;
 
 /**
- * Esta clase brinda informacion sobre el transcurso del paciente en la modelo.clinica
+ * Esta clase brinda informacion sobre el transcurso del paciente en la Clinica
  * 
  */
 

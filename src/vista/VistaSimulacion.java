@@ -62,4 +62,9 @@ public class VistaSimulacion extends JFrame implements IVista{
     public int getCantLlamadas() {
         return 0;
     }
+
+    @Override
+    public Asociado getAsociadoSelected() {
+        return null;
+    }
 }

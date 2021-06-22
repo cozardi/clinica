@@ -77,7 +77,7 @@ public class SalaDeEspera {
     }
 
     /**
-     * Metodo que retorna la instancia de la Sala Privada de la modelo.clinica.<br>
+     * Metodo que retorna la instancia de la Sala Privada de la Clinica.<br>
      * 
      * @return instancia de salaprivada.
      */

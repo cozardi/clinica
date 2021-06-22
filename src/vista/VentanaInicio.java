@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -21,7 +23,7 @@ import javax.swing.JList;
 
 import modelo.usuarios.Asociado;
 
-public class VentanaInicio extends JFrame implements IVista {
+public class VentanaInicio extends JFrame implements IVista, KeyListener {
 
 	private JPanel contentPane;
 	private JPanel panelContenedor;
@@ -100,6 +102,7 @@ public class VentanaInicio extends JFrame implements IVista {
 		
 		btnAgregar = new JButton("Agregar Asociado");
 		btnAgregar.setActionCommand("Agregar");
+		btnAgregar.setEnabled(false);
 		panelAgregar.add(btnAgregar);
 		
 		panelEliminar = new JPanel();
@@ -107,6 +110,7 @@ public class VentanaInicio extends JFrame implements IVista {
 		
 		btnEliminar = new JButton("Eliminar Asociado");
 		btnEliminar.setActionCommand("Eliminar");
+		btnEliminar.setEnabled(false);
 		panelEliminar.add(btnEliminar);
 		
 		panelOperario = new JPanel();
@@ -114,6 +118,7 @@ public class VentanaInicio extends JFrame implements IVista {
 		
 		btnOperario = new JButton("Configurar operario");
 		btnOperario.setActionCommand("Configurar");
+		btnOperario.setEnabled(false);
 		panelOperario.add(btnOperario);
 		
 		panelSerial = new JPanel();
@@ -151,6 +156,7 @@ public class VentanaInicio extends JFrame implements IVista {
 		
 		textFieldNombre = new JTextField();
 		textFieldNombre.setColumns(10);
+		this.textFieldNombre.addKeyListener(this);
 		panelNombre.add(textFieldNombre);
 		
 		panelApellido = new JPanel();
@@ -161,6 +167,7 @@ public class VentanaInicio extends JFrame implements IVista {
 		
 		textFieldApellido = new JTextField();
 		textFieldApellido.setColumns(10);
+		this.textFieldApellido.addKeyListener(this);
 		panelApellido.add(textFieldApellido);
 		
 		panelDni = new JPanel();
@@ -171,6 +178,7 @@ public class VentanaInicio extends JFrame implements IVista {
 		
 		textFieldDni = new JTextField();
 		textFieldDni.setColumns(10);
+		this.textFieldDni.addKeyListener(this);
 		panelDni.add(textFieldDni);
 		
 		panelDomicilio = new JPanel();
@@ -181,6 +189,7 @@ public class VentanaInicio extends JFrame implements IVista {
 		
 		textFieldDomicilio = new JTextField();
 		textFieldDomicilio.setColumns(10);
+		this.textFieldDomicilio.addKeyListener(this);
 		panelDomicilio.add(textFieldDomicilio);
 		
 		panelTelefono = new JPanel();
@@ -191,7 +200,9 @@ public class VentanaInicio extends JFrame implements IVista {
 		
 		textFieldTelefono = new JTextField();
 		textFieldTelefono.setColumns(10);
+		this.textFieldTelefono.addKeyListener(this);
 		panelTelefono.add(textFieldTelefono);
+
 		
 		panelLlamados = new JPanel();
 		panelEste.add(panelLlamados);
@@ -201,6 +212,8 @@ public class VentanaInicio extends JFrame implements IVista {
 		
 		textFieldLlamadas = new JTextField();
 		textFieldLlamadas.setColumns(10);
+		this.textFieldLlamadas.addKeyListener(this);
+
 		panelLlamados.add(textFieldLlamadas);
 
 		this.setVisible(true);
@@ -214,6 +227,41 @@ public class VentanaInicio extends JFrame implements IVista {
 		this.btnEliminar.addActionListener(actionListener);
 		this.btnGuardarDatos.addActionListener(actionListener);
 		this.btnCargar.addActionListener(actionListener);
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	public void keyReleased(KeyEvent arg0)
+	{
+		int solicitudes = -1;
+		String nombre = null;
+		String apellido = null;
+		String domicilio = null;
+		String dni = null;
+		String telefono = null;
+		try{
+			solicitudes = Integer.parseInt(this.textFieldLlamadas.getText());
+			nombre = this.getNombre();
+			apellido = this.getApellido();
+			domicilio = this.getDomicilio();
+			dni = this.getDni();
+			telefono = this.getTelefono();
+		}
+		catch (NumberFormatException e) {
+		}
+		System.out.println(nombre);
+		boolean condicion = (nombre!=null && apellido!=null && domicilio!=null
+							&& dni!=null && telefono!=null && solicitudes>=0);
+		System.out.println(condicion);
+		this.btnAgregar.setEnabled(condicion);
+		if (solicitudes>=0)
+			this.btnOperario.setEnabled(true);
 	}
 
 	@Override
@@ -248,7 +296,12 @@ public class VentanaInicio extends JFrame implements IVista {
 
 	@Override
 	public int getCantLlamadas() {
-		
 		return Integer.parseInt(this.textFieldLlamadas.getText());
 	}
+
+	public Asociado getAsociadoSelected(){
+		return this.listAsociados.getSelectedValue();
+	}
+
+
 }

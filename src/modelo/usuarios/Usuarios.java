@@ -3,7 +3,7 @@ package modelo.usuarios;
 import java.util.Objects;
 
 /**
- * Define tipo de Usuario que pasa por la modelo.clinica (Medico y Paciente)
+ * Define tipo de Usuario que pasa por la Clinica (Medico y Paciente)
  */
 public abstract class Usuarios implements Comparable<Usuarios> {
     protected String dni, domicilio, ciudad, telefono, nombre;
