@@ -16,25 +16,25 @@ import java.util.*;
  */
 
 public class Clinica {
-	private static Clinica instance = null;
-	// DATOS DE LA CLINICA
-	private String nombre = "Hospital", direccion = "Avenida siempre viva", telefono = "123123", ciudad = "Balcarce";
+    private static Clinica instance = null;
+    // DATOS DE LA CLINICA
+    private String nombre = "Hospital", direccion = "Avenida siempre viva", telefono = "123123", ciudad = "Balcarce";
 
-	private Set<Medico> medicos = new TreeSet<>();
-	private Set<Paciente> pacientes = new TreeSet<>();
-	private Set<Asociado> asociados = new HashSet<>();
-	private PriorityQueue<Paciente> listaEspera = new PriorityQueue<Paciente>();
-	private ArrayList<Paciente> pacientesEnAtencion = new ArrayList<Paciente>();
-	private Operario operario;
+    private Set<Medico> medicos = new TreeSet<>();
+    private Set<Paciente> pacientes = new TreeSet<>();
+    private Set<Asociado> asociados = new HashSet<>();
+    private PriorityQueue<Paciente> listaEspera = new PriorityQueue<Paciente>();
+    private ArrayList<Paciente> pacientesEnAtencion = new ArrayList<Paciente>();
+    private Operario operario;
 
 
-	public Set<Medico> getMedicos() {
-		return medicos;
-	}
+    public Set<Medico> getMedicos() {
+        return medicos;
+    }
 
-	public Set<Paciente> getPacientes() {
-		return pacientes;
-	}
+    public Set<Paciente> getPacientes() {
+        return pacientes;
+    }
 
     //    /**
 //     * Constructor privado, es invocado por el metodo <i>getInstance</i>
@@ -55,7 +55,7 @@ public class Clinica {
     private Clinica() {
     }
 
-	//    /**
+    //    /**
 //     * Crea la instancia de la modelo.clinica en caso de que esta no exista, sino devuelve
 //     * la existente
 //     *
@@ -66,11 +66,11 @@ public class Clinica {
 //     * @return Una instancia de la modelo.clinica
 //     */
 
-	public static Clinica getInstance() {
-		if (instance == null)
-			instance = new Clinica();
-		return instance;
-	}
+    public static Clinica getInstance() {
+        if (instance == null)
+            instance = new Clinica();
+        return instance;
+    }
 
     /**
      * <b>Pre: </b> Deberia invocarse anteriormente al otro constructor para generar
@@ -108,75 +108,75 @@ public class Clinica {
         }
     }
 
-	/**
-	 * Agrega un medico a la lista de medicos de la Clinica, en caso de ingresar un
-	 * dato erroneo informa con un mensaje y no crea el objeto
-	 * 
-	 * @param dni              Contiene el DNI del medico
-	 * @param domicilio        contiene el domicilio del medico
-	 * @param ciudad           representa la ciudad de origen
-	 * @param telefono         contiene el telefono del medico
-	 * @param nombre           Nombre y apellido del medico
-	 * @param numero           representa el numero de licencia medico (unico por
-	 *                         medico)
-	 * @param honorarioBasico  Honorario basico del medico
-	 * @param especialidad     especialidad del medico (clinico, cirujano, pediatra)
-	 * @param tipoContratacion tipo de contratacion (permanente, temporario)
-	 * @param posgrado         posgrado del medico en caso de tenerlo (magister,
-	 *                         doctorado)
-	 */
-	public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
-			int honorarioBasico, String especialidad, String tipoContratacion, String posgrado) {
-		try {
-			Medico medico = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
-					especialidad, tipoContratacion, posgrado);
-			medicos.add(medico);
-		} catch (NoExisteException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-	/**
-	 * Agrega un asociado a la estructura de Asociados. Si ya existe arroja excepcion.
-	 * @param asociado
-	 * @throws YaExisteAsociadoException El controlador recibe esta excepción y delega a la vista la solución.
-	 */
-	public void addAsociado(Asociado asociado) throws YaExisteAsociadoException {
-		if(!this.asociados.add(asociado))
-			throw new YaExisteAsociadoException("El Asociado ingresado ya existe");
-	}
+    /**
+     * Agrega un medico a la lista de medicos de la Clinica, en caso de ingresar un
+     * dato erroneo informa con un mensaje y no crea el objeto
+     *
+     * @param dni              Contiene el DNI del medico
+     * @param domicilio        contiene el domicilio del medico
+     * @param ciudad           representa la ciudad de origen
+     * @param telefono         contiene el telefono del medico
+     * @param nombre           Nombre y apellido del medico
+     * @param numero           representa el numero de licencia medico (unico por
+     *                         medico)
+     * @param honorarioBasico  Honorario basico del medico
+     * @param especialidad     especialidad del medico (clinico, cirujano, pediatra)
+     * @param tipoContratacion tipo de contratacion (permanente, temporario)
+     * @param posgrado         posgrado del medico en caso de tenerlo (magister,
+     *                         doctorado)
+     */
+    public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
+                          int honorarioBasico, String especialidad, String tipoContratacion, String posgrado) {
+        try {
+            Medico medico = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
+                    especialidad, tipoContratacion, posgrado);
+            medicos.add(medico);
+        } catch (NoExisteException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-	/**
-	 *
-	 * @param asociado
-	 */
-	public void eliminaAsociado(Asociado asociado) throws NoExisteAsociadoException {
-		if(!this.asociados.remove(asociado))
-		    throw new NoExisteAsociadoException("El asociado no existe");
-	}
+    /**
+     * Agrega un asociado a la estructura de Asociados. Si ya existe arroja excepcion.
+     *
+     * @param asociado
+     * @throws YaExisteAsociadoException El controlador recibe esta excepción y delega a la vista la solución.
+     */
+    public void addAsociado(Asociado asociado) throws YaExisteAsociadoException {
+        if (!this.asociados.add(asociado))
+            throw new YaExisteAsociadoException("El Asociado ingresado ya existe");
+    }
 
-	/**
-	 *
-	 * @param cantSolicitudes
-	 */
-	public void setOperario(int cantSolicitudes){
-		this.operario = new Operario(Ambulancia.get_instance(),cantSolicitudes);
-	}
+    /**
+     * @param asociado
+     */
+    public void eliminaAsociado(Asociado asociado) throws NoExisteAsociadoException {
+        if (!this.asociados.remove(asociado))
+            throw new NoExisteAsociadoException("El asociado no existe");
+    }
 
-	public Operario getOperario(){
-		return this.operario;
-	}
+    /**
+     * @param cantSolicitudes
+     */
+    public void setOperario(int cantSolicitudes) {
+        this.operario = new Operario(Ambulancia.get_instance(), cantSolicitudes);
+    }
 
-	/**
-	 * Ingresa el paciente a la Clinica y lo deriva a la sala de espera. En caso de
-	 * no poder crearlo informa el error con un mensaje.
-	 *
-	 * @param dni         String, contiene el DNI del paciente. <br>
-	 * @param domicilio   String, contiene el Domicilio en nombre y número. <br>
-	 * @param ciudad      String, representa la ciudad de nacimiento. <br>
-	 * @param telefono    String, contiene el numero de telefono del paciente. <br>
-	 * @param nombre      Nombre y Apellido del paciente. <br>
-	 * @param rangoEtario Rango etario del paciente (nino, joven o mayor) <br>
-	 */
+    public Operario getOperario() {
+        return this.operario;
+    }
+
+    /**
+     * Ingresa el paciente a la Clinica y lo deriva a la sala de espera. En caso de
+     * no poder crearlo informa el error con un mensaje.
+     *
+     * @param dni         String, contiene el DNI del paciente. <br>
+     * @param domicilio   String, contiene el Domicilio en nombre y número. <br>
+     * @param ciudad      String, representa la ciudad de nacimiento. <br>
+     * @param telefono    String, contiene el numero de telefono del paciente. <br>
+     * @param nombre      Nombre y Apellido del paciente. <br>
+     * @param rangoEtario Rango etario del paciente (nino, joven o mayor) <br>
+     */
 
     public void ingresaPaciente(String dni, String domicilio, String ciudad, String telefono, String nombre,
                                 String rangoEtario) {
@@ -343,7 +343,9 @@ public class Clinica {
         paciente.ReseteaPrestaciones();
     }
 
-    public void simulacion (){
+    public void simulacion() {
+        Thread op = new Thread(this.operario);
+        op.start();
         for (Asociado asociado : this.asociados) {
             Thread h = new Thread(asociado);
             h.start();

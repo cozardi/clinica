@@ -14,10 +14,10 @@ import java.awt.event.*;
 
 import modelo.usuarios.Asociado;
 
-public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSelectionListener {
+public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyListener, ListSelectionListener {
 
 	private JPanel contentPane;
-	private JPanel panelContenedor;
+	private JPanel panelContenedorAsociados;
 	private JPanel panelCentral;
 	private JPanel panelAgregar;
 	private JButton btnAgregar;
@@ -56,6 +56,8 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 	private JScrollPane scrollPane;
 	private JList<Asociado> listAsociados;
 	private DefaultListModel<Asociado> modeloLista= new DefaultListModel<Asociado>();
+	private JTabbedPane tabbedPane;
+	private JPanel panelContenedorSimulacion;
 
 	public VentanaInicio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,14 +65,12 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		panelContenedor = new JPanel();
-		contentPane.add(panelContenedor);
-		panelContenedor.setLayout(new GridLayout(0, 3, 0, 0));
+		panelContenedorAsociados = new JPanel();
+		panelContenedorAsociados.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		panelOeste = new JPanel();
-		panelContenedor.add(panelOeste);
+		panelContenedorAsociados.add(panelOeste);
 		panelOeste.setLayout(new BorderLayout(0, 0));
 		
 		lblListaAsociados = new JLabel("Lista de Asociados");
@@ -87,7 +87,7 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 		scrollPane.setViewportView(listAsociados);
 		
 		panelCentral = new JPanel();
-		panelContenedor.add(panelCentral);
+		panelContenedorAsociados.add(panelCentral);
 		panelCentral.setLayout(new GridLayout(5, 1, 0, 0));
 		
 		panelAgregar = new JPanel();
@@ -140,7 +140,7 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 		panelComenzar.add(btnComenzar);
 		
 		panelEste = new JPanel();
-		panelContenedor.add(panelEste);
+		panelContenedorAsociados.add(panelEste);
 		panelEste.setLayout(new GridLayout(6, 1, 0, 0));
 		
 		panelNombre = new JPanel();
@@ -208,8 +208,17 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 		textFieldLlamadas = new JTextField();
 		textFieldLlamadas.setColumns(10);
 		this.textFieldLlamadas.addKeyListener(this);
+		contentPane.setLayout(new BorderLayout(0, 0));
 
 		panelLlamados.add(textFieldLlamadas);
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane);
+		tabbedPane.addTab("Asociados", null, panelContenedorAsociados, null);
+		
+		panelContenedorSimulacion = new JPanel();
+		tabbedPane.addTab("New tab", null, panelContenedorSimulacion, null);
+
 
 		this.setVisible(true);
 	}
@@ -279,6 +288,7 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 		this.textFieldTelefono.setText("");
 		this.textFieldLlamadas.setText("");
 		this.textFieldDomicilio.setText("");
+		this.btnAgregar.setEnabled(false);
 	}
 
 	@Override

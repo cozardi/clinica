@@ -25,8 +25,8 @@ public class Prueba {
 
 
         IVista ventanaInicio = new VentanaInicio();
-    //    IVistaFactura ventanaFactura = new VentanaFactura();
-     //   Controlador controlador = new Controlador(ventanaInicio,ventanaFactura);
+        //IVistaFactura ventanaFactura = new VentanaFactura();
+        Controlador controlador = new Controlador(ventanaInicio,(IVistaFactura)ventanaInicio);
 
         // Creamos la Clinica
         Clinica clinica = Clinica.getInstance();
@@ -66,7 +66,6 @@ public class Prueba {
         Iterator<Medico> medicosIterator = medicos.iterator();
         Medico medicoPrueba1 = medicosIterator.next();
         Medico medicoPrueba2 = medicosIterator.next();
-
         Habitacion habPrueba = new HabPrivada();
 
 
@@ -76,7 +75,6 @@ public class Prueba {
         try {
             clinica.agregaInternacionAPaciente(pacientePrueba, habPrueba, 5);
         } catch (Exception e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
 
@@ -97,22 +95,22 @@ public class Prueba {
             e.printStackTrace();
         }
 
-/*
-        ObserverAmbulanciaPrueba observerAmbulanciaPrueba = new ObserverAmbulanciaPrueba(Ambulancia.get_instance());
 
-        Asociado a1 = new Asociado("123456", "Juan", "Colon 2342", "44356754", 5, Ambulancia.get_instance());
-        Asociado a2 = new Asociado("123457", "Alberto", "Colon 2342", "44356754", 6, Ambulancia.get_instance());
-        Clinica.getInstance().setOperario(4);
-        Operario op = Clinica.getInstance().getOperario();
+//        ObserverAmbulanciaPrueba observerAmbulanciaPrueba = new ObserverAmbulanciaPrueba(Ambulancia.get_instance());
+////
+////        Asociado a1 = new Asociado("123456", "Juan", "Colon 2342", "44356754", 5, Ambulancia.get_instance());
+////        Asociado a2 = new Asociado("123457", "Alberto", "Colon 2342", "44356754", 6, Ambulancia.get_instance());
+////        Clinica.getInstance().setOperario(4);
+////        Operario op = Clinica.getInstance().getOperario();
+////
+////        Thread h1 = new Thread(a1);
+////        Thread h2 = new Thread(a2);
+////        Thread h3 = new Thread(op);
+////
+////        h1.start();
+////        h2.start();
+////        h3.start();
 
-        Thread h1 = new Thread(a1);
-        Thread h2 = new Thread(a2);
-        Thread h3 = new Thread(op);
-
-        h1.start();
-        h2.start();
-        h3.start();
-*/
 
     }
 }
