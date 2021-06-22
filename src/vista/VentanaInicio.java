@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.DefaultListSelectionModel;
+
 
 import java.awt.event.*;
 
@@ -81,6 +83,7 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 		listAsociados = new JList<Asociado>();
 		listAsociados.setModel(modeloLista);
 		listAsociados.addListSelectionListener(this);
+		listAsociados.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listAsociados);
 		
 		panelCentral = new JPanel();
@@ -133,6 +136,7 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 		
 		btnComenzar = new JButton("Comenzar Simulacion");
 		btnComenzar.setActionCommand("Comenzar");
+		btnComenzar.setEnabled(false);
 		panelComenzar.add(btnComenzar);
 		
 		panelEste = new JPanel();
@@ -249,16 +253,32 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 		boolean condicion = (!nombre.isBlank() && !apellido.isBlank() && !domicilio.isBlank()
 							&& !dni.isBlank() && !telefono.isBlank() && solicitudes>=0);
 		this.btnAgregar.setEnabled(condicion);
-		if (solicitudes>=0)
-			this.btnOperario.setEnabled(true);
+		condicion = solicitudes>=0;
+			this.btnOperario.setEnabled(condicion);
 	}
 
 	@Override
 	public void actualizaLista(Asociado asociado) {
-		if (!this.modeloLista.contains(asociado))
+		if (!this.modeloLista.contains(asociado)) {
 			this.modeloLista.addElement(asociado);
-		else
+			this.btnComenzar.setEnabled(true);
+			this.setTextField();
+		}
+		else {
 			this.modeloLista.remove(this.modeloLista.indexOf(asociado));
+			if (this.modeloLista.isEmpty())
+				this.btnComenzar.setEnabled(false);
+		}
+		listAsociados.clearSelection();
+	}
+
+	private void setTextField() {
+		this.textFieldNombre.setText("");
+		this.textFieldDni.setText("");
+		this.textFieldApellido.setText("");
+		this.textFieldTelefono.setText("");
+		this.textFieldLlamadas.setText("");
+		this.textFieldDomicilio.setText("");
 	}
 
 	@Override
@@ -291,6 +311,11 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 		return Integer.parseInt(this.textFieldLlamadas.getText());
 	}
 
+	@Override
+	public void Visible(boolean cond) {
+		setVisible(cond);
+	}
+
 	public Asociado getAsociadoSelected(){
 		return this.listAsociados.getSelectedValue();
 	}
@@ -299,7 +324,5 @@ public class VentanaInicio extends JFrame implements IVista, KeyListener,ListSel
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		this.btnEliminar.setEnabled(!this.listAsociados.isSelectionEmpty());
-
-
 	}
 }

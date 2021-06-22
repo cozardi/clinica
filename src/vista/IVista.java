@@ -14,6 +14,8 @@ public interface IVista {
 	String getDomicilio();
 	String getTelefono();
 	int getCantLlamadas();
+	void Visible(boolean cond);
 	Asociado getAsociadoSelected();
+
 
 	}

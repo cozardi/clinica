@@ -6,7 +6,9 @@ import modelo.exceptions.NoExisteAsociadoException;
 import modelo.exceptions.YaExisteAsociadoException;
 import modelo.usuarios.Asociado;
 import vista.IVista;
-import vista.VentanaInicio;
+import vista.IVistaFactura;
+//import vista.VentanaFactura;
+//import vista.VistaSimulacion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +17,14 @@ import java.awt.event.ActionListener;
 
 public class Controlador implements ActionListener {
 	private IVista vista = null;
+//	private IVistaSimulacion vistaSimulacion;
+	private IVistaFactura vistaFactura;
 
-	public Controlador() {
-		this.vista = new VentanaInicio();
+	public Controlador(IVista ventanaInicio, IVistaFactura ventanaFactura) {
+		this.vista = ventanaInicio;
 		this.vista.addActionListener(this);
+		this.vistaFactura=ventanaFactura;
+		this.vistaFactura.addActionListener(this);
 	}
 
 	@Override
@@ -56,8 +62,14 @@ public class Controlador implements ActionListener {
 			//CARGAR SERIAL
 		}
 		else if (accion.equalsIgnoreCase("COMENZAR")){
-			this.vista.addActionListener(this);
-			Clinica.getInstance().simulacion();
+			this.vista.Visible(false);
+			this.vistaFactura.Visible(true);
 		}
+		else if (accion.equalsIgnoreCase("TERMINAR")){
+
+		}
+
+
+
 	}
 }
