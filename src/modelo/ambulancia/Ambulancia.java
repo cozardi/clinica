@@ -35,14 +35,6 @@ public class Ambulancia extends Observable {
         this.estado.solicitaAtencionDomicilio();
         this.setChanged();
         this.notifyObservers(this.estado.toString()); //se notifica que la modelo.ambulancia fue solicitada
-        Util.espera(1000);
-        this.estado.vuelveClinica();
-        if (!(estado instanceof DisponibleState)){
-            Util.espera(1000);
-            this.estado.vuelveClinica();
-        }
-        this.setChanged();
-        this.notifyObservers(this.estado.toString()); //se notificia que la modelo.ambulancia esta disponible
         notifyAll();
     }
 
@@ -55,10 +47,6 @@ public class Ambulancia extends Observable {
             }
         }
         this.estado.solicitaTraslado();
-        this.setChanged();
-        this.notifyObservers(this.estado.toString());
-        Util.espera(1000);
-        this.estado.vuelveClinica();
         this.setChanged();
         this.notifyObservers(this.estado.toString());
         notifyAll();
@@ -75,14 +63,24 @@ public class Ambulancia extends Observable {
         this.estado.repararAmbulancia(); // es la unica solicitud que puede realizar un operario
         this.setChanged();
         this.notifyObservers(this.estado.toString());
-        Util.espera(1000);
-        this.estado.vuelveClinica();
-        if (!(estado instanceof DisponibleState)){
-            Util.espera(1000);
-            this.estado.vuelveClinica();
-        }
-        this.setChanged();
-        this.notifyObservers(this.estado.toString());
         notifyAll();
+    }
+
+    public synchronized void terminarUso() {
+//        while (this.estado instanceof DisponibleState) {
+//            try {
+//                wait();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        this.estado.vuelveClinica();
+        this.setChanged();
+        this.notifyObservers(this.estado.toString()); //se notificia que la modelo.ambulancia esta disponible
+        notifyAll();
+    }
+
+    public IState getEstado() {
+        return estado;
     }
 }
