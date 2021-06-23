@@ -44,7 +44,7 @@ public class PanelOperario extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         Operario operario = (Operario) o;
         if (this.operario == operario) {
-            this.textArea.append((String) arg + "\n");
+            this.textArea.append("El operario " + arg + "\n");
         } else
             throw new IllegalArgumentException();
     }

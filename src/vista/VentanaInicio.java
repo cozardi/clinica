@@ -63,10 +63,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     private DefaultListModel<Asociado> modeloLista = new DefaultListModel<Asociado>();
     private JTabbedPane tabbedPane;
     private JPanel panelContenedorSimulacion;
-    private JPanel panelAsociados;
-    private JPanel panelDerecha;
-    private JPanel panelNorEste;
-    private JPanel panelSurEste;
+    private JPanel panelIzquierda;
+    private JScrollPane scrollPaneAsociados;
+    private JPanel panelCentralAsociados;
+    private JPanel panelEstadoOperario;
+    private JPanel panelEstadoAmbulancia;
 
     public VentanaInicio() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -230,50 +231,26 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
 
         panelContenedorSimulacion = new JPanel();
         tabbedPane.addTab("Simulacion", null, panelContenedorSimulacion, null);
+        panelContenedorSimulacion.setLayout(new BorderLayout(0, 0));
 
-        panelAsociados = new JPanel();
+        panelIzquierda = new JPanel();
+        panelContenedorSimulacion.add(panelIzquierda, BorderLayout.WEST);
+        panelIzquierda.setLayout(new GridLayout(2, 1, 0, 5));
 
-        panelDerecha = new JPanel();
-        GroupLayout gl_panelContenedorSimulacion = new GroupLayout(panelContenedorSimulacion);
-        gl_panelContenedorSimulacion.setHorizontalGroup(
-                gl_panelContenedorSimulacion.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panelContenedorSimulacion.createSequentialGroup()
-                                .addComponent(panelAsociados, GroupLayout.PREFERRED_SIZE, 454, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(panelDerecha, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE))
-        );
-        gl_panelContenedorSimulacion.setVerticalGroup(
-                gl_panelContenedorSimulacion.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(gl_panelContenedorSimulacion.createSequentialGroup()
-                                .addGroup(gl_panelContenedorSimulacion.createParallelGroup(Alignment.TRAILING)
-                                        .addComponent(panelDerecha, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
-                                        .addComponent(panelAsociados, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
-        );
-        panelAsociados.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panelEstadoOperario = new JPanel();
+        FlowLayout fl_panelEstadoOperario = (FlowLayout) panelEstadoOperario.getLayout();
+        fl_panelEstadoOperario.setHgap(80);
+        panelIzquierda.add(panelEstadoOperario);
 
-        panelNorEste = new JPanel();
+        panelEstadoAmbulancia = new JPanel();
+        panelIzquierda.add(panelEstadoAmbulancia);
 
-        panelSurEste = new JPanel();
-        GroupLayout gl_panelDerecha = new GroupLayout(panelDerecha);
-        gl_panelDerecha.setHorizontalGroup(
-                gl_panelDerecha.createParallelGroup(Alignment.LEADING)
-                        .addGroup(Alignment.TRAILING, gl_panelDerecha.createSequentialGroup()
-                                .addGroup(gl_panelDerecha.createParallelGroup(Alignment.TRAILING)
-                                        .addComponent(panelSurEste, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                                        .addComponent(panelNorEste, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
-                                .addContainerGap())
-        );
-        gl_panelDerecha.setVerticalGroup(
-                gl_panelDerecha.createParallelGroup(Alignment.LEADING)
-                        .addGroup(Alignment.TRAILING, gl_panelDerecha.createSequentialGroup()
-                                .addComponent(panelSurEste, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(panelNorEste, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-        );
-        panelDerecha.setLayout(gl_panelDerecha);
-        panelContenedorSimulacion.setLayout(gl_panelContenedorSimulacion);
+        scrollPaneAsociados = new JScrollPane();
+        panelContenedorSimulacion.add(scrollPaneAsociados, BorderLayout.CENTER);
+
+        panelCentralAsociados = new JPanel();
+        scrollPaneAsociados.setViewportView(panelCentralAsociados);
+        panelCentralAsociados.setLayout(new GridLayout(0, 5, 6, 6));
         tabbedPane.setEnabledAt(tabbedPane.indexOfTab("Simulacion"), false);
 
 
@@ -285,6 +262,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         if (!tieneActionListener) {
             this.btnAgregar.addActionListener(actionListener);
             this.btnComenzar.addActionListener(actionListener);
+            this.btnOperario.addActionListener(actionListener);
             this.btnCargar.addActionListener(actionListener);
             this.btnEliminar.addActionListener(actionListener);
             this.btnGuardarDatos.addActionListener(actionListener);
@@ -299,11 +277,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         for (Asociado asociado : asociados) {
             if (asociado.getCantSolicitudes() > 0) {
                 PanelAsociado panelAux = new PanelAsociado(asociado);
-                this.panelAsociados.add(panelAux);
+                this.panelCentralAsociados.add(panelAux);
             }
         }
         PanelOperario panelOP = new PanelOperario(Clinica.getInstance().getOperario());
-        this.panelSurEste.add(panelOP);
+        this.panelEstadoOperario.add(panelOP);
 
     }
 

@@ -5,7 +5,11 @@ import modelo.ambulancia.Ambulancia;
 import java.util.Observable;
 
 public class Operario extends Observable implements Runnable {
-    private int cantSolicitud = 0;
+    public int getCantSolicitud() {
+        return cantSolicitud;
+    }
+
+    private int cantSolicitud;
     private Ambulancia ambulancia;
 
 
@@ -21,7 +25,7 @@ public class Operario extends Observable implements Runnable {
     @Override
     public void run() {
         if (this.cantSolicitud != 0)
-            for (int i = 1; i <= this.cantSolicitud; i++) {
+            for (int i = 0; i < this.cantSolicitud; i++) {
                 this.setChanged();
                 this.notifyObservers("intenta solicitar arreglo de Ambulancia");
                 this.ambulancia.repararAmbulancia(this);
@@ -31,7 +35,5 @@ public class Operario extends Observable implements Runnable {
                 this.ambulancia.terminarUso();
 
             }
-
-
     }
 }
