@@ -25,7 +25,7 @@ public class Clinica {
     private Set<Asociado> asociados = new HashSet<>();
     private PriorityQueue<Paciente> listaEspera = new PriorityQueue<Paciente>();
     private ArrayList<Paciente> pacientesEnAtencion = new ArrayList<Paciente>();
-    private Operario operario;
+    private Operario operario = new Operario(Ambulancia.get_instance(), 0);
 
 
     public Set<Medico> getMedicos() {
@@ -53,6 +53,7 @@ public class Clinica {
 //        pacientesEnAtencion = new ArrayList<>();
 //    }
     private Clinica() {
+
     }
 
     //    /**

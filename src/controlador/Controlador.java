@@ -51,10 +51,7 @@ public class Controlador implements ActionListener {
             this.vista.actualizaLista(vista.getAsociadoSelected());
 
         } else if (accion.equalsIgnoreCase("CONFIGURAR")) {
-            if (clinica.getOperario() == null)
-                clinica.setOperario(vista.getCantLlamadas());
-            else
-                clinica.getOperario().setCantSolicitud(vista.getCantLlamadas());
+            clinica.getOperario().setCantSolicitud(vista.getCantLlamadas());
         } else if (accion.equalsIgnoreCase("GUARDAR")) {
             //SERIALIZACION
         } else if (accion.equalsIgnoreCase("CARGAR")) {
