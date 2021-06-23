@@ -12,7 +12,7 @@ import javax.swing.DefaultListSelectionModel;
 
 import java.awt.event.*;
 
-import modelo.usuarios.Operario;
+import modelo.usuarios.Asociado;
 
 public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyListener, ListSelectionListener {
 	private static boolean tieneActionListener = false;
@@ -54,8 +54,8 @@ public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyL
 	private JPanel panelOeste;
 	private JLabel lblListaAsociados;
 	private JScrollPane scrollPane;
-	private JList<Operario> listAsociados;
-	private DefaultListModel<Operario> modeloLista= new DefaultListModel<Operario>();
+	private JList<Asociado> listAsociados;
+	private DefaultListModel<Asociado> modeloLista= new DefaultListModel<Asociado>();
 	private JTabbedPane tabbedPane;
 	private JPanel panelContenedorSimulacion;
 
@@ -80,7 +80,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyL
 		scrollPane = new JScrollPane();
 		panelOeste.add(scrollPane, BorderLayout.CENTER);
 		
-		listAsociados = new JList<Operario>();
+		listAsociados = new JList<Asociado>();
 		listAsociados.setModel(modeloLista);
 		listAsociados.addListSelectionListener(this);
 		listAsociados.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
@@ -274,7 +274,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyL
 	}
 
 	@Override
-	public void actualizaLista(Operario asociado) {
+	public void actualizaLista(Asociado asociado) {
 		if (!this.modeloLista.contains(asociado)) {
 			this.modeloLista.addElement(asociado);
 			this.btnComenzar.setEnabled(true);
@@ -338,7 +338,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyL
 		setVisible(cond);
 	}
 
-	public Operario getAsociadoSelected(){
+	public Asociado getAsociadoSelected(){
 		return this.listAsociados.getSelectedValue();
 	}
 

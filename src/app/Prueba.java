@@ -12,7 +12,7 @@ import modelo.exceptions.FechaInvalidaException;
 import modelo.exceptions.PacienteInvalidoException;
 import modelo.lugares.HabPrivada;
 import modelo.lugares.Habitacion;
-import modelo.usuarios.Operario;
+import modelo.usuarios.Asociado;
 import modelo.usuarios.Medico;
 import modelo.usuarios.Paciente;
 import vista.IVista;

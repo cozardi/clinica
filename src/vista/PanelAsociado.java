@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
-import modelo.usuarios.Operario;
+import modelo.usuarios.Asociado;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,12 +19,12 @@ import javax.swing.border.TitledBorder;
 public class PanelAsociado extends JPanel implements Observer {
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
-	private Operario asociado;
+	private Asociado asociado;
 	
 	/**
 	 * Create the panel.
 	 */
-	public PanelAsociado(Operario asociado) {
+	public PanelAsociado(Asociado asociado) {
 		setPreferredSize(new Dimension(300, 300));
     	setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), asociado.getNombre(), TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
     	setLayout(new BorderLayout(0, 0));
@@ -42,7 +42,7 @@ public class PanelAsociado extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		Operario asociado = (Operario) o;
+		Asociado asociado = (Asociado) o;
 		if (this.asociado == asociado) {
 			this.textArea.append(asociado.getNombre()+' '+ arg);
 		}
