@@ -45,16 +45,16 @@ public class Asociado extends Observable implements Runnable {
         Random r = new Random();
         this.setChanged();
         if (r.nextBoolean()) {
-            this.notifyObservers(this.nombre + " intenta solicitar atencion a Domicilio");
+            this.notifyObservers("intenta solicitar atencion a Domicilio");
             this.ambulancia.solicitaAtencionDomicilio(this);
 
         } else {
-            this.notifyObservers(this.nombre + " intenta solicitar atencion a Domicilio");
+            this.notifyObservers("intenta solicitar atencion a Domicilio");
             this.ambulancia.solicitaTraslado(this);
         }
         Util.espera(1000);
         this.setChanged();
-        this.notifyObservers(this.nombre + " solicito correctamente");
+        this.notifyObservers("solicito correctamente");
 
     }
 
@@ -66,7 +66,7 @@ public class Asociado extends Observable implements Runnable {
                 this.ambulancia.terminarUso();
                 this.ambulancia.terminarUso();
                 this.setChanged();
-                this.notifyObservers(this.nombre + " termino de usar la ambulancia");
+                this.notifyObservers("termino de usar la ambulancia");
             }
     }
 

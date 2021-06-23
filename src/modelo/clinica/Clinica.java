@@ -166,6 +166,10 @@ public class Clinica {
         return this.operario;
     }
 
+    public Set<Asociado> getAsociados() {
+        return asociados;
+    }
+
     /**
      * Ingresa el paciente a la Clinica y lo deriva a la sala de espera. En caso de
      * no poder crearlo informa el error con un mensaje.

@@ -23,10 +23,10 @@ public class Operario extends Observable implements Runnable {
         if (this.cantSolicitud != 0)
             for (int i = 1; i <= this.cantSolicitud; i++) {
                 this.setChanged();
-                this.notifyObservers(" intenta solicitar arreglo de Ambulancia");
+                this.notifyObservers("intenta solicitar arreglo de Ambulancia");
                 this.ambulancia.repararAmbulancia(this);
                 this.setChanged();
-                this.notifyObservers(" pudo solicitar arreglo de Ambulancia");
+                this.notifyObservers("pudo solicitar arreglo de Ambulancia");
                 this.ambulancia.terminarUso();
                 this.ambulancia.terminarUso();
 

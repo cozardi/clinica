@@ -17,6 +17,7 @@ import modelo.usuarios.Medico;
 import modelo.usuarios.Paciente;
 import vista.IVista;
 import vista.IVistaFactura;
+import vista.IVistaSimulacion;
 import vista.VentanaInicio;
 
 public class Prueba {
@@ -26,7 +27,7 @@ public class Prueba {
 
         IVista ventanaInicio = new VentanaInicio();
         IVistaFactura ventanaFactura = (IVistaFactura) ventanaInicio;
-        Controlador controlador = new Controlador(ventanaInicio, ventanaFactura);
+        Controlador controlador = new Controlador(ventanaInicio, ventanaFactura, (IVistaSimulacion) ventanaInicio);
 
         // Creamos la Clinica
         Clinica clinica = Clinica.getInstance();
