@@ -350,10 +350,10 @@ public class Clinica {
 
     public void simulacion() {
         Thread op = new Thread(this.operario);
-        op.start();
         for (Asociado asociado : this.asociados) {
             Thread h = new Thread(asociado);
             h.start();
         }
+        op.start();
     }
 }

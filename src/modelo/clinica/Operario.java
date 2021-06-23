@@ -33,6 +33,8 @@ public class Operario extends Observable implements Runnable {
                 this.notifyObservers("pudo solicitar arreglo de Ambulancia");
                 this.ambulancia.terminarUso();
                 this.ambulancia.terminarUso();
+                this.setChanged();
+                this.notifyObservers("Termino de usar la ambulancia");
 
             }
     }
