@@ -167,11 +167,14 @@ public class VentanaInicio extends JFrame implements IVista, IVistaFactura ,KeyL
 		
 		panelDni = new JPanel();
 		panelEste.add(panelDni);
+		panelDni.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		lblDni = new JLabel("Dni:");
+		lblDni.setHorizontalAlignment(SwingConstants.CENTER);
 		panelDni.add(lblDni);
 		
 		textFieldDni = new JTextField();
+		textFieldDni.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldDni.setColumns(10);
 		this.textFieldDni.addKeyListener(this);
 		panelDni.add(textFieldDni);

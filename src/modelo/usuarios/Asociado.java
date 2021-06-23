@@ -1,7 +1,6 @@
 package modelo.usuarios;
 
 import modelo.ambulancia.Ambulancia;
-import modelo.ambulancia.DisponibleState;
 import modelo.util.Util;
 
 import java.util.Objects;

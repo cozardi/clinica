@@ -1,8 +1,8 @@
 package modelo.ambulancia;
 
+
 import modelo.clinica.Operario;
 import modelo.usuarios.Asociado;
-import modelo.util.Util;
 
 import java.util.Observable;
 
