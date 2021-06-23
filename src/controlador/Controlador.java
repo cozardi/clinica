@@ -4,7 +4,7 @@ import modelo.ambulancia.Ambulancia;
 import modelo.clinica.Clinica;
 import modelo.exceptions.NoExisteAsociadoException;
 import modelo.exceptions.YaExisteAsociadoException;
-import modelo.usuarios.Asociado;
+import modelo.usuarios.Operario;
 import vista.IVista;
 import vista.IVistaFactura;
 //import vista.VentanaFactura;
@@ -33,7 +33,7 @@ public class Controlador implements ActionListener {
 	Clinica clinica = Clinica.getInstance();
 		if (accion.equalsIgnoreCase("AGREGAR")) {
 			try {
-				Asociado asociado = new Asociado(vista.getDni(),vista.getNombre()+' '+ vista.getApellido(),vista.getDomicilio(),vista.getTelefono(),vista.getCantLlamadas(),Ambulancia.get_instance());
+				Operario asociado = new Operario(vista.getDni(),vista.getNombre()+' '+ vista.getApellido(),vista.getDomicilio(),vista.getTelefono(),vista.getCantLlamadas(),Ambulancia.get_instance());
 				clinica.addAsociado(asociado);
 				vista.actualizaLista(asociado);
 			} catch (YaExisteAsociadoException ex) {

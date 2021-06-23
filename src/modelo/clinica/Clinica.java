@@ -22,7 +22,7 @@ public class Clinica {
 
     private Set<Medico> medicos = new TreeSet<>();
     private Set<Paciente> pacientes = new TreeSet<>();
-    private Set<Asociado> asociados = new HashSet<>();
+    private Set<Operario> asociados = new HashSet<>();
     private PriorityQueue<Paciente> listaEspera = new PriorityQueue<Paciente>();
     private ArrayList<Paciente> pacientesEnAtencion = new ArrayList<Paciente>();
     private Operario operario;
@@ -142,7 +142,7 @@ public class Clinica {
      * @param asociado
      * @throws YaExisteAsociadoException El controlador recibe esta excepción y delega a la vista la solución.
      */
-    public void addAsociado(Asociado asociado) throws YaExisteAsociadoException {
+    public void addAsociado(Operario asociado) throws YaExisteAsociadoException {
         if (!this.asociados.add(asociado))
             throw new YaExisteAsociadoException("El Asociado ingresado ya existe");
     }
@@ -150,7 +150,7 @@ public class Clinica {
     /**
      * @param asociado
      */
-    public void eliminaAsociado(Asociado asociado) throws NoExisteAsociadoException {
+    public void eliminaAsociado(Operario asociado) throws NoExisteAsociadoException {
         if (!this.asociados.remove(asociado))
             throw new NoExisteAsociadoException("El asociado no existe");
     }
@@ -346,7 +346,7 @@ public class Clinica {
     public void simulacion() {
         Thread op = new Thread(this.operario);
         op.start();
-        for (Asociado asociado : this.asociados) {
+        for (Operario asociado : this.asociados) {
             Thread h = new Thread(asociado);
             h.start();
         }

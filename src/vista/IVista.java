@@ -2,12 +2,12 @@ package vista;
 
 import java.awt.event.ActionListener;
 
-import modelo.usuarios.Asociado;
+import modelo.usuarios.Operario;
 
 
 public interface IVista {
 	void addActionListener(ActionListener actionListener);
-	void actualizaLista(Asociado asociado);
+	void actualizaLista(Operario asociado);
 	void activaSimulacion();
 	String getNombre();
 	String getApellido();
@@ -16,7 +16,7 @@ public interface IVista {
 	String getTelefono();
 	int getCantLlamadas();
 	void Visible(boolean cond);
-	Asociado getAsociadoSelected();
+	Operario getAsociadoSelected();
 
 
 	}

@@ -8,12 +8,12 @@ import java.util.Objects;
 import java.util.Observable;
 import java.util.Random;
 
-public class Asociado extends Observable implements Runnable {
+public class Operario extends Observable implements Runnable {
     private String dni, nombre, domicilio, telefono;
     private int cantSolicitudes;
     private Ambulancia ambulancia;
 
-    public Asociado(String dni, String nombre, String domicilio, String telefono, int cantSolicitudes, Ambulancia ambulancia) {
+    public Operario(String dni, String nombre, String domicilio, String telefono, int cantSolicitudes, Ambulancia ambulancia) {
         this.dni = dni;
         this.nombre = nombre;
         this.domicilio = domicilio;
@@ -75,7 +75,7 @@ public class Asociado extends Observable implements Runnable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Asociado asociado = (Asociado) o;
+        Operario asociado = (Operario) o;
         return Objects.equals(dni, asociado.dni);
     }
 

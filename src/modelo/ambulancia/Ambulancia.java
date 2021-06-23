@@ -1,7 +1,7 @@
 package modelo.ambulancia;
 
 import modelo.clinica.Operario;
-import modelo.usuarios.Asociado;
+import modelo.usuarios.Operario;
 import modelo.util.Util;
 
 import java.util.Observable;
@@ -40,7 +40,7 @@ public class Ambulancia extends Observable {
         this.estado = estado;
     }
 
-    public synchronized void solicitaAtencionDomicilio(Asociado asociado) {
+    public synchronized void solicitaAtencionDomicilio(Operario asociado) {
         while (!isDisponibleAtencionDomicilio) {
             try {
                 wait();
@@ -54,7 +54,7 @@ public class Ambulancia extends Observable {
         notifyAll();
     }
 
-    public synchronized void solicitaTraslado(Asociado asociado) {
+    public synchronized void solicitaTraslado(Operario asociado) {
         while (!isDisponibleTraslado) {
             try {
                 wait();
