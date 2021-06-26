@@ -9,6 +9,9 @@ import modelo.lugares.Habitacion;
 import modelo.usuarios.Medico;
 import modelo.usuarios.Paciente;
 
+import javax.swing.table.TableModel;
+import javax.swing.table.TableStringConverter;
+
 /**
  * Esta clase brinda informacion sobre el transcurso del paciente en la Clinica
  * 
@@ -36,9 +39,12 @@ public class Factura {
 	/**
 	 * Imprime la modelo.factura con los datos de Prestacion, Valor, Cantidad, Subtotal
 	 * Post: Imprime en formato de tabla la informacion
+	 * @return
 	 */
-	public void ImprimeFactura() {
-		System.out.print("\nFactura numero: " + numFactura + "\n");
+	public StringBuilder ImprimeFactura() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\nFactura numero: " + numFactura + "\n");
 
 		int contadorDatos = 0;
 
@@ -77,14 +83,16 @@ public class Factura {
 			contadorDatos++;
 		}
 
-		System.out.format("%25s | %11s | %8s | %7s%n", "Prestacion", "Valor", "Cantidad", "Subtotal");
+		sb.append(String.format("%25s | %25s | %8s | %7s\n", "Prestacion", "Valor", "Cantidad", "Subtotal"));
 
 		for (final Object[] entrada : datos) {
-			System.out.format("%25s | $%10.2f | %8d | $%7.2f%n", entrada);
+			sb.append(String.format("%25s | $%15.2f | %8d | $%7.2f\n", entrada));
 		}
 
-		System.out.format("\nTotal: $%8.2f%n", costoTotal);
+		sb.append(String.format("\nTotal: $%8.2f\n", costoTotal));
 
+
+		return sb;
 	}
 
 	public GregorianCalendar getFecha() {

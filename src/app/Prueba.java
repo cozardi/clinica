@@ -36,7 +36,9 @@ public class Prueba {
         } catch (IOException | ClassNotFoundException ioException) {
             ioException.printStackTrace();
         }
+
         IVista ventanaInicio = new VentanaInicio();
+        ventanaInicio.actualizaLista(Clinica.getInstance().getAsociados());
         IVistaFactura ventanaFactura = (IVistaFactura) ventanaInicio;
         Controlador controlador = new Controlador(ventanaInicio, ventanaFactura, (IVistaSimulacion) ventanaInicio);
 
@@ -59,6 +61,9 @@ public class Prueba {
         clinica.ingresaPaciente("7561238", "Colon 1239", "Mar del plata", "6873213", "Agustin Adan", "Nino");
         clinica.ingresaPaciente("1354314", "Buenos Aires 1239", "Mar del plata", "2234564687",
                 "Richard Palomo", "Joven");
+
+        ventanaFactura.actualizaListaPacientes();
+
         // Ingreso del paciente a la modelo.clinica
 
         System.out.println("PACIENTES");
@@ -90,22 +95,18 @@ public class Prueba {
             e1.printStackTrace();
         }
 
+/*
         try {
-            clinica.imprimeFacturaDePaciente(pacientePrueba, new GregorianCalendar(2021, 5, 14));
+            System.out.println(clinica.imprimeFacturaDePaciente(pacientePrueba, new GregorianCalendar(2021, 5, 14)));
         } catch (PacienteInvalidoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+*/
 
-        System.out.println("********************************");
 
-        try {
-            clinica.buscaMedico(1408).muestraReporte(new GregorianCalendar(2021, 5, 13),
-                    new GregorianCalendar(2021, 5, 16));
-        } catch (FechaInvalidaException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
+
 
 
 //        ObserverAmbulanciaPrueba observerAmbulanciaPrueba = new ObserverAmbulanciaPrueba(Ambulancia.get_instance());

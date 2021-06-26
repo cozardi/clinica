@@ -92,4 +92,8 @@ public abstract class Paciente extends Usuarios implements Priorizable {
 		consultas.clear();
 	}
 
+	@Override
+	public String toString() {
+		return nombre + ", DNI: " + dni;
+	}
 }

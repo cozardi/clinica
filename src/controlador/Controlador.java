@@ -2,7 +2,9 @@ package controlador;
 
 import modelo.ambulancia.Ambulancia;
 import modelo.clinica.Clinica;
+import modelo.exceptions.FechaInvalidaException;
 import modelo.exceptions.NoExisteAsociadoException;
+import modelo.exceptions.PacienteInvalidoException;
 import modelo.exceptions.YaExisteAsociadoException;
 import modelo.usuarios.Asociado;
 import persistencia.*;
@@ -20,6 +22,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 
 public class Controlador implements ActionListener, WindowListener {
     private IVista vista = null;
@@ -69,8 +72,15 @@ public class Controlador implements ActionListener, WindowListener {
             this.vista.activaSimulacion();
             this.vistaSimulacion.cargaPaneles(Clinica.getInstance().getAsociados());
             Clinica.getInstance().simulacion();
-        } else if (accion.equalsIgnoreCase("TERMINAR")) {
+        } else if (accion.equalsIgnoreCase("GENERAR")) {
+            try {
+                StringBuilder sb = Clinica.getInstance().imprimeFacturaDePaciente(this.vistaFactura.getPacienteSelected(),new GregorianCalendar());
+                this.vistaFactura.muestraFactura(sb);
 
+
+            } catch (PacienteInvalidoException pacienteInvalidoException) {
+                pacienteInvalidoException.printStackTrace();
+            }
         }
 
 
@@ -91,6 +101,14 @@ public class Controlador implements ActionListener, WindowListener {
             persistencia.cerrarOutput();
         } catch (IOException ioException) {
             ioException.printStackTrace();
+        }
+
+        try {
+            Clinica.getInstance().buscaMedico(1408).muestraReporte(new GregorianCalendar(2021, 5, 13),
+                    new GregorianCalendar(2021, 5, 16));
+        } catch (FechaInvalidaException ex) {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
         }
 
     }
