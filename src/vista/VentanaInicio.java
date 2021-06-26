@@ -11,10 +11,19 @@ import javax.swing.DefaultListSelectionModel;
 
 
 import java.awt.event.*;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
+import modelo.ambulancia.Ambulancia;
 import modelo.clinica.Clinica;
 import modelo.usuarios.Asociado;
+import persistencia.ClinicaDTO;
+import persistencia.IPersistencia;
+import persistencia.PersistenciaBIN;
+import persistencia.UtilsDTO;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -68,6 +77,8 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     private JPanel panelCentralAsociados;
     private JPanel panelEstadoOperario;
     private JPanel panelEstadoAmbulancia;
+    private static String nombreArchivo = "datos.bin";
+
 
     public VentanaInicio() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -252,9 +263,42 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         scrollPaneAsociados.setViewportView(panelCentralAsociados);
         panelCentralAsociados.setLayout(new GridLayout(0, 5, 6, 6));
         tabbedPane.setEnabledAt(tabbedPane.indexOfTab("Simulacion"), false);
-
-
         this.setVisible(true);
+//        this.addWindowListener(new WindowAdapter() {
+//            private IPersistencia<Serializable> persistencia = new PersistenciaBIN();
+//
+//            @Override
+//            public void windowOpened(WindowEvent e) {
+//                System.out.println("HOlaaa");
+//        try {
+//            this.persistencia.abrirInput(nombreArchivo);
+//            UtilsDTO.ClinicaDTOAClinica((ClinicaDTO) this.persistencia.cargar(), Ambulancia.get_instance());
+//            //borrar
+//            HashSet<Asociado> hash = (HashSet<Asociado>) Clinica.getInstance().getAsociados();
+//            System.out.println("Tamaño" + hash.size());
+//            //borrar
+//            this.persistencia.cerrarInput();
+//        } catch (IOException | ClassNotFoundException ioException) {
+//            ioException.printStackTrace();
+//        }
+//
+//            }
+//
+//            @Override
+//            public void windowClosing(WindowEvent e) {
+//
+//                System.out.println("HOlaaa2222");
+//                try {
+//                    this.persistencia.abrirOutput(nombreArchivo);
+//                    ClinicaDTO clinicaDto = UtilsDTO.ClinicaAClinicaDTO(Clinica.getInstance());
+//                    this.persistencia.guardar(clinicaDto);
+//                    this.persistencia.cerrarOutput();
+//                } catch (IOException ioException) {
+//                    ioException.printStackTrace();
+//                }
+//
+//            }
+//        });
     }
 
     @Override
@@ -293,6 +337,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     public void keyPressed(KeyEvent e) {
     }
 
+    @Override
     public void keyReleased(KeyEvent arg0) {
         int solicitudes = -1;
         String nombre = "";
@@ -317,6 +362,27 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     }
 
     @Override
+    public void actualizaLista(Set<Asociado> asociados) {
+        Iterator<Asociado> it = asociados.iterator();
+        Asociado asociado;
+
+        while (it.hasNext()) {
+            System.out.println("ENTRAMOS");
+            asociado = it.next();
+            if (!this.modeloLista.contains(asociado)) {
+                this.modeloLista.addElement(asociado);
+                this.btnComenzar.setEnabled(true);
+                this.setTextField();
+            } else {
+                this.modeloLista.remove(this.modeloLista.indexOf(asociado));
+                if (this.modeloLista.isEmpty())
+                    this.btnComenzar.setEnabled(false);
+            }
+            listAsociados.clearSelection();
+        }
+    }
+
+    @Override
     public void actualizaLista(Asociado asociado) {
         if (!this.modeloLista.contains(asociado)) {
             this.modeloLista.addElement(asociado);
@@ -329,6 +395,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         }
         listAsociados.clearSelection();
     }
+
 
     @Override
     public void activaSimulacion() {
@@ -389,4 +456,6 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     public void valueChanged(ListSelectionEvent e) {
         this.btnEliminar.setEnabled(!this.listAsociados.isSelectionEmpty());
     }
+
+
 }

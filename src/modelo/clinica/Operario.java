@@ -4,6 +4,9 @@ import modelo.ambulancia.Ambulancia;
 
 import java.util.Observable;
 
+/**
+ * Clase operario, clase utilzada para la simulacion. Representa a quien
+ */
 public class Operario extends Observable implements Runnable {
     public int getCantSolicitud() {
         return cantSolicitud;

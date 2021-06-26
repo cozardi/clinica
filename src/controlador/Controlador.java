@@ -5,6 +5,7 @@ import modelo.clinica.Clinica;
 import modelo.exceptions.NoExisteAsociadoException;
 import modelo.exceptions.YaExisteAsociadoException;
 import modelo.usuarios.Asociado;
+import persistencia.*;
 import vista.IVista;
 import vista.IVistaFactura;
 import vista.IVistaSimulacion;
@@ -15,8 +16,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.IOException;
+import java.io.Serializable;
 
-public class Controlador implements ActionListener {
+public class Controlador implements ActionListener, WindowListener {
     private IVista vista = null;
     private IVistaSimulacion vistaSimulacion;
     private IVistaFactura vistaFactura;
@@ -28,6 +33,9 @@ public class Controlador implements ActionListener {
         this.vistaFactura.addActionListener(this);
         this.vistaSimulacion = ventanaSimulacion;
         this.vistaSimulacion.addActionListener(this);
+        this.vista.addWindowListener(this);
+        this.vista.actualizaLista(Clinica.getInstance().getAsociados());
+
     }
 
     @Override
@@ -65,6 +73,51 @@ public class Controlador implements ActionListener {
 
         }
 
+
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        IPersistencia persistencia = new PersistenciaXML();
+        try {
+            persistencia.abrirOutput("datos.xml");
+            ClinicaDTO clinicaDto = UtilsDTO.ClinicaAClinicaDTO(Clinica.getInstance());
+            persistencia.guardar(clinicaDto);
+            persistencia.cerrarOutput();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+    }
+
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
 
     }
 }

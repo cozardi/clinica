@@ -1,6 +1,9 @@
 package app;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -15,6 +18,7 @@ import modelo.lugares.Habitacion;
 import modelo.usuarios.Asociado;
 import modelo.usuarios.Medico;
 import modelo.usuarios.Paciente;
+import persistencia.*;
 import vista.IVista;
 import vista.IVistaFactura;
 import vista.IVistaSimulacion;
@@ -23,8 +27,19 @@ import vista.VentanaInicio;
 public class Prueba {
 
     public static void main(String[] args) {
-
-
+        //IPersistencia<Serializable> persistencia = new PersistenciaBIN();
+        IPersistencia persistenciaMain = new PersistenciaXML();
+        try {
+            persistenciaMain.abrirInput("datos.xml");
+            UtilsDTO.ClinicaDTOAClinica((ClinicaDTO) persistenciaMain.cargar(), Ambulancia.get_instance());
+            //borrar
+            HashSet<Asociado> hash = (HashSet<Asociado>) Clinica.getInstance().getAsociados();
+            System.out.println("Tamaño" + hash.size());
+            //borrar
+            persistenciaMain.cerrarInput();
+        } catch (IOException | ClassNotFoundException ioException) {
+            ioException.printStackTrace();
+        }
         IVista ventanaInicio = new VentanaInicio();
         IVistaFactura ventanaFactura = (IVistaFactura) ventanaInicio;
         Controlador controlador = new Controlador(ventanaInicio, ventanaFactura, (IVistaSimulacion) ventanaInicio);
