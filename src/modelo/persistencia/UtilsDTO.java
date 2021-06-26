@@ -65,12 +65,16 @@ public class UtilsDTO {
 		return clinicaDTO;
 	}
 	
-	public static Clinica ClinicaDTOAClinica(ClinicaDTO clinDTO, Ambulancia amb)
+	public static void ClinicaDTOAClinica(ClinicaDTO clinDTO, Ambulancia amb)
 	{
-		Clinica clinicaNueva = new Clinica();
+		Set<Asociado> asociados = new HashSet<Asociado>();
+		for (int i = 0; i < clinDTO.getAsociadosDTO().size(); i++)
 		{
-			
+			asociados.add(UtilsDTO.AsociadoDTOAAsociado(clinDTO.getAsociadosDTO().get(i), amb));
 		}
+		
+		Clinica.getInstance().setAsociados(asociados);
+		Clinica.getInstance().setOperario(UtilsDTO.OperarioDTOAOperario(clinDTO.getOperarioDTO(), amb));
 	}
 
 }

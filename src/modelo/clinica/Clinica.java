@@ -32,7 +32,7 @@ public class Clinica {
         return medicos;
     }
 
-    public Set<Paciente> getPacientes() {
+	public Set<Paciente> getPacientes() {
         return pacientes;
     }
 
@@ -155,12 +155,22 @@ public class Clinica {
         if (!this.asociados.remove(asociado))
             throw new NoExisteAsociadoException("El asociado no existe");
     }
+    
 
+    public void setAsociados(Set<Asociado> asociados) {
+		this.asociados = asociados;
+	}
+    
     /**
      * @param cantSolicitudes
      */
     public void setOperario(int cantSolicitudes) {
         this.operario = new Operario(Ambulancia.get_instance(), cantSolicitudes);
+    }
+    
+    public void setOperario(Operario operario)
+    {
+    	this.operario = operario;
     }
 
     public Operario getOperario() {
