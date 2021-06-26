@@ -52,26 +52,19 @@ public class UtilsDTO {
         ArrayList<AsociadoDTO> asociadosDTO = new ArrayList<AsociadoDTO>();
         ArrayList<Asociado> asociados = new ArrayList<Asociado>(clinica.getAsociados());
 
-        for (int i = 0; i < asociados.size(); i++) {
-            System.out.println(asociados.get(i));
+        for (int i = 0; i < asociados.size(); i++)
             asociadosDTO.add(UtilsDTO.AsociadoAAsociadoDTO(asociados.get(i)));
-        }
 
-
-        System.out.println("Tamaño en ClinicaAClinicaDTO" + asociadosDTO.size());
-
+        clinicaDTO.setAsociadosDTO(asociadosDTO);
         clinicaDTO.setOperarioDTO(UtilsDTO.OperarioAOperarioDTO(clinica.getOperario()));
         return clinicaDTO;
     }
 
     public static void ClinicaDTOAClinica(ClinicaDTO clinDTO, Ambulancia amb) {
         Set<Asociado> asociados = new HashSet<Asociado>();
-        System.out.println("lo que llega" + clinDTO.getAsociadosDTO().size());
         for (int i = 0; i < clinDTO.getAsociadosDTO().size(); i++) {
             asociados.add(UtilsDTO.AsociadoDTOAAsociado(clinDTO.getAsociadosDTO().get(i), amb));
         }
-        System.out.println("tamañoclinicadtoooo" + asociados.size());
-
         Clinica.getInstance().setAsociados(asociados);
         Clinica.getInstance().setOperario(UtilsDTO.OperarioDTOAOperario(clinDTO.getOperarioDTO(), amb));
     }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ClinicaDTO implements Serializable {
 
     private ArrayList<AsociadoDTO> asociadosDTO = new ArrayList<AsociadoDTO>();
-    private OperarioDTO operario;
+    private OperarioDTO operarioDTO;
 
     public ClinicaDTO() {
     }
@@ -20,11 +20,11 @@ public class ClinicaDTO implements Serializable {
     }
 
     public OperarioDTO getOperarioDTO() {
-        return operario;
+        return operarioDTO;
     }
 
     public void setOperarioDTO(OperarioDTO operario) {
-        this.operario = operario;
+        this.operarioDTO = operario;
     }
 
 

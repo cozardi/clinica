@@ -83,9 +83,9 @@ public class Controlador implements ActionListener, WindowListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
-        IPersistencia persistencia = new PersistenciaXML();
+        IPersistencia<Serializable> persistencia = new PersistenciaBIN();
         try {
-            persistencia.abrirOutput("datos.xml");
+            persistencia.abrirOutput("datos.bin");
             ClinicaDTO clinicaDto = UtilsDTO.ClinicaAClinicaDTO(Clinica.getInstance());
             persistencia.guardar(clinicaDto);
             persistencia.cerrarOutput();

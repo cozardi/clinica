@@ -27,16 +27,12 @@ import vista.VentanaInicio;
 public class Prueba {
 
     public static void main(String[] args) {
-        //IPersistencia<Serializable> persistencia = new PersistenciaBIN();
-        IPersistencia persistenciaMain = new PersistenciaXML();
+        IPersistencia<Serializable> persistencia = new PersistenciaBIN();
+        //IPersistencia persistenciaMain = new PersistenciaXML();
         try {
-            persistenciaMain.abrirInput("datos.xml");
-            UtilsDTO.ClinicaDTOAClinica((ClinicaDTO) persistenciaMain.cargar(), Ambulancia.get_instance());
-            //borrar
-            HashSet<Asociado> hash = (HashSet<Asociado>) Clinica.getInstance().getAsociados();
-            System.out.println("Tamaño" + hash.size());
-            //borrar
-            persistenciaMain.cerrarInput();
+            persistencia.abrirInput("datos.bin");
+            UtilsDTO.ClinicaDTOAClinica((ClinicaDTO) persistencia.cargar(), Ambulancia.get_instance());
+            persistencia.cerrarInput();
         } catch (IOException | ClassNotFoundException ioException) {
             ioException.printStackTrace();
         }
