@@ -77,10 +77,10 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     private JScrollPane scrollPacientes;
     private JLabel lblNewLabel;
     private JPanel panel_FacturaCentro;
-    private JPanel panel_TextArea;
+    private JPanel panelBotonFactura;
     private JButton btnGenerar;
     private JTextArea textoFactura;
-    private JPanel panelBotonGenerar;
+    private JScrollPane scrollPaneFactura;
 
     public VentanaInicio() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -269,55 +269,26 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         this.scrollPacientes.setViewportView(this.listPacientes);
 
 
-
         this.lblNewLabel = new JLabel("Lista de Pacientes");
         this.scrollPacientes.setColumnHeaderView(this.lblNewLabel);
 
         this.panel_FacturaCentro = new JPanel();
         this.panelFacturas.add(this.panel_FacturaCentro, BorderLayout.CENTER);
-        GridBagLayout c_panelFacturaCentro = new GridBagLayout();
-        c_panelFacturaCentro.columnWidths = new int[] {0, 0};
-        c_panelFacturaCentro.rowHeights = new int[] {10, 150};
-        c_panelFacturaCentro.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-        c_panelFacturaCentro.rowWeights = new double[]{1.0, 0.0};
-        this.panel_FacturaCentro.setLayout(c_panelFacturaCentro);
+        panel_FacturaCentro.setLayout(new BorderLayout(0, 0));
 
-        this.panelBotonGenerar = new JPanel();
-        GridBagConstraints gbc_panelBotonGenerar = new GridBagConstraints();
-        gbc_panelBotonGenerar.fill = GridBagConstraints.BOTH;
-        gbc_panelBotonGenerar.insets = new Insets(0, 0, 5, 0);
-        gbc_panelBotonGenerar.gridx = 0;
-        gbc_panelBotonGenerar.gridy = 0;
-        this.panel_FacturaCentro.add(this.panelBotonGenerar, gbc_panelBotonGenerar);
-        GridBagLayout gbl_panelBotonGenerar = new GridBagLayout();
-        gbl_panelBotonGenerar.columnWidths = new int[]{0, 0};
-        gbl_panelBotonGenerar.rowHeights = new int[]{10, 0};
-        gbl_panelBotonGenerar.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-        gbl_panelBotonGenerar.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-        this.panelBotonGenerar.setLayout(gbl_panelBotonGenerar);
+        panelBotonFactura = new JPanel();
+        panel_FacturaCentro.add(panelBotonFactura, BorderLayout.NORTH);
 
-        this.btnGenerar = new JButton("Generar Factura");
-        GridBagConstraints gbc_btnGenerar = new GridBagConstraints();
-        gbc_btnGenerar.gridx = 0;
-        gbc_btnGenerar.gridy = 0;
-        this.panelBotonGenerar.add(this.btnGenerar, gbc_btnGenerar);
-        this.btnGenerar.setVerticalAlignment(SwingConstants.TOP);
-        this.btnGenerar.addActionListener(this);
-        this.btnGenerar.setEnabled(false);
-        this.btnGenerar.setActionCommand("GENERAR");
+        btnGenerar = new JButton("Generar Factura");
+        btnGenerar.setEnabled(false);
+        btnGenerar.setActionCommand("Generar");
+        panelBotonFactura.add(btnGenerar);
 
-        this.panel_TextArea = new JPanel();
-        GridBagConstraints gbc_panel_TextArea = new GridBagConstraints();
-        gbc_panel_TextArea.fill = GridBagConstraints.BOTH;
-        gbc_panel_TextArea.gridx = 0;
-        gbc_panel_TextArea.gridy = 1;
-        this.panel_FacturaCentro.add(this.panel_TextArea, gbc_panel_TextArea);
-        this.panel_TextArea.setLayout(new BorderLayout(0, 0));
-
-        this.textoFactura = new JTextArea();
-        this.textoFactura.setEditable(false);
-        this.panel_TextArea.add(this.textoFactura);
-
+        textoFactura = new JTextArea();
+        textoFactura.setEditable(false);
+        scrollPaneFactura = new JScrollPane(textoFactura);
+        panel_FacturaCentro.add(scrollPaneFactura, BorderLayout.SOUTH);
+        panel_FacturaCentro.add(scrollPaneFactura, BorderLayout.CENTER);
         this.setVisible(true);
     }
 
@@ -416,7 +387,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
 
     @Override
     public void actualizaListaPacientes() {
-        for (Paciente p : Clinica.getInstance().getPacientes()){
+        for (Paciente p : Clinica.getInstance().getPacientes()) {
             this.modeloPaciente.addElement(p);
         }
         this.listPacientes.clearSelection();
@@ -480,6 +451,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     @Override
     public void Visible(boolean cond) {
         setVisible(cond);
+    }
+
+    @Override
+    public void setConfigurarVisibilidad(boolean cond) {
+        this.btnComenzar.setEnabled(cond);
     }
 
     public Asociado getAsociadoSelected() {

@@ -37,7 +37,6 @@ public class Controlador implements ActionListener, WindowListener {
         this.vistaSimulacion = ventanaSimulacion;
         this.vistaSimulacion.addActionListener(this);
         this.vista.addWindowListener(this);
-        this.vista.actualizaLista(Clinica.getInstance().getAsociados());
 
     }
 
@@ -69,12 +68,14 @@ public class Controlador implements ActionListener, WindowListener {
         } else if (accion.equalsIgnoreCase("CARGAR")) {
             //CARGAR SERIAL
         } else if (accion.equalsIgnoreCase("COMENZAR")) {
+            this.vista.setConfigurarVisibilidad(false);
             this.vista.activaSimulacion();
             this.vistaSimulacion.cargaPaneles(Clinica.getInstance().getAsociados());
             Clinica.getInstance().simulacion();
+
         } else if (accion.equalsIgnoreCase("GENERAR")) {
             try {
-                StringBuilder sb = Clinica.getInstance().imprimeFacturaDePaciente(this.vistaFactura.getPacienteSelected(),new GregorianCalendar());
+                StringBuilder sb = Clinica.getInstance().imprimeFacturaDePaciente(this.vistaFactura.getPacienteSelected(), new GregorianCalendar());
                 this.vistaFactura.muestraFactura(sb);
 
 

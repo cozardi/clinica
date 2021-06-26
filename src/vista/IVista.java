@@ -30,6 +30,8 @@ public interface IVista {
 
     void Visible(boolean cond);
 
+    void setConfigurarVisibilidad(boolean cond);
+
     Asociado getAsociadoSelected();
 
     void addWindowListener(WindowListener windowListener);
