@@ -1,5 +1,9 @@
 package modelo.ambulancia;
 
+import vista.Recursos;
+
+import javax.swing.*;
+
 public class RegresandoClinicaState implements IState {
     private Ambulancia ambulancia;
 
@@ -17,7 +21,6 @@ public class RegresandoClinicaState implements IState {
 
     @Override
     public void solicitaTraslado() {
-        System.out.println("No es posible");
     }
 
     @Override
@@ -27,7 +30,11 @@ public class RegresandoClinicaState implements IState {
 
     @Override
     public void repararAmbulancia() {
-        System.out.println("No es posible");
+    }
+
+    @Override
+    public ImageIcon getFoto() {
+        return Recursos.REGRESANDO_CLINICA;
     }
 
     @Override

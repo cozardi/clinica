@@ -306,6 +306,8 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
 
     @Override
     public void cargaPaneles(Set<Asociado> asociados) {
+        PanelAmbulancia panelAM = new PanelAmbulancia(Ambulancia.get_instance());
+        this.panelEstadoAmbulancia.add(panelAM);
 
         for (Asociado asociado : asociados) {
             if (asociado.getCantSolicitudes() > 0) {
@@ -315,6 +317,8 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         }
         PanelOperario panelOP = new PanelOperario(Clinica.getInstance().getOperario());
         this.panelEstadoOperario.add(panelOP);
+
+
 
     }
 

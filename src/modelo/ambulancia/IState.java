@@ -1,5 +1,7 @@
 package modelo.ambulancia;
 
+import javax.swing.*;
+
 public interface IState {
     void solicitaAtencionDomicilio();
 
@@ -8,4 +10,6 @@ public interface IState {
     void vuelveClinica();
 
     void repararAmbulancia();
+
+    ImageIcon getFoto();
 }

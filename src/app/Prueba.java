@@ -19,10 +19,7 @@ import modelo.usuarios.Asociado;
 import modelo.usuarios.Medico;
 import modelo.usuarios.Paciente;
 import persistencia.*;
-import vista.IVista;
-import vista.IVistaFactura;
-import vista.IVistaSimulacion;
-import vista.VentanaInicio;
+import vista.*;
 
 public class Prueba {
 
@@ -94,6 +91,7 @@ public class Prueba {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
+
 
 /*
         try {

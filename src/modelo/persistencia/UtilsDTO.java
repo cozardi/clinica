@@ -8,6 +8,9 @@ import modelo.ambulancia.Ambulancia;
 import modelo.clinica.Clinica;
 import modelo.clinica.Operario;
 import modelo.usuarios.Asociado;
+import persistencia.AsociadoDTO;
+import persistencia.ClinicaDTO;
+import persistencia.OperarioDTO;
 
 public class UtilsDTO {
 	
