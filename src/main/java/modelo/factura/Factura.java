@@ -83,10 +83,10 @@ public class Factura {
 			contadorDatos++;
 		}
 
-		sb.append(String.format("%25s | %25s | %8s | %7s\n", "Prestacion", "Valor", "Cantidad", "Subtotal"));
+		sb.append(String.format("%25s \t| %20s \t| %10s \t| %10s \n", "Prestacion", "Valor", "Cantidad", "Subtotal"));
 
 		for (final Object[] entrada : datos) {
-			sb.append(String.format("%25s | $%15.2f | %8d | $%7.2f\n", entrada));
+			sb.append(String.format("%25s \t| $%15.2f \t| %10d \t| $%10.2f \n", entrada));
 		}
 
 		sb.append(String.format("\nTotal: $%8.2f\n", costoTotal));

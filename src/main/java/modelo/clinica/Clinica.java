@@ -12,7 +12,8 @@ import java.util.*;
 
 /**
  * Esta clase contiene la informacion de los medicos, los pacientes y donde se
- * encuentran los mismos
+ * encuentran los mismos. <br>
+ * Tambien contiene una lista de asociados, y el operario de la ambulancia .<br>
  */
 
 public class Clinica {
@@ -36,7 +37,7 @@ public class Clinica {
         return pacientes;
     }
 
-    //    /**
+//    /**
 //     * Constructor privado, es invocado por el metodo <i>getInstance</i>
 //     *
 //     * @param nombre    Representa el nombre de la modelo.clinica
@@ -149,29 +150,42 @@ public class Clinica {
     }
 
     /**
-     * @param asociado
+     * Elimina un determinado asociado de la lista de asociados. Si el asociado no existe,
+     * lanza una excepcion <br>
+     * <b>Pre:</b> El asociado pasado por parametro no debe ser nulo.
+     * <b>Post: </b> Si existe el asociado, lo elimina del Set de asociados.
+     * @param asociado Asociado de la clinica.
      */
     public void eliminaAsociado(Asociado asociado) throws NoExisteAsociadoException {
         if (!this.asociados.remove(asociado))
             throw new NoExisteAsociadoException("El asociado no existe");
     }
-    
 
+    /**
+     * Setea los asociados a partir de un set pasado por parametro<br>
+     * <b>Pre: </b> Debe existir la collecion pasada por parametro.
+     * <b>Post:</b> La clinica tiene una nueva lista de asociados.
+     * @param asociados
+     */
     public void setAsociados(Set<Asociado> asociados) {
-		this.asociados = asociados;
+        this.asociados = asociados;
 	}
     
     /**
-     * @param cantSolicitudes
+     * Crea el operario de la ambulancia.
+     * <b>Post: </b> La clinica tiene su operario asignado.
+     * @param cantSolicitudes Cantidad de solicitudes que tiene el operario.
      */
     public void setOperario(int cantSolicitudes) {
         this.operario = new Operario(Ambulancia.get_instance(), cantSolicitudes);
     }
-    
+
+
     public void setOperario(Operario operario)
     {
     	this.operario = operario;
     }
+
 
     public Operario getOperario() {
         return this.operario;
@@ -269,8 +283,8 @@ public class Clinica {
 
     /**
      * Agregamos una consulta al historial de consultas del paciente <br>
-     * Pre: El IMedico no debe ser null <br>
-     * Post: si encontro al paciente y se agrego con exito returna <i>true</i>, en caso contrario <i>false</i>
+     * <b>Pre:</b> El IMedico no debe ser null <br>
+     * <b>Post:</b> si encontro al paciente y se agrego con exito returna <i>true</i>, en caso contrario <i>false</i>
      *
      * @param numero El numero de paciente del
      * @param medico
@@ -332,14 +346,16 @@ public class Clinica {
     }
 
     /**
-     * Pre:El paciente y la fecha no deben ser null<br>
-     * Post:Muestra la tabla de la factura y tambien agrega la informacion necesaria
+     * Genera la factura del paciente, y la devuelve en un String Builder.
+     * <b>Pre:</b>El paciente y la fecha no deben ser null<br>
+     * <b>Post:</b>Muestra la tabla de la factura y tambien agrega la informacion necesaria
      * a los reportes de los medicos
      *
      * @param paciente
      * @param fecha
      * @throws PacienteInvalidoException
      */
+
     public StringBuilder imprimeFacturaDePaciente(Paciente paciente, GregorianCalendar fecha) throws PacienteInvalidoException {
 
 
@@ -359,6 +375,11 @@ public class Clinica {
         return sb;
     }
 
+    /**
+     * Crea los threads de los asociados y del operario. Recorre el Set de asociados
+     * y da la orden para que se inicien los hilos. <br>
+     * <b>Post:</b> Todos los hilos estan listos para su ejecucion.
+     */
     public void simulacion() {
         Thread op = new Thread(this.operario);
         for (Asociado asociado : this.asociados) {

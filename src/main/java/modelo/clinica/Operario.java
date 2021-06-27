@@ -6,9 +6,10 @@ import modelo.util.Util;
 import java.util.Observable;
 
 /**
- * Clase operario, clase utilzada para la simulacion. Representa a quien
+ * Clase operario, clase utilzada para la simulacion. Representa a quien es el encargado de reparar la ambulancia.
  */
 public class Operario extends Observable implements Runnable {
+
     public int getCantSolicitud() {
         return cantSolicitud;
     }
@@ -16,7 +17,12 @@ public class Operario extends Observable implements Runnable {
     private int cantSolicitud;
     private Ambulancia ambulancia;
 
-
+    /**
+     * Constructor con dos parametros. Uno para la cantidad de solicitudes, otro para la doble referencia
+     * con la ambulancia.
+     * @param ambulancia Referencia a la ambulancia de la clinica.
+     * @param cantSolicitud
+     */
     public Operario(Ambulancia ambulancia, int cantSolicitud) {
         this.ambulancia = ambulancia;
         this.cantSolicitud = cantSolicitud;
@@ -26,6 +32,11 @@ public class Operario extends Observable implements Runnable {
         this.cantSolicitud = cantSolicitud;
     }
 
+    /**
+     * Metodo run sobreescrito para el uso del operario.
+     * Se ejecutara el cuerpo siempre y cuando la cantidad de solicitudes sea distinta de 0. <br>
+     *
+     */
     @Override
     public void run() {
         if (this.cantSolicitud != 0)

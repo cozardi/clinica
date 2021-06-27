@@ -71,7 +71,7 @@ public class UtilsDTO {
 	 * Post: devuelve un Asociado con los datos de AsociadoDTO y asignado a la ambulancia dada
 	 * 
 	 * @param asocDTO clase para serializar Asociados
-	 * @param ambulancia ambulancia a asociar al Asociado que se devuelve
+	 * @param amb ambulancia a asociar al Asociado que se devuelve
 	 * 
 	 * @return un Asociado con los datos de AsociadoDTO y la ambulancia dada
 	 */
