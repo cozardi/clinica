@@ -25,6 +25,7 @@ import persistencia.ClinicaDTO;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaBIN;
 import persistencia.UtilsDTO;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, IVistaFactura, KeyListener, ListSelectionListener, ActionListener {
     private static boolean tieneActionListener = false;
@@ -248,7 +249,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         panelCentralAsociados = new JPanel();
         scrollPaneAsociados.setViewportView(panelCentralAsociados);
         panelCentralAsociados.setLayout(new GridLayout(0, 5, 6, 6));
-        tabbedPane.setEnabledAt(tabbedPane.indexOfTab("Simulacion"), false);
+        tabbedPane.setEnabledAt(1, false);
 
         this.panelFacturas = new JPanel();
         this.tabbedPane.addTab("Facturas", null, this.panelFacturas, null);
@@ -287,6 +288,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         textoFactura = new JTextArea();
         textoFactura.setEditable(false);
         scrollPaneFactura = new JScrollPane(textoFactura);
+        textoFactura.setColumns(3);
         panel_FacturaCentro.add(scrollPaneFactura, BorderLayout.SOUTH);
         panel_FacturaCentro.add(scrollPaneFactura, BorderLayout.CENTER);
         this.setVisible(true);
@@ -360,7 +362,6 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         Asociado asociado;
 
         while (it.hasNext()) {
-            System.out.println("ENTRAMOS");
             asociado = it.next();
             if (!this.modeloLista.contains(asociado)) {
                 this.modeloLista.addElement(asociado);
@@ -391,7 +392,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
 
     @Override
     public void actualizaListaPacientes() {
-        for (Paciente p : Clinica.getInstance().getPacientes()) {
+        for (Paciente p : Clinica.getInstance().getPacientes()){
             this.modeloPaciente.addElement(p);
         }
         this.listPacientes.clearSelection();
@@ -400,6 +401,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     @Override
     public void muestraFactura(StringBuilder sb) {
         this.textoFactura.append(sb.toString());
+    }
+
+    @Override
+    public void clearText() {
+        this.textoFactura.setText("");
     }
 
     @Override

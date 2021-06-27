@@ -11,8 +11,6 @@ import persistencia.*;
 import vista.IVista;
 import vista.IVistaFactura;
 import vista.IVistaSimulacion;
-//import vista.VentanaFactura;
-//import vista.VistaSimulacion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +27,14 @@ public class Controlador implements ActionListener, WindowListener {
     private IVistaSimulacion vistaSimulacion;
     private IVistaFactura vistaFactura;
 
+    /**
+     * Constructor del controlador. <br>
+     * <b>Pre:</b> Ningun parametro debe ser nulo. <br>
+     * <b>Post: </b> El controlador tiene las referencias a las ventanas creadas.
+     * @param ventanaInicio Es la ventana principal
+     * @param ventanaFactura Referencia a la ventana que se encarga de generar la factura de un paciente.
+     * @param ventanaSimulacion Referencia a la ventana encargada de realizar la simulacion del sistema de la ambulancia.
+     */
     public Controlador(IVista ventanaInicio, IVistaFactura ventanaFactura, IVistaSimulacion ventanaSimulacion) {
         this.vista = ventanaInicio;
         this.vista.addActionListener(this);
@@ -40,6 +46,13 @@ public class Controlador implements ActionListener, WindowListener {
 
     }
 
+    /**
+     * Metodo encargado de capturar los eventos que produce el usuario en la vista. <br>
+     * Recibe el evento y delega al modelo las acciones necesarias para cumplir la peticion.
+     * Luego de realizar esto, comunica a la vista los cambios que haya que hacer si es que son necesarios <br>
+     * @param e Evento realizado por el usuario, que contiene un comando asociado para identificarlo.<br>
+     *
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String accion = e.getActionCommand();
@@ -75,6 +88,7 @@ public class Controlador implements ActionListener, WindowListener {
 
         } else if (accion.equalsIgnoreCase("GENERAR")) {
             try {
+                this.vistaFactura.clearText();
                 StringBuilder sb = Clinica.getInstance().imprimeFacturaDePaciente(this.vistaFactura.getPacienteSelected(), new GregorianCalendar());
                 this.vistaFactura.muestraFactura(sb);
 
@@ -83,15 +97,31 @@ public class Controlador implements ActionListener, WindowListener {
                 pacienteInvalidoException.printStackTrace();
             }
         }
-
+        /*
+        Esta seccion seria la encargado de delegar al modelo la creacion del informe medico si se tuviera la ventana de Medico.
+        En la que mediante textfields ingresamos las fechas, y se selecciona el medico mediante una JList.
+        if (accion.equalsIgonerCase("REPORTE"){
+            try {
+                Clinica.getInstance().buscaMedico(1408).muestraReporte(new GregorianCalendar(2021, 5, 13),
+                        new GregorianCalendar(2021, 5, 16));
+            } catch (FechaInvalidaException ex) {
+                // TODO Auto-generated catch block
+                ex.printStackTrace();
+            }
+        }
+        */
 
     }
 
     @Override
     public void windowOpened(WindowEvent e) {
-
     }
 
+    /**
+     * Metodo que, al cerrar la ventana, realiza la persistencia de los datos <br>
+     * <b>Post:</b> Se genera un archivo ".bin" con los datos serializados. <br>
+     * @param e
+     */
     @Override
     public void windowClosing(WindowEvent e) {
         IPersistencia<Serializable> persistencia = new PersistenciaBIN();
@@ -102,14 +132,6 @@ public class Controlador implements ActionListener, WindowListener {
             persistencia.cerrarOutput();
         } catch (IOException ioException) {
             ioException.printStackTrace();
-        }
-
-        try {
-            Clinica.getInstance().buscaMedico(1408).muestraReporte(new GregorianCalendar(2021, 5, 13),
-                    new GregorianCalendar(2021, 5, 16));
-        } catch (FechaInvalidaException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
         }
 
     }
