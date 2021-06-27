@@ -333,19 +333,19 @@ public class Clinica {
 
     /**
      * Pre:El paciente y la fecha no deben ser null<br>
-     * Post:Muestra la tabla de la facura y tambien agrega la informacion necesaria
+     * Post:Muestra la tabla de la factura y tambien agrega la informacion necesaria
      * a los reportes de los medicos
      *
      * @param paciente
      * @param fecha
      * @throws PacienteInvalidoException
      */
-    public void imprimeFacturaDePaciente(Paciente paciente, GregorianCalendar fecha) throws PacienteInvalidoException {
+    public StringBuilder imprimeFacturaDePaciente(Paciente paciente, GregorianCalendar fecha) throws PacienteInvalidoException {
 
 
         Factura facturaNueva = new Factura(paciente, fecha);
 
-        facturaNueva.ImprimeFactura();
+        StringBuilder sb = facturaNueva.ImprimeFactura();
         // Por cada medico en el paciente
         Medico it2;
         Set<Medico> keys = paciente.getConsultas().keySet();
@@ -356,6 +356,7 @@ public class Clinica {
                     paciente.getConsultas().get(it2), it2.getHonorario() * paciente.getConsultas().get(it2)));
         }
         paciente.ReseteaPrestaciones();
+        return sb;
     }
 
     public void simulacion() {

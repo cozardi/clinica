@@ -1,10 +1,8 @@
-package modelo.persistencia;
+package persistencia;
 
 import java.io.IOException;
-import java.io.Serializable;
 
-public interface IPersistencia <E>
-{
+public interface IPersistencia<E> {
     void abrirInput(String nombre) throws IOException;
 
     void abrirOutput(String nombre) throws IOException;

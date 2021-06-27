@@ -11,15 +11,22 @@ import javax.swing.DefaultListSelectionModel;
 
 
 import java.awt.event.*;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
+import modelo.ambulancia.Ambulancia;
 import modelo.clinica.Clinica;
 import modelo.usuarios.Asociado;
+import modelo.usuarios.Paciente;
+import persistencia.ClinicaDTO;
+import persistencia.IPersistencia;
+import persistencia.PersistenciaBIN;
+import persistencia.UtilsDTO;
 
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
-public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, IVistaFactura, KeyListener, ListSelectionListener {
+public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, IVistaFactura, KeyListener, ListSelectionListener, ActionListener {
     private static boolean tieneActionListener = false;
     private JPanel contentPane;
     private JPanel panelContenedorAsociados;
@@ -30,11 +37,6 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     private JButton btnEliminar;
     private JPanel panelOperario;
     private JButton btnOperario;
-    private JPanel panelSerial;
-    private JPanel panelGuardar;
-    private JButton btnGuardarDatos;
-    private JPanel panelCargar;
-    private JButton btnCargar;
     private JPanel panelComenzar;
     private JButton btnComenzar;
     private JPanel panelEste;
@@ -68,6 +70,17 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     private JPanel panelCentralAsociados;
     private JPanel panelEstadoOperario;
     private JPanel panelEstadoAmbulancia;
+    private JPanel panelFacturas;
+    private JPanel panel_FacturaLista;
+    private JList<Paciente> listPacientes;
+    private DefaultListModel<Paciente> modeloPaciente = new DefaultListModel<Paciente>();
+    private JScrollPane scrollPacientes;
+    private JLabel lblNewLabel;
+    private JPanel panel_FacturaCentro;
+    private JPanel panelBotonFactura;
+    private JButton btnGenerar;
+    private JTextArea textoFactura;
+    private JScrollPane scrollPaneFactura;
 
     public VentanaInicio() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,11 +111,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
 
         panelCentral = new JPanel();
         panelContenedorAsociados.add(panelCentral);
-        panelCentral.setLayout(new GridLayout(5, 1, 0, 0));
+        panelCentral.setLayout(new GridLayout(4, 1, 0, 0));
 
         panelAgregar = new JPanel();
         panelCentral.add(panelAgregar);
-        panelAgregar.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panelAgregar.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         btnAgregar = new JButton("Agregar Asociado");
         btnAgregar.setActionCommand("Agregar");
@@ -124,22 +137,6 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         btnOperario.setActionCommand("Configurar");
         btnOperario.setEnabled(false);
         panelOperario.add(btnOperario);
-
-        panelSerial = new JPanel();
-        panelCentral.add(panelSerial);
-        panelSerial.setLayout(new GridLayout(1, 2, 0, 0));
-
-        panelGuardar = new JPanel();
-        panelSerial.add(panelGuardar);
-
-        btnGuardarDatos = new JButton("Guardar");
-        panelGuardar.add(btnGuardarDatos);
-
-        panelCargar = new JPanel();
-        panelSerial.add(panelCargar);
-
-        btnCargar = new JButton("Cargar ");
-        panelCargar.add(btnCargar);
 
         panelComenzar = new JPanel();
         panelCentral.add(panelComenzar);
@@ -253,7 +250,45 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         panelCentralAsociados.setLayout(new GridLayout(0, 5, 6, 6));
         tabbedPane.setEnabledAt(tabbedPane.indexOfTab("Simulacion"), false);
 
+        this.panelFacturas = new JPanel();
+        this.tabbedPane.addTab("Facturas", null, this.panelFacturas, null);
+        this.panelFacturas.setLayout(new BorderLayout(0, 0));
 
+        this.panel_FacturaLista = new JPanel();
+        this.panelFacturas.add(this.panel_FacturaLista, BorderLayout.NORTH);
+        this.panel_FacturaLista.setLayout(new BorderLayout(0, 0));
+
+        this.scrollPacientes = new JScrollPane();
+        this.panel_FacturaLista.add(this.scrollPacientes);
+
+        this.listPacientes = new JList<Paciente>();
+        this.listPacientes.setVisibleRowCount(7);
+        this.listPacientes.setModel(modeloPaciente);
+        this.listPacientes.addListSelectionListener(this);
+        this.listPacientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.scrollPacientes.setViewportView(this.listPacientes);
+
+
+        this.lblNewLabel = new JLabel("Lista de Pacientes");
+        this.scrollPacientes.setColumnHeaderView(this.lblNewLabel);
+
+        this.panel_FacturaCentro = new JPanel();
+        this.panelFacturas.add(this.panel_FacturaCentro, BorderLayout.CENTER);
+        panel_FacturaCentro.setLayout(new BorderLayout(0, 0));
+
+        panelBotonFactura = new JPanel();
+        panel_FacturaCentro.add(panelBotonFactura, BorderLayout.NORTH);
+
+        btnGenerar = new JButton("Generar Factura");
+        btnGenerar.setEnabled(false);
+        btnGenerar.setActionCommand("Generar");
+        panelBotonFactura.add(btnGenerar);
+
+        textoFactura = new JTextArea();
+        textoFactura.setEditable(false);
+        scrollPaneFactura = new JScrollPane(textoFactura);
+        panel_FacturaCentro.add(scrollPaneFactura, BorderLayout.SOUTH);
+        panel_FacturaCentro.add(scrollPaneFactura, BorderLayout.CENTER);
         this.setVisible(true);
     }
 
@@ -263,10 +298,8 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
             this.btnAgregar.addActionListener(actionListener);
             this.btnComenzar.addActionListener(actionListener);
             this.btnOperario.addActionListener(actionListener);
-            this.btnCargar.addActionListener(actionListener);
             this.btnEliminar.addActionListener(actionListener);
-            this.btnGuardarDatos.addActionListener(actionListener);
-            this.btnCargar.addActionListener(actionListener);
+            this.btnGenerar.addActionListener(actionListener);
             tieneActionListener = true;
         }
     }
@@ -293,6 +326,7 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     public void keyPressed(KeyEvent e) {
     }
 
+    @Override
     public void keyReleased(KeyEvent arg0) {
         int solicitudes = -1;
         String nombre = "";
@@ -317,6 +351,27 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     }
 
     @Override
+    public void actualizaLista(Set<Asociado> asociados) {
+        Iterator<Asociado> it = asociados.iterator();
+        Asociado asociado;
+
+        while (it.hasNext()) {
+            System.out.println("ENTRAMOS");
+            asociado = it.next();
+            if (!this.modeloLista.contains(asociado)) {
+                this.modeloLista.addElement(asociado);
+                this.btnComenzar.setEnabled(true);
+                this.setTextField();
+            } else {
+                this.modeloLista.remove(this.modeloLista.indexOf(asociado));
+                if (this.modeloLista.isEmpty())
+                    this.btnComenzar.setEnabled(false);
+            }
+            listAsociados.clearSelection();
+        }
+    }
+
+    @Override
     public void actualizaLista(Asociado asociado) {
         if (!this.modeloLista.contains(asociado)) {
             this.modeloLista.addElement(asociado);
@@ -328,6 +383,24 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
                 this.btnComenzar.setEnabled(false);
         }
         listAsociados.clearSelection();
+    }
+
+    @Override
+    public void actualizaListaPacientes() {
+        for (Paciente p : Clinica.getInstance().getPacientes()) {
+            this.modeloPaciente.addElement(p);
+        }
+        this.listPacientes.clearSelection();
+    }
+
+    @Override
+    public void muestraFactura(StringBuilder sb) {
+        this.textoFactura.append(sb.toString());
+    }
+
+    @Override
+    public Paciente getPacienteSelected() {
+        return this.listPacientes.getSelectedValue();
     }
 
     @Override
@@ -380,6 +453,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         setVisible(cond);
     }
 
+    @Override
+    public void setConfigurarVisibilidad(boolean cond) {
+        this.btnComenzar.setEnabled(cond);
+    }
+
     public Asociado getAsociadoSelected() {
         return this.listAsociados.getSelectedValue();
     }
@@ -388,5 +466,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     @Override
     public void valueChanged(ListSelectionEvent e) {
         this.btnEliminar.setEnabled(!this.listAsociados.isSelectionEmpty());
+        this.btnGenerar.setEnabled(!this.listPacientes.isSelectionEmpty());
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

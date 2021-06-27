@@ -1,6 +1,9 @@
 package app;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -15,6 +18,7 @@ import modelo.lugares.Habitacion;
 import modelo.usuarios.Asociado;
 import modelo.usuarios.Medico;
 import modelo.usuarios.Paciente;
+import persistencia.*;
 import vista.IVista;
 import vista.IVistaFactura;
 import vista.IVistaSimulacion;
@@ -23,9 +27,18 @@ import vista.VentanaInicio;
 public class Prueba {
 
     public static void main(String[] args) {
-
+        IPersistencia<Serializable> persistencia = new PersistenciaBIN();
+        //IPersistencia persistenciaMain = new PersistenciaXML();
+        try {
+            persistencia.abrirInput("datos.bin");
+            UtilsDTO.ClinicaDTOAClinica((ClinicaDTO) persistencia.cargar(), Ambulancia.get_instance());
+            persistencia.cerrarInput();
+        } catch (IOException | ClassNotFoundException ioException) {
+            ioException.printStackTrace();
+        }
 
         IVista ventanaInicio = new VentanaInicio();
+        ventanaInicio.actualizaLista(Clinica.getInstance().getAsociados());
         IVistaFactura ventanaFactura = (IVistaFactura) ventanaInicio;
         Controlador controlador = new Controlador(ventanaInicio, ventanaFactura, (IVistaSimulacion) ventanaInicio);
 
@@ -48,6 +61,9 @@ public class Prueba {
         clinica.ingresaPaciente("7561238", "Colon 1239", "Mar del plata", "6873213", "Agustin Adan", "Nino");
         clinica.ingresaPaciente("1354314", "Buenos Aires 1239", "Mar del plata", "2234564687",
                 "Richard Palomo", "Joven");
+
+        ventanaFactura.actualizaListaPacientes();
+
         // Ingreso del paciente a la modelo.clinica
 
         System.out.println("PACIENTES");
@@ -79,22 +95,18 @@ public class Prueba {
             e1.printStackTrace();
         }
 
+/*
         try {
-            clinica.imprimeFacturaDePaciente(pacientePrueba, new GregorianCalendar(2021, 5, 14));
+            System.out.println(clinica.imprimeFacturaDePaciente(pacientePrueba, new GregorianCalendar(2021, 5, 14)));
         } catch (PacienteInvalidoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+*/
 
-        System.out.println("********************************");
 
-        try {
-            clinica.buscaMedico(1408).muestraReporte(new GregorianCalendar(2021, 5, 13),
-                    new GregorianCalendar(2021, 5, 16));
-        } catch (FechaInvalidaException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
+
 
 
 //        ObserverAmbulanciaPrueba observerAmbulanciaPrueba = new ObserverAmbulanciaPrueba(Ambulancia.get_instance());
