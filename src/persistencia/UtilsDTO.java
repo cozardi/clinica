@@ -8,7 +8,9 @@ import modelo.ambulancia.Ambulancia;
 import modelo.clinica.Clinica;
 import modelo.clinica.Operario;
 import modelo.usuarios.Asociado;
-
+/**
+ * Esta clase se ocupa de pasar ciertas clases a una version serializable de las mismas y viceversa
+ */
 public class UtilsDTO {
 
     /**

@@ -3,6 +3,11 @@ package persistencia;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * 
+ * Clase con los datos a serializar de una Clinica
+ *
+ */
 public class ClinicaDTO implements Serializable {
 
     private ArrayList<AsociadoDTO> asociadosDTO = new ArrayList<AsociadoDTO>();

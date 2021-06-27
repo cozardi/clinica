@@ -2,6 +2,12 @@ package persistencia;
 
 import java.io.IOException;
 
+/**
+ * 
+ * Interfaz para serialización de clases
+ *
+ * @param <E>
+ */
 public interface IPersistencia<E> {
     void abrirInput(String nombre) throws IOException;
 

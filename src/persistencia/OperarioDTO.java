@@ -2,6 +2,11 @@ package persistencia;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * Clase con los datos a serializar de un Operario de ambulancia
+ *
+ */
 public class OperarioDTO implements Serializable {
 
 

@@ -2,6 +2,11 @@ package persistencia;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * Clase con los datos a serializar de un Asociado
+ *
+ */
 public class AsociadoDTO implements Serializable {
 
     private String dni, nombre, domicilio, telefono;

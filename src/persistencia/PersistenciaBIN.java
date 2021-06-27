@@ -7,6 +7,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * 
+ * Implementa la persistencia de clases serializables mediante el método binario
+ *
+ */
 public class PersistenciaBIN implements IPersistencia<Serializable> {
 
     private FileOutputStream fileoutput = null;
