@@ -25,6 +25,12 @@ public class Factura {
 
 	private final float valorAgregadoConsulta = 0.2f;
 
+	/**
+	 * Constructor de la factura del paciente. A la factura actual se le asocia un paciente.
+	 * @param paciente
+	 * @param fecha
+	 * @throws PacienteInvalidoException
+	 */
 	public Factura(Paciente paciente, GregorianCalendar fecha) throws PacienteInvalidoException {
 		numFacturaMax++;
 		numFactura = numFacturaMax;
@@ -33,13 +39,12 @@ public class Factura {
 		if (paciente != null)
 			this.paciente = paciente;
 		else
-			throw new PacienteInvalidoException("Se trato de crear una modelo.factura con un paciente null");
+			throw new PacienteInvalidoException("Se trato de crear una factura con un paciente null");
 	}
 
 	/**
-	 * Imprime la modelo.factura con los datos de Prestacion, Valor, Cantidad, Subtotal
-	 * Post: Imprime en formato de tabla la informacion
-	 * @return
+	 * Genera la factura con los datos de Prestacion, Valor, Cantidad, Subtotal
+	 * @return Retorna un StringBuilder con la factura del mismo.
 	 */
 	public StringBuilder ImprimeFactura() {
 		StringBuilder sb = new StringBuilder();

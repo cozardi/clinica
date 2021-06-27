@@ -20,14 +20,13 @@ public class MedicoClinico extends Medico {
     public MedicoClinico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
                          double honorarioBasico) {
         super(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico);
-        //setHonorario();
     }
 
-//    @Override
-//    public void setHonorario() {
-//        this.honorario *= 1.05;
-//    }
-
+    /**
+     * Retorna el honorario del medico
+     *
+     * @return double
+     */
     @Override
     public double getHonorario() {
         return super.getHonorario() * 1.05;

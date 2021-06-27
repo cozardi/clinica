@@ -4,7 +4,7 @@ import java.util.GregorianCalendar;
 
 /**
  * Clase que contiene nombre del paciente, fecha de la facturacion, la cantidad
- * de consultas que hizoel paciente y el subtotal Esta clase la contendra en el
+ * de consultas que hizo el paciente y el subtotal Esta clase la contendra en el
  * estado un medico
  */
 public class Reporte implements Comparable {
@@ -62,7 +62,7 @@ public class Reporte implements Comparable {
      * retorna cero si son iguales retorna positivo si this es mayor que el
      * parametro
      * 
-     * @param Object o
+     * @param o
      * @return int
      */
     @Override

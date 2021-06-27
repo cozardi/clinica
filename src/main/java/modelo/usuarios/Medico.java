@@ -20,15 +20,6 @@ public abstract class Medico extends Usuarios {
         this.honorario = honorarioBasico;
     }
 
-    /**
-     * Obtiene el Honorario del medico generado
-     *
-     * @return honorario con su aumento dependiendo de su especialidad, tipo de
-     * contratacion y posgrado
-     */
-    public void setHonorario(double honorario) {
-        this.honorario = honorario;
-    }
 
     /**
      * Retorna el honorario del medico
@@ -49,9 +40,10 @@ public abstract class Medico extends Usuarios {
     }
 
     /**
-     * PRE: Se espera que f1 sea una fecha en la que mas adelante se encuentre algun
+     * Metodo encargado de generar el Reporte Medico.
+     * <b>PRE:</b> Se espera que f1 sea una fecha en la que mas adelante se encuentre algun
      * reporte<br>
-     * POST: Muestra por cada reporte los datos: Nombre del paciente, fecha de
+     * <b>POST:</b> Muestra por cada reporte los datos: Nombre del paciente, fecha de
      * facturacion, cantidad de consultas realizadas por el paciente, y el subtotal
      * que cobra el medico
      *

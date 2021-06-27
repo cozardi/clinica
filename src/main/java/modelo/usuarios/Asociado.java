@@ -7,11 +7,23 @@ import java.util.Objects;
 import java.util.Observable;
 import java.util.Random;
 
+/**
+ * Clase de los asociados de la clinica.
+ */
 public class Asociado extends Observable implements Runnable {
     private String dni, nombre, domicilio, telefono;
     private int cantSolicitudes;
     private Ambulancia ambulancia;
 
+    /**
+     * Constructor con los parametros del asociado requeridos, y una referencia a la ambulancia de la clinica.
+     * @param dni
+     * @param nombre
+     * @param domicilio
+     * @param telefono
+     * @param cantSolicitudes
+     * @param ambulancia
+     */
     public Asociado(String dni, String nombre, String domicilio, String telefono, int cantSolicitudes, Ambulancia ambulancia) {
         this.dni = dni;
         this.nombre = nombre;
@@ -41,6 +53,13 @@ public class Asociado extends Observable implements Runnable {
         return cantSolicitudes;
     }
 
+    /**
+     * Metodo que permite a un asociado solicitar la ambulancia, e ingresar en el metodo synchronized correspondiente.
+     * Notifica al observador (PanelAsociado) lo que esta intentando hacer. <br>
+     * Mediante la funcion random es que funciona la simulacion para que se le asigne una tarea.
+     *
+     */
+
     public void solicitaAmbulancia() {
         Random r = new Random();
         this.setChanged();
@@ -58,6 +77,11 @@ public class Asociado extends Observable implements Runnable {
 
     }
 
+    /**
+     * Metodo run sobreescrito para que se inicie la ejecucion dle hilo del asociado.
+     * Se ejecutara el cuerpo siempre y cuando la cantidad de solicitudes sea distinta de 0.
+     * <b>Post: </b> Notifica al observador los cambios.
+     */
     @Override
     public void run() {
         if (this.cantSolicitudes != 0)
@@ -71,6 +95,11 @@ public class Asociado extends Observable implements Runnable {
             }
     }
 
+    /**
+     * Metodo equals redefinido para comparar dos asociados. El criterio de igualdad es el dni.
+     * @param o objeto que puede o no ser un asociado.
+     * @return 1 si ambos asociados tienen el mismo dni, otro valor si no.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,6 +108,11 @@ public class Asociado extends Observable implements Runnable {
         return Objects.equals(dni, asociado.dni);
     }
 
+    /**
+     * Metodo hash redefinido. Dos asociados con el mismo dni son iguales (es decir, seran los dos el mismo asociado),
+     * por lo tanto su hash debe cincidir.
+     * @return el hashcode del asociado basado en el dni.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(dni);

@@ -27,6 +27,10 @@ import persistencia.PersistenciaBIN;
 import persistencia.UtilsDTO;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Ventana principal de la interfaz grafica. Contiene pestañas de acceso a las demas ventanas.
+ */
+
 public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, IVistaFactura, KeyListener, ListSelectionListener, ActionListener {
     private static boolean tieneActionListener = false;
     private JPanel contentPane;
@@ -83,6 +87,9 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     private JTextArea textoFactura;
     private JScrollPane scrollPaneFactura;
 
+    /**
+     * Constructor de la ventana.
+     */
     public VentanaInicio() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 650, 400);
@@ -294,6 +301,10 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         this.setVisible(true);
     }
 
+    /**
+     * Asigna a los botones pertinentes el actionlistener, el cual es el constructor.
+     * @param actionListener
+     */
     @Override
     public void addActionListener(ActionListener actionListener) {
         if (!tieneActionListener) {
@@ -306,6 +317,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         }
     }
 
+    /**
+     * Carga los paneles de los asociados en la ventana de la simulacion.
+     *
+     * @param asociados
+     */
     @Override
     public void cargaPaneles(Set<Asociado> asociados) {
         PanelAmbulancia panelAM = new PanelAmbulancia(Ambulancia.get_instance());
@@ -319,9 +335,6 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         }
         PanelOperario panelOP = new PanelOperario(Clinica.getInstance().getOperario());
         this.panelEstadoOperario.add(panelOP);
-
-
-
     }
 
     @Override
@@ -331,6 +344,13 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
     @Override
     public void keyPressed(KeyEvent e) {
     }
+
+    /**
+     * Metodo que se encarga de habilitar los botones de configurar operario o agregar asociado si se cumplen las condiciones necesarias.
+     * Chequea que no se ingresen String nulos, y que las solicitudes sean mayores a 0.
+     * <b>Post:</b> Habilita los botones necesarios.
+     * @param arg0
+     */
 
     @Override
     public void keyReleased(KeyEvent arg0) {
@@ -356,6 +376,11 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         this.btnOperario.setEnabled(condicion);
     }
 
+    /**
+     * Metodo que carga el Set de asociados a la lista de la ventana.
+     * <b>Post:</b> La lista de asociados presente en la vista queda actualizada.
+     * @param asociados Set de asociados.
+     */
     @Override
     public void actualizaLista(Set<Asociado> asociados) {
         Iterator<Asociado> it = asociados.iterator();
@@ -376,6 +401,10 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         }
     }
 
+    /**
+     * Metodo que agrega un asociado, o lo remueve de la lista de asociados presente en la ventana.
+     * @param asociado
+     */
     @Override
     public void actualizaLista(Asociado asociado) {
         if (!this.modeloLista.contains(asociado)) {
@@ -390,6 +419,9 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         listAsociados.clearSelection();
     }
 
+    /**
+     * Metodo que agrega la lista de pacientes de la clinica a la ventana de la Factura.
+     */
     @Override
     public void actualizaListaPacientes() {
         for (Paciente p : Clinica.getInstance().getPacientes()){
@@ -398,26 +430,42 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         this.listPacientes.clearSelection();
     }
 
+    /**
+     * Asocia el texto de la factura al area de texto de la ventana Factura.
+     * @param sb
+     */
     @Override
     public void muestraFactura(StringBuilder sb) {
         this.textoFactura.append(sb.toString());
     }
 
+    /**
+     * Borra el texto del TextArea.
+     */
     @Override
     public void clearText() {
         this.textoFactura.setText("");
     }
 
+    /**
+     * Devuelve el paciente seleccionado.
+     */
     @Override
     public Paciente getPacienteSelected() {
         return this.listPacientes.getSelectedValue();
     }
 
+    /**
+     * Activa la pestania de la simulacion.
+     */
     @Override
     public void activaSimulacion() {
         this.tabbedPane.setEnabledAt(tabbedPane.indexOfTab("Simulacion"), true);
     }
 
+    /**
+     * Inicializa los TextField en vacio. Esto se realiza despues de agregar un asociado, o configurar el operario.
+     */
     private void setTextField() {
         this.textFieldNombre.setText("");
         this.textFieldDni.setText("");
@@ -463,16 +511,27 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
         setVisible(cond);
     }
 
+    /**
+     * Habilita el boton "Comenzar Simulacion".
+     * @param cond
+     */
     @Override
     public void setConfigurarVisibilidad(boolean cond) {
         this.btnComenzar.setEnabled(cond);
     }
 
+    /**
+     * Devuelve el asociado seleccionado en la lista.
+     * @return
+     */
     public Asociado getAsociadoSelected() {
         return this.listAsociados.getSelectedValue();
     }
 
-
+    /**
+     * Cuando se selecciona algun objeto de la lista, habilita los botones respectivos.
+     * @param e
+     */
     @Override
     public void valueChanged(ListSelectionEvent e) {
         this.btnEliminar.setEnabled(!this.listAsociados.isSelectionEmpty());
@@ -481,6 +540,5 @@ public class VentanaInicio extends JFrame implements IVista, IVistaSimulacion, I
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 }

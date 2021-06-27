@@ -34,7 +34,7 @@ public class Operario extends Observable implements Runnable {
 
     /**
      * Metodo run sobreescrito para el uso del operario.
-     * Se ejecutara el cuerpo siempre y cuando la cantidad de solicitudes sea distinta de 0. <br>
+     * Se ejecutara el cuerpo siempre y cuando la cantidad de solicitudes sea distinta de 0.
      *
      */
     @Override
