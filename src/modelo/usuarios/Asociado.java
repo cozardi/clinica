@@ -52,7 +52,7 @@ public class Asociado extends Observable implements Runnable {
             this.notifyObservers("intenta solicitar traslado a Clinica");
             this.ambulancia.solicitaTraslado(this);
         }
-        Util.espera(1000);
+        Util.espera(2000);
         this.setChanged();
         this.notifyObservers("solicito correctamente");
 
@@ -64,6 +64,7 @@ public class Asociado extends Observable implements Runnable {
             for (int i = 1; i <= this.cantSolicitudes; i++) {
                 this.solicitaAmbulancia();
                 this.ambulancia.terminarUso();
+                Util.espera(2000);
                 this.ambulancia.terminarUso();
                 this.setChanged();
                 this.notifyObservers("termino de usar la ambulancia");

@@ -1,6 +1,7 @@
 package modelo.clinica;
 
 import modelo.ambulancia.Ambulancia;
+import modelo.util.Util;
 
 import java.util.Observable;
 
@@ -32,9 +33,11 @@ public class Operario extends Observable implements Runnable {
                 this.setChanged();
                 this.notifyObservers("intenta solicitar arreglo de Ambulancia");
                 this.ambulancia.repararAmbulancia(this);
+                Util.espera(2000);
                 this.setChanged();
                 this.notifyObservers("pudo solicitar arreglo de Ambulancia");
                 this.ambulancia.terminarUso();
+                Util.espera(2000);
                 this.ambulancia.terminarUso();
                 this.setChanged();
                 this.notifyObservers("Termino de usar la ambulancia");

@@ -3,6 +3,7 @@ package modelo.ambulancia;
 
 import modelo.clinica.Operario;
 import modelo.usuarios.Asociado;
+import vista.Recursos;
 
 import java.util.Observable;
 
@@ -16,7 +17,6 @@ public class Ambulancia extends Observable {
     private Ambulancia() {
         this.estado = new DisponibleState(this);
     }
-
 
     public static Ambulancia get_instance() {
         if (instance == null)
@@ -50,7 +50,7 @@ public class Ambulancia extends Observable {
         }
         this.estado.solicitaAtencionDomicilio();
         this.setChanged();
-        this.notifyObservers(this.estado.toString()); //se notifica que la modelo.ambulancia fue solicitada
+        this.notifyObservers(this.estado.getFoto());
         notifyAll();
     }
 
@@ -64,7 +64,7 @@ public class Ambulancia extends Observable {
         }
         this.estado.solicitaTraslado();
         this.setChanged();
-        this.notifyObservers(this.estado.toString());
+        this.notifyObservers(this.estado.getFoto());
         notifyAll();
     }
 
@@ -78,21 +78,14 @@ public class Ambulancia extends Observable {
         }
         this.estado.repararAmbulancia(); // es la unica solicitud que puede realizar un operario
         this.setChanged();
-        this.notifyObservers(this.estado.toString());
+        this.notifyObservers(this.estado.getFoto());
         notifyAll();
     }
 
     public synchronized void terminarUso() {
-//        while (this.estado instanceof DisponibleState) {
-//            try {
-//                wait();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
         this.estado.vuelveClinica();
         this.setChanged();
-        this.notifyObservers(this.estado.toString()); //se notificia que la modelo.ambulancia esta disponible
+        this.notifyObservers(this.estado.getFoto()); //se notificia que la modelo.ambulancia esta disponible
         notifyAll();
     }
 }
