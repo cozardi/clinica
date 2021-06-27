@@ -13,6 +13,8 @@ public interface IVistaFactura {
     void actualizaListaPacientes();
 
     void muestraFactura(StringBuilder sb);
-
+    
+    void clearText();
+    
     Paciente getPacienteSelected();
 }
