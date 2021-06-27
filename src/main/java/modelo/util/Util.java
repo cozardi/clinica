@@ -2,7 +2,12 @@ package modelo.util;
 
 public class Util {
 
-    public static void espera(int milisegundos){
+    /**
+     * Pone a esperar un hilo de ejecucion
+     *
+     * @param milisegundos
+     */
+    public static void espera(int milisegundos) {
         try {
             Thread.sleep(milisegundos);
         } catch (InterruptedException e) {

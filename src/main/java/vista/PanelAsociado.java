@@ -17,13 +17,16 @@ import javax.swing.border.TitledBorder;
 
 import modelo.usuarios.Asociado;
 
+/**
+ * Clase observadora de Asociado, muestra los cambios de estado del mismo
+ */
 public class PanelAsociado extends JPanel implements Observer {
     private JScrollPane scrollPane;
     private JTextArea textArea;
     private Asociado asociado;
 
     /**
-     * Create the panel.
+     * Crea el panel y se agrega al asociado como observador
      */
     public PanelAsociado(Asociado asociado) {
         setPreferredSize(new Dimension(300, 300));
@@ -41,6 +44,13 @@ public class PanelAsociado extends JPanel implements Observer {
 
     }
 
+    /**
+     * PRE: el Observable o debe ser la misma instancia del atributo asociado
+     * Muestra en su textArea el cambio por escrito
+     *
+     * @param o
+     * @param arg
+     */
     @Override
     public void update(Observable o, Object arg) {
         Asociado asociado = (Asociado) o;

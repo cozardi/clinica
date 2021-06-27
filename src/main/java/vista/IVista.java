@@ -6,7 +6,9 @@ import java.util.Set;
 
 import modelo.usuarios.Asociado;
 
-
+/**
+ * Interface para la pestaña de inicio de la aplicacion
+ */
 public interface IVista {
     void addActionListener(ActionListener actionListener);
 

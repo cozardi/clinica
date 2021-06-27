@@ -16,13 +16,16 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Clase observadora de Operario, muestra los cambios de estado del mismo
+ */
 public class PanelOperario extends JPanel implements Observer {
     private JScrollPane scrollPane;
     private JTextArea textArea;
     private Operario operario;
 
     /**
-     * Create the panel.
+     * Crea el panel y se añade como observador del operario
      */
     public PanelOperario(Operario operario) {
         setPreferredSize(new Dimension(300, 300));
@@ -40,6 +43,13 @@ public class PanelOperario extends JPanel implements Observer {
 
     }
 
+    /**
+     * PRE: el Observable o debe ser la misma instancia del atributo operario
+     * Muestra en su textArea el cambio por escrito
+     *
+     * @param o
+     * @param arg
+     */
     @Override
     public void update(Observable o, Object arg) {
         Operario operario = (Operario) o;
