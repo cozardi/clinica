@@ -1,6 +1,5 @@
 package vista;
 
-import app.ObserverAmbulanciaPrueba;
 import modelo.ambulancia.Ambulancia;
 
 import javax.swing.*;
