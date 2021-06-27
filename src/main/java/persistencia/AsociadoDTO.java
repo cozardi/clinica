@@ -3,9 +3,7 @@ package persistencia;
 import java.io.Serializable;
 
 /**
- * 
  * Clase con los datos a serializar de un Asociado
- *
  */
 public class AsociadoDTO implements Serializable {
 
@@ -14,7 +12,7 @@ public class AsociadoDTO implements Serializable {
 
     public AsociadoDTO() {
     }
-
+    
     public String getDni() {
         return dni;
     }

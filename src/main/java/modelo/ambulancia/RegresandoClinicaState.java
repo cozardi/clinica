@@ -4,6 +4,9 @@ import vista.Recursos;
 
 import javax.swing.*;
 
+/**
+ * Clase representantiva del state de la ambulancia
+ */
 public class RegresandoClinicaState implements IState {
     private Ambulancia ambulancia;
 
@@ -23,15 +26,26 @@ public class RegresandoClinicaState implements IState {
     public void solicitaTraslado() {
     }
 
+    /**
+     * Setea el atributo IState de la ambulancia con una instancia de DisponibleState
+     */
     @Override
     public void vuelveClinica() {
         ambulancia.setEstado(new DisponibleState(ambulancia));
     }
 
+    /**
+     * No hace nada
+     */
     @Override
     public void repararAmbulancia() {
     }
 
+    /**
+     * retorna la imagen correspondiente
+     *
+     * @return ImageIcon
+     */
     @Override
     public ImageIcon getFoto() {
         return Recursos.REGRESANDO_CLINICA;

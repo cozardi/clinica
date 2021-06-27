@@ -46,11 +46,11 @@ public class Asociado extends Observable implements Runnable {
         this.setChanged();
         if (r.nextBoolean()) {
             this.notifyObservers("intenta solicitar atencion a Domicilio");
-            this.ambulancia.solicitaAtencionDomicilio(this);
+            this.ambulancia.solicitaAtencionDomicilio();
 
         } else {
             this.notifyObservers("intenta solicitar traslado a Clinica");
-            this.ambulancia.solicitaTraslado(this);
+            this.ambulancia.solicitaTraslado();
         }
         Util.espera(2000);
         this.setChanged();

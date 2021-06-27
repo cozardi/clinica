@@ -7,6 +7,9 @@ import vista.Recursos;
 
 import java.util.Observable;
 
+/**
+ * Clase utilizada como monitor y recurso compartido por los asociados
+ */
 public class Ambulancia extends Observable {
     protected IState estado;
     private static Ambulancia instance = null;
@@ -14,15 +17,25 @@ public class Ambulancia extends Observable {
     private boolean isDisponibleTraslado;
     private boolean isDisponibleReparar;
 
+    /**
+     * Constructor que setea en disponible el estado de la ambulancia
+     */
     private Ambulancia() {
         this.estado = new DisponibleState(this);
     }
 
+    /**
+     * Devuelve una instancia de la ambulancia. Si no existe la crea <br>
+     * Si existe devuelve la instancia existente
+     *
+     * @return Ambulancia
+     */
     public static Ambulancia get_instance() {
         if (instance == null)
             instance = new Ambulancia();
         return instance;
     }
+
 
     public void setDisponibleAtencionDomicilio(boolean disponibleAtencionDomicilio) {
         isDisponibleAtencionDomicilio = disponibleAtencionDomicilio;
@@ -40,7 +53,13 @@ public class Ambulancia extends Observable {
         this.estado = estado;
     }
 
-    public synchronized void solicitaAtencionDomicilio(Asociado asociado) {
+    /**
+     * PRE: si la ambulancia no esta disponible para la atencion a domicilio el hilo quedara durmiendo <br>
+     * Metodo sincronizado que cambia el estado de la ambulancia
+     * Simula que la ambulancia esta yendo a atender a domicilio a un Asociado
+     * Delega el trabajo a su atributo IState estado
+     */
+    public synchronized void solicitaAtencionDomicilio() {
         while (!isDisponibleAtencionDomicilio) {
             try {
                 wait();
@@ -54,7 +73,13 @@ public class Ambulancia extends Observable {
         notifyAll();
     }
 
-    public synchronized void solicitaTraslado(Asociado asociado) {
+    /**
+     * PRE: si la ambulancia no esta disponible para el traslado el hilo quedara durmiendo <br>
+     * Metodo sincronizado que cambia el estado de la ambulancia
+     * Simula que la ambulancia esta trasladando un paciente a la clinica
+     * Delega el trabajo a su atributo IState estado
+     */
+    public synchronized void solicitaTraslado() {
         while (!isDisponibleTraslado) {
             try {
                 wait();
@@ -68,7 +93,13 @@ public class Ambulancia extends Observable {
         notifyAll();
     }
 
-    public synchronized void repararAmbulancia(Operario operario) {
+    /**
+     * PRE: si la ambulancano esta disponible para ser reparada el hilo quedara durmiendo <br>
+     * Metodo sincronizado que cambia el estado de la ambulancia
+     * Simula que la ambulancia esta siendo reparada por el operario
+     * Delega el trabajo a su atributo IState estado
+     */
+    public synchronized void repararAmbulancia() {
         while (!isDisponibleReparar) {
             try {
                 wait();
@@ -82,6 +113,11 @@ public class Ambulancia extends Observable {
         notifyAll();
     }
 
+    /**
+     * Metodo sincronizado que cambia el estado de la ambulancia
+     * Simula que la ambulancia termino de hacer la accion que estaba haciendo
+     * Delega el trabajo a su atributo IState estado
+     */
     public synchronized void terminarUso() {
         this.estado.vuelveClinica();
         this.setChanged();
