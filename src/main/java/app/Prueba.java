@@ -43,13 +43,13 @@ public class Prueba {
         Clinica clinica = Clinica.getInstance();
         // Creacion de medicos
         clinica.addMedico("234565", "Marconi 2345", "Mar del Plata", "223456732", "Susana Ibanez", 1502, 3000,
-                "Clinico", "Permanente");
+                "Clinico", "Permanente",null);
         clinica.addMedico("82216", "Moreno 4562", "Mar del Plata", "6872312", "Davinia Pino", 1407, 5000,
-                "Cirujano", "Temporario");
+                "Cirujano", "Temporario",null);
         clinica.addMedico("7432138", "Belgrano 2135", "Mar del Plata", "5761234", "Jose Rafael Novo", 1408, 6000,
-                "Pediatra", "Permanente");
+                "Pediatra", "Permanente",null);
         clinica.addMedico("867321", "Colon 1235", "Mar del Plata", "57658432", "Luca Bermudez", 1409, 7000,
-                "Clinico", "Temporario");
+                "Clinico", "Temporario",null);
         clinica.addMedico("867321", "Colon 1235", "Mar del Plata", "57658432", "Agustin Adan", 1410, 7000,
                 "Clinico", "Temporario", "Magister");
         // Creamos un par de pacientes

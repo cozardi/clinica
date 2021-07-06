@@ -33,7 +33,7 @@ public abstract class Medico extends Usuarios {
     /**
      * Retorna el treeset de reportes
      *
-     * @return TreeSet<Reporte>
+     * @return un Treeset de tipo Reporte
      */
     public TreeSet<Reporte> getReporte() {
         return reporte;

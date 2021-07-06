@@ -37,22 +37,6 @@ public class Clinica {
         return pacientes;
     }
 
-//    /**
-//     * Constructor privado, es invocado por el metodo <i>getInstance</i>
-//     *
-//     * @param nombre    Representa el nombre de la modelo.clinica
-//     * @param direccion Contiene la direccion de la modelo.clinica
-//     * @param telefono  Contiene el telefono de la modelo.clinica
-//     * @param ciudad    Contiene la ciudad donde se encuentra la modelo.clinica
-//     */
-//    private Clinica(String nombre, String direccion, String telefono, String ciudad) {
-//        this.nombre = nombre;
-//        this.direccion = direccion;
-//        this.telefono = telefono;
-//        this.ciudad = ciudad;
-//        listaEspera = new PriorityQueue();
-//        pacientesEnAtencion = new ArrayList<>();
-//    }
     private Clinica() {
 
     }
@@ -100,35 +84,7 @@ public class Clinica {
      * @param tipoContratacion tipo de contratacion (permanente, temporario)
      */
     public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
-                          int honorarioBasico, String especialidad, String tipoContratacion) {
-        try {
-            Medico medico = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
-                    especialidad, tipoContratacion);
-            medicos.add(medico);
-        } catch (NoExisteException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Agrega un medico a la lista de medicos de la Clinica, en caso de ingresar un
-     * dato erroneo informa con un mensaje y no crea el objeto
-     *
-     * @param dni              Contiene el DNI del medico
-     * @param domicilio        contiene el domicilio del medico
-     * @param ciudad           representa la ciudad de origen
-     * @param telefono         contiene el telefono del medico
-     * @param nombre           Nombre y apellido del medico
-     * @param numero           representa el numero de licencia medico (unico por
-     *                         medico)
-     * @param honorarioBasico  Honorario basico del medico
-     * @param especialidad     especialidad del medico (clinico, cirujano, pediatra)
-     * @param tipoContratacion tipo de contratacion (permanente, temporario)
-     * @param posgrado         posgrado del medico en caso de tenerlo (magister,
-     *                         doctorado)
-     */
-    public void addMedico(String dni, String domicilio, String ciudad, String telefono, String nombre, int numero,
-                          int honorarioBasico, String especialidad, String tipoContratacion, String posgrado) {
+                          int honorarioBasico, String especialidad, String tipoContratacion,String posgrado) {
         try {
             Medico medico = MedicoFactory.getMedico(dni, domicilio, ciudad, telefono, nombre, numero, honorarioBasico,
                     especialidad, tipoContratacion, posgrado);
@@ -137,6 +93,7 @@ public class Clinica {
             System.out.println(e.getMessage());
         }
     }
+
 
     /**
      * Agrega un asociado a la estructura de Asociados. Si ya existe arroja excepcion.
@@ -273,7 +230,6 @@ public class Clinica {
      *
      * @param paciente Paciente que recibio la consulta <br>
      * @param medico   Medico que hizo la consulta <br>
-     * @throws PacienteInvalidoException si el medico o paciente son nulos <br>
      */
     public void agregaConsultaAPaciente(Paciente paciente, Medico medico) {
         if (paciente != null) {

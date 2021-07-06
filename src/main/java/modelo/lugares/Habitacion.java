@@ -21,7 +21,7 @@ public abstract class Habitacion {
      * 
      * @param cantDias
      * @return double
-     * @throws DiasInvalidosException si los dias <=0
+     * @throws DiasInvalidosException si los dias son negativos
      */
     public abstract double calculaArancel(int cantDias) throws DiasInvalidosException;
 

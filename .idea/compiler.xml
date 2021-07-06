@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="TPClinica" />
+        <module name="Grupo3" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="TPClinica" target="16" />
+      <module name="Grupo3" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>
